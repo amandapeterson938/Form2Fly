@@ -9,11 +9,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var signOnBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        signOnBtn.layer.cornerRadius = 12
+        // code
     }
     
 }
