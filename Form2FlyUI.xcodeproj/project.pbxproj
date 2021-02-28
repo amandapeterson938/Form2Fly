@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F00107B025EC3BEF00D4A383 /* TrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00107AF25EC3BEF00D4A383 /* TrainingViewController.swift */; };
+		F031338E25EBE29A002C649F /* RecordOrUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F031338D25EBE29A002C649F /* RecordOrUploadViewController.swift */; };
+		F048CF1125EAB69D006F1C70 /* puzzleNoBG.png in Resources */ = {isa = PBXBuildFile; fileRef = F048CF1025EAB69D006F1C70 /* puzzleNoBG.png */; };
+		F048CF1425EACA00006F1C70 /* pickProfessional.png in Resources */ = {isa = PBXBuildFile; fileRef = F048CF1325EACA00006F1C70 /* pickProfessional.png */; };
+		F09912D025EB005D00B6811A /* SelectOrMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09912CF25EB005D00B6811A /* SelectOrMatchViewController.swift */; };
+		F09912D525EB026200B6811A /* SignOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09912D425EB026200B6811A /* SignOnViewController.swift */; };
 		F0AEDCDC25E82E0100AAF1AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AEDCDB25E82E0100AAF1AA /* AppDelegate.swift */; };
 		F0AEDCDE25E82E0100AAF1AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AEDCDD25E82E0100AAF1AA /* SceneDelegate.swift */; };
 		F0AEDCE025E82E0100AAF1AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AEDCDF25E82E0100AAF1AA /* ViewController.swift */; };
@@ -14,9 +20,21 @@
 		F0AEDCE525E82E0100AAF1AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AEDCE425E82E0100AAF1AA /* Assets.xcassets */; };
 		F0AEDCE825E82E0100AAF1AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0AEDCE625E82E0100AAF1AA /* LaunchScreen.storyboard */; };
 		F0AEDCF125E831EB00AAF1AA /* image2.png in Resources */ = {isa = PBXBuildFile; fileRef = F0AEDCF025E831EB00AAF1AA /* image2.png */; };
+		F0C041F225EB22D10070FA53 /* ProfessionalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C041F125EB22D10070FA53 /* ProfessionalsViewController.swift */; };
+		F0C041F525EB262F0070FA53 /* ProTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C041F425EB262F0070FA53 /* ProTableCell.swift */; };
+		F0C041F825EB27C60070FA53 /* Professional.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C041F725EB27C60070FA53 /* Professional.swift */; };
+		F0C0420025EB38940070FA53 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C041FF25EB38940070FA53 /* SettingsViewController.swift */; };
+		F0C0420425EB3B870070FA53 /* ThrowTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C0420325EB3B870070FA53 /* ThrowTypeViewController.swift */; };
+		F0F1A87925EC5AAD00AF4F6F /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F1A87825EC5AAD00AF4F6F /* avatar.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F00107AF25EC3BEF00D4A383 /* TrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
+		F031338D25EBE29A002C649F /* RecordOrUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordOrUploadViewController.swift; sourceTree = "<group>"; };
+		F048CF1025EAB69D006F1C70 /* puzzleNoBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = puzzleNoBG.png; sourceTree = "<group>"; };
+		F048CF1325EACA00006F1C70 /* pickProfessional.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pickProfessional.png; sourceTree = "<group>"; };
+		F09912CF25EB005D00B6811A /* SelectOrMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOrMatchViewController.swift; sourceTree = "<group>"; };
+		F09912D425EB026200B6811A /* SignOnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOnViewController.swift; sourceTree = "<group>"; };
 		F0AEDCD825E82E0100AAF1AA /* Form2FlyUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Form2FlyUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0AEDCDB25E82E0100AAF1AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F0AEDCDD25E82E0100AAF1AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +44,12 @@
 		F0AEDCE725E82E0100AAF1AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F0AEDCE925E82E0100AAF1AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F0AEDCF025E831EB00AAF1AA /* image2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image2.png; sourceTree = "<group>"; };
+		F0C041F125EB22D10070FA53 /* ProfessionalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalsViewController.swift; sourceTree = "<group>"; };
+		F0C041F425EB262F0070FA53 /* ProTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProTableCell.swift; sourceTree = "<group>"; };
+		F0C041F725EB27C60070FA53 /* Professional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Professional.swift; sourceTree = "<group>"; };
+		F0C041FF25EB38940070FA53 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		F0C0420325EB3B870070FA53 /* ThrowTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrowTypeViewController.swift; sourceTree = "<group>"; };
+		F0F1A87825EC5AAD00AF4F6F /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,11 +63,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F00107AE25EC3BDC00D4A383 /* TrainingView */ = {
+			isa = PBXGroup;
+			children = (
+				F00107AF25EC3BEF00D4A383 /* TrainingViewController.swift */,
+			);
+			path = TrainingView;
+			sourceTree = "<group>";
+		};
+		F031338C25EBE271002C649F /* RecordOrUploadView */ = {
+			isa = PBXGroup;
+			children = (
+				F031338D25EBE29A002C649F /* RecordOrUploadViewController.swift */,
+			);
+			path = RecordOrUploadView;
+			sourceTree = "<group>";
+		};
+		F09912CD25EB002300B6811A /* SelectOrMatchView */ = {
+			isa = PBXGroup;
+			children = (
+				F09912CF25EB005D00B6811A /* SelectOrMatchViewController.swift */,
+			);
+			path = SelectOrMatchView;
+			sourceTree = "<group>";
+		};
+		F09912D225EB023D00B6811A /* SignOnView */ = {
+			isa = PBXGroup;
+			children = (
+				F09912D425EB026200B6811A /* SignOnViewController.swift */,
+			);
+			path = SignOnView;
+			sourceTree = "<group>";
+		};
+		F09912D725EB035700B6811A /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				F0F1A87825EC5AAD00AF4F6F /* avatar.png */,
+				F0AEDCF025E831EB00AAF1AA /* image2.png */,
+				F048CF1325EACA00006F1C70 /* pickProfessional.png */,
+				F048CF1025EAB69D006F1C70 /* puzzleNoBG.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		F0AEDCCF25E82E0100AAF1AA = {
 			isa = PBXGroup;
 			children = (
 				F0AEDCDA25E82E0100AAF1AA /* Form2FlyUI */,
-				F0AEDCD925E82E0100AAF1AA /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -53,11 +119,20 @@
 				F0AEDCD825E82E0100AAF1AA /* Form2FlyUI.app */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		F0AEDCDA25E82E0100AAF1AA /* Form2FlyUI */ = {
 			isa = PBXGroup;
 			children = (
+				F00107AE25EC3BDC00D4A383 /* TrainingView */,
+				F031338C25EBE271002C649F /* RecordOrUploadView */,
+				F0C0420225EB3B5B0070FA53 /* SelectThrowType */,
+				F0C041FD25EB383D0070FA53 /* SettingsView */,
+				F0C041F025EB22640070FA53 /* ProfessionalTableView */,
+				F09912D725EB035700B6811A /* Images */,
+				F09912D225EB023D00B6811A /* SignOnView */,
+				F09912CD25EB002300B6811A /* SelectOrMatchView */,
 				F0AEDCDB25E82E0100AAF1AA /* AppDelegate.swift */,
 				F0AEDCDD25E82E0100AAF1AA /* SceneDelegate.swift */,
 				F0AEDCDF25E82E0100AAF1AA /* ViewController.swift */,
@@ -65,9 +140,35 @@
 				F0AEDCE425E82E0100AAF1AA /* Assets.xcassets */,
 				F0AEDCE625E82E0100AAF1AA /* LaunchScreen.storyboard */,
 				F0AEDCE925E82E0100AAF1AA /* Info.plist */,
-				F0AEDCF025E831EB00AAF1AA /* image2.png */,
+				F0AEDCD925E82E0100AAF1AA /* Products */,
 			);
 			path = Form2FlyUI;
+			sourceTree = "<group>";
+		};
+		F0C041F025EB22640070FA53 /* ProfessionalTableView */ = {
+			isa = PBXGroup;
+			children = (
+				F0C041F125EB22D10070FA53 /* ProfessionalsViewController.swift */,
+				F0C041F425EB262F0070FA53 /* ProTableCell.swift */,
+				F0C041F725EB27C60070FA53 /* Professional.swift */,
+			);
+			path = ProfessionalTableView;
+			sourceTree = "<group>";
+		};
+		F0C041FD25EB383D0070FA53 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				F0C041FF25EB38940070FA53 /* SettingsViewController.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		F0C0420225EB3B5B0070FA53 /* SelectThrowType */ = {
+			isa = PBXGroup;
+			children = (
+				F0C0420325EB3B870070FA53 /* ThrowTypeViewController.swift */,
+			);
+			path = SelectThrowType;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,7 +229,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0AEDCE825E82E0100AAF1AA /* LaunchScreen.storyboard in Resources */,
+				F0F1A87925EC5AAD00AF4F6F /* avatar.png in Resources */,
 				F0AEDCE525E82E0100AAF1AA /* Assets.xcassets in Resources */,
+				F048CF1125EAB69D006F1C70 /* puzzleNoBG.png in Resources */,
+				F048CF1425EACA00006F1C70 /* pickProfessional.png in Resources */,
 				F0AEDCF125E831EB00AAF1AA /* image2.png in Resources */,
 				F0AEDCE325E82E0100AAF1AA /* Main.storyboard in Resources */,
 			);
@@ -142,8 +246,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0AEDCE025E82E0100AAF1AA /* ViewController.swift in Sources */,
+				F0C0420425EB3B870070FA53 /* ThrowTypeViewController.swift in Sources */,
+				F09912D525EB026200B6811A /* SignOnViewController.swift in Sources */,
+				F0C041F825EB27C60070FA53 /* Professional.swift in Sources */,
 				F0AEDCDC25E82E0100AAF1AA /* AppDelegate.swift in Sources */,
+				F0C041F225EB22D10070FA53 /* ProfessionalsViewController.swift in Sources */,
+				F00107B025EC3BEF00D4A383 /* TrainingViewController.swift in Sources */,
+				F09912D025EB005D00B6811A /* SelectOrMatchViewController.swift in Sources */,
+				F0C041F525EB262F0070FA53 /* ProTableCell.swift in Sources */,
 				F0AEDCDE25E82E0100AAF1AA /* SceneDelegate.swift in Sources */,
+				F0C0420025EB38940070FA53 /* SettingsViewController.swift in Sources */,
+				F031338E25EBE29A002C649F /* RecordOrUploadViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
