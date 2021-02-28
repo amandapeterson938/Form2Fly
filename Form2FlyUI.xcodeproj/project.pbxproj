@@ -21,6 +21,8 @@
 		F0C041F225EB22D10070FA53 /* ProfessionalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C041F125EB22D10070FA53 /* ProfessionalsViewController.swift */; };
 		F0C041F525EB262F0070FA53 /* ProTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C041F425EB262F0070FA53 /* ProTableCell.swift */; };
 		F0C041F825EB27C60070FA53 /* Professional.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C041F725EB27C60070FA53 /* Professional.swift */; };
+		F0C0420025EB38940070FA53 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C041FF25EB38940070FA53 /* SettingsViewController.swift */; };
+		F0C0420425EB3B870070FA53 /* ThrowTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C0420325EB3B870070FA53 /* ThrowTypeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		F0C041F125EB22D10070FA53 /* ProfessionalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfessionalsViewController.swift; sourceTree = "<group>"; };
 		F0C041F425EB262F0070FA53 /* ProTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProTableCell.swift; sourceTree = "<group>"; };
 		F0C041F725EB27C60070FA53 /* Professional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Professional.swift; sourceTree = "<group>"; };
+		F0C041FF25EB38940070FA53 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		F0C0420325EB3B870070FA53 /* ThrowTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrowTypeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,8 @@
 		F0AEDCDA25E82E0100AAF1AA /* Form2FlyUI */ = {
 			isa = PBXGroup;
 			children = (
+				F0C0420225EB3B5B0070FA53 /* SelectThrowType */,
+				F0C041FD25EB383D0070FA53 /* SettingsView */,
 				F0C041F025EB22640070FA53 /* ProfessionalTableView */,
 				F09912D725EB035700B6811A /* Images */,
 				F09912D225EB023D00B6811A /* SignOnView */,
@@ -122,6 +128,22 @@
 				F0C041F725EB27C60070FA53 /* Professional.swift */,
 			);
 			path = ProfessionalTableView;
+			sourceTree = "<group>";
+		};
+		F0C041FD25EB383D0070FA53 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				F0C041FF25EB38940070FA53 /* SettingsViewController.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		F0C0420225EB3B5B0070FA53 /* SelectThrowType */ = {
+			isa = PBXGroup;
+			children = (
+				F0C0420325EB3B870070FA53 /* ThrowTypeViewController.swift */,
+			);
+			path = SelectThrowType;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0AEDCE025E82E0100AAF1AA /* ViewController.swift in Sources */,
+				F0C0420425EB3B870070FA53 /* ThrowTypeViewController.swift in Sources */,
 				F09912D525EB026200B6811A /* SignOnViewController.swift in Sources */,
 				F0C041F825EB27C60070FA53 /* Professional.swift in Sources */,
 				F0AEDCDC25E82E0100AAF1AA /* AppDelegate.swift in Sources */,
@@ -205,6 +228,7 @@
 				F09912D025EB005D00B6811A /* SelectOrMatchViewController.swift in Sources */,
 				F0C041F525EB262F0070FA53 /* ProTableCell.swift in Sources */,
 				F0AEDCDE25E82E0100AAF1AA /* SceneDelegate.swift in Sources */,
+				F0C0420025EB38940070FA53 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
