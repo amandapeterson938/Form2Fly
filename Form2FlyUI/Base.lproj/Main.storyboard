@@ -46,7 +46,6 @@
                                     <segment title="Sign In"/>
                                     <segment title="Create an Account"/>
                                 </segments>
-                                <color key="selectedSegmentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="JeL-1P-8jc" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="SWy-ex-J3f"/>
                                 </connections>
@@ -307,8 +306,8 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Your Throw Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="XHw-AF-f6U">
-                                <rect key="frame" x="113" y="342" width="188" height="21"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <rect key="frame" x="117" y="342" width="180.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -349,7 +348,7 @@
         <!--Settings-->
         <scene sceneID="f7o-1c-c6r">
             <objects>
-                <viewController id="RJA-UO-0Cs" customClass="SettingsViewController" customModule="Form2FlyUI" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsViewController" id="RJA-UO-0Cs" customClass="SettingsViewController" customModule="Form2FlyUI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U1d-3d-WiU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -360,6 +359,9 @@
                                 <state key="normal" title="Sign Out">
                                     <color key="titleColor" systemColor="systemRedColor"/>
                                 </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="Ffd-f2-fpw"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Us" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55E-gi-F88">
                                 <rect key="frame" x="164" y="784" width="86" height="21"/>
@@ -389,17 +391,55 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z4c-J2-sVy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2254" y="815"/>
+            <point key="canvasLocation" x="2080" y="815"/>
         </scene>
-        <!--View Controller-->
+        <!--Record Or Upload View Controller-->
         <scene sceneID="C2k-Lr-srR">
             <objects>
-                <viewController id="b0f-pI-qVb" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecordOrUploadViewController" id="b0f-pI-qVb" customClass="RecordOrUploadViewController" customModule="Form2FlyUI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CsX-AB-buW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MnA-xT-kMa">
+                                <rect key="frame" x="20" y="433" width="374" height="30"/>
+                                <color key="backgroundColor" name="Form2FlyBlue"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Record Video"/>
+                                <connections>
+                                    <action selector="recordVideo:" destination="b0f-pI-qVb" eventType="touchUpInside" id="XZz-LX-0F7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ut2-ln-Yjh">
+                                <rect key="frame" x="20" y="499" width="374" height="30"/>
+                                <color key="backgroundColor" name="Form2FlyBlue"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Upload Video"/>
+                                <connections>
+                                    <action selector="uploadVideo:" destination="b0f-pI-qVb" eventType="touchUpInside" id="OXg-pP-e9b"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Record or Upload Video" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6i-3E-5ii">
+                                <rect key="frame" x="116" y="342" width="182" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="KUv-TS-rPi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="MnA-xT-kMa" firstAttribute="centerY" secondItem="CsX-AB-buW" secondAttribute="centerY" id="3Pa-mb-Gie"/>
+                            <constraint firstItem="KUv-TS-rPi" firstAttribute="trailing" secondItem="ut2-ln-Yjh" secondAttribute="trailing" constant="20" id="BvD-iQ-f5N"/>
+                            <constraint firstItem="MnA-xT-kMa" firstAttribute="top" secondItem="B6i-3E-5ii" secondAttribute="bottom" constant="70" id="PvD-rj-4ae"/>
+                            <constraint firstItem="ut2-ln-Yjh" firstAttribute="leading" secondItem="KUv-TS-rPi" secondAttribute="leading" constant="20" id="Q8d-0p-ZGa"/>
+                            <constraint firstItem="ut2-ln-Yjh" firstAttribute="centerX" secondItem="CsX-AB-buW" secondAttribute="centerX" id="Xmv-Ha-KST"/>
+                            <constraint firstItem="MnA-xT-kMa" firstAttribute="leading" secondItem="KUv-TS-rPi" secondAttribute="leading" constant="20" id="bIR-7N-dC2"/>
+                            <constraint firstItem="ut2-ln-Yjh" firstAttribute="top" secondItem="MnA-xT-kMa" secondAttribute="bottom" constant="36" id="be8-uu-dXV"/>
+                            <constraint firstItem="B6i-3E-5ii" firstAttribute="centerX" secondItem="CsX-AB-buW" secondAttribute="centerX" id="g6v-bn-mEu"/>
+                            <constraint firstItem="MnA-xT-kMa" firstAttribute="centerX" secondItem="CsX-AB-buW" secondAttribute="centerX" id="mzB-5m-ACX"/>
+                            <constraint firstItem="KUv-TS-rPi" firstAttribute="trailing" secondItem="MnA-xT-kMa" secondAttribute="trailing" constant="20" id="wLy-ii-QUq"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="AJf-jk-04t">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="gear" catalog="system" id="2LL-EI-YY8">
@@ -409,15 +449,46 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="recordVideoBtn" destination="MnA-xT-kMa" id="UdW-Z9-eoM"/>
+                        <outlet property="uploadVideoBtn" destination="ut2-ln-Yjh" id="Nd6-L4-p6Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1bW-vF-OTd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="922" y="2480"/>
         </scene>
+        <!--Training View Controller-->
+        <scene sceneID="gyU-mA-BL0">
+            <objects>
+                <viewController storyboardIdentifier="TrainingViewController" id="WHe-qw-MRi" customClass="TrainingViewController" customModule="Form2FlyUI" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Uwx-FV-him">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Training" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbz-B6-rXC">
+                                <rect key="frame" x="176.5" y="437.5" width="61" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="upm-8W-JzY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cbz-B6-rXC" firstAttribute="centerY" secondItem="Uwx-FV-him" secondAttribute="centerY" id="ug5-0y-TW8"/>
+                            <constraint firstItem="cbz-B6-rXC" firstAttribute="centerX" secondItem="Uwx-FV-him" secondAttribute="centerX" id="vQ1-jy-iBf"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OiX-Cu-QOz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="922" y="3214"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="uYf-rq-VTB"/>
-        <segue reference="0R6-Fe-VRn"/>
+        <segue reference="cCs-ih-kNM"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="gear" catalog="system" width="128" height="119"/>
