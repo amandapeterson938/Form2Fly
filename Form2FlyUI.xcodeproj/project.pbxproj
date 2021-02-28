@@ -25,6 +25,7 @@
 		F0C041F825EB27C60070FA53 /* Professional.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C041F725EB27C60070FA53 /* Professional.swift */; };
 		F0C0420025EB38940070FA53 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C041FF25EB38940070FA53 /* SettingsViewController.swift */; };
 		F0C0420425EB3B870070FA53 /* ThrowTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C0420325EB3B870070FA53 /* ThrowTypeViewController.swift */; };
+		F0F1A87925EC5AAD00AF4F6F /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F1A87825EC5AAD00AF4F6F /* avatar.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		F0C041F725EB27C60070FA53 /* Professional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Professional.swift; sourceTree = "<group>"; };
 		F0C041FF25EB38940070FA53 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		F0C0420325EB3B870070FA53 /* ThrowTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrowTypeViewController.swift; sourceTree = "<group>"; };
+		F0F1A87825EC5AAD00AF4F6F /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 		F09912D725EB035700B6811A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F0F1A87825EC5AAD00AF4F6F /* avatar.png */,
 				F0AEDCF025E831EB00AAF1AA /* image2.png */,
 				F048CF1325EACA00006F1C70 /* pickProfessional.png */,
 				F048CF1025EAB69D006F1C70 /* puzzleNoBG.png */,
@@ -226,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0AEDCE825E82E0100AAF1AA /* LaunchScreen.storyboard in Resources */,
+				F0F1A87925EC5AAD00AF4F6F /* avatar.png in Resources */,
 				F0AEDCE525E82E0100AAF1AA /* Assets.xcassets in Resources */,
 				F048CF1125EAB69D006F1C70 /* puzzleNoBG.png in Resources */,
 				F048CF1425EACA00006F1C70 /* pickProfessional.png in Resources */,
