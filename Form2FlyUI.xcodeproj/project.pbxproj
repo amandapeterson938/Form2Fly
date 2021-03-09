@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9608D34C69E77EA49AA077E0 /* Pods_Form2FlyUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 846F61094318C7B276554B50 /* Pods_Form2FlyUI.framework */; };
 		F00107B025EC3BEF00D4A383 /* TrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00107AF25EC3BEF00D4A383 /* TrainingViewController.swift */; };
 		F031338E25EBE29A002C649F /* RecordOrUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F031338D25EBE29A002C649F /* RecordOrUploadViewController.swift */; };
 		F048CF1125EAB69D006F1C70 /* puzzleNoBG.png in Resources */ = {isa = PBXBuildFile; fileRef = F048CF1025EAB69D006F1C70 /* puzzleNoBG.png */; };
@@ -29,6 +30,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D67DDECD2F818414CE87D54 /* Pods-Form2FlyUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Form2FlyUI.release.xcconfig"; path = "Target Support Files/Pods-Form2FlyUI/Pods-Form2FlyUI.release.xcconfig"; sourceTree = "<group>"; };
+		846F61094318C7B276554B50 /* Pods_Form2FlyUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Form2FlyUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE9A4C8048AAF7D8EB3AB9CA /* Pods-Form2FlyUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Form2FlyUI.debug.xcconfig"; path = "Target Support Files/Pods-Form2FlyUI/Pods-Form2FlyUI.debug.xcconfig"; sourceTree = "<group>"; };
 		F00107AF25EC3BEF00D4A383 /* TrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
 		F031338D25EBE29A002C649F /* RecordOrUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordOrUploadViewController.swift; sourceTree = "<group>"; };
 		F048CF1025EAB69D006F1C70 /* puzzleNoBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = puzzleNoBG.png; sourceTree = "<group>"; };
@@ -57,12 +61,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9608D34C69E77EA49AA077E0 /* Pods_Form2FlyUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		56570BF0001CCCB086B337A9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				846F61094318C7B276554B50 /* Pods_Form2FlyUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C9BA5097D6E88DC78FD8BC52 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CE9A4C8048AAF7D8EB3AB9CA /* Pods-Form2FlyUI.debug.xcconfig */,
+				6D67DDECD2F818414CE87D54 /* Pods-Form2FlyUI.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		F00107AE25EC3BDC00D4A383 /* TrainingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +133,8 @@
 			isa = PBXGroup;
 			children = (
 				F0AEDCDA25E82E0100AAF1AA /* Form2FlyUI */,
+				C9BA5097D6E88DC78FD8BC52 /* Pods */,
+				56570BF0001CCCB086B337A9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -178,9 +203,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F0AEDCEC25E82E0100AAF1AA /* Build configuration list for PBXNativeTarget "Form2FlyUI" */;
 			buildPhases = (
+				9AAF0286038B75F43C5B40E6 /* [CP] Check Pods Manifest.lock */,
 				F0AEDCD425E82E0100AAF1AA /* Sources */,
 				F0AEDCD525E82E0100AAF1AA /* Frameworks */,
 				F0AEDCD625E82E0100AAF1AA /* Resources */,
+				B3D2215BC087C53DDEEA6ED0 /* [CP] Embed Pods Frameworks */,
+				5F37B57A4EB6AD1B97084FCF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -239,6 +267,65 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5F37B57A4EB6AD1B97084FCF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Form2FlyUI/Pods-Form2FlyUI-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Form2FlyUI/Pods-Form2FlyUI-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Form2FlyUI/Pods-Form2FlyUI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9AAF0286038B75F43C5B40E6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Form2FlyUI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B3D2215BC087C53DDEEA6ED0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Form2FlyUI/Pods-Form2FlyUI-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Form2FlyUI/Pods-Form2FlyUI-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Form2FlyUI/Pods-Form2FlyUI-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F0AEDCD425E82E0100AAF1AA /* Sources */ = {
@@ -400,6 +487,7 @@
 		};
 		F0AEDCED25E82E0100AAF1AA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE9A4C8048AAF7D8EB3AB9CA /* Pods-Form2FlyUI.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -419,6 +507,7 @@
 		};
 		F0AEDCEE25E82E0100AAF1AA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6D67DDECD2F818414CE87D54 /* Pods-Form2FlyUI.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
