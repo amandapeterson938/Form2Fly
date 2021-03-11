@@ -64,18 +64,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
                 print(videoURL)
                 print(String(Float(video.duration.seconds)))
                 
-                
-                let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask) [0]
-                
-//                let queue = OperationQueue()
-//                let operation = BlockOperation{self.analyzeVideo(video: video)}
-//                queue.addOperations([operation], waitUntilFinished: true)
-//                print("Operations finished")
-                
-                
-                //analyzeVideo(video: video)
-                generateVideoFrames(video: video)
-                //implementML(video: video, videoFrames: videoFrames)
+                analyzeVideo(video: video)
                 
                 // Opening new view (Training)
                 if let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TrainingViewController") as? TrainingViewController {
@@ -118,7 +107,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             
             print(String(Float(video.duration.seconds)))
             
-            //analyzeVideo(video: video)
+            analyzeVideo(video: video)
             
             // Opening new view (Training)
             if let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TrainingViewController") as? TrainingViewController {
@@ -152,10 +141,20 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         return frameForTimes
     }
     
-    func generateVideoFrames(video: AVURLAsset) {
+    func analyzeVideo(video: AVURLAsset) {
+        
+        let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask) [0]
+        let fileURL = URL(fileURLWithPath: "poseData", relativeTo: directoryURL).appendingPathExtension("txt")
+        overwriteFile(dataString: "", fileURL: fileURL)
+        
         let frameForTimes = generateTimeForFrames(video: video)
         let numFrames = frameForTimes.count
         var outputFrames = [VisionImage]()
+        
+        // Set up pose detector with .stream
+        let options = AccuratePoseDetectorOptions()
+        options.detectorMode = .stream
+        let poseDetector = PoseDetector.poseDetector(options: options)
         
         let semaphore = DispatchSemaphore(value: 1)
         DispatchQueue.global().async {
@@ -176,52 +175,24 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             })
         }
         DispatchQueue.global().async {
+            semaphore.wait()
             
-        }
-    }
-    
-    
-    func analyzeVideo(video: AVURLAsset) {
-        
-        let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask) [0]
-        let fileURL = URL(fileURLWithPath: "poseData", relativeTo: directoryURL).appendingPathExtension("txt")
-        overwriteFile(dataString: "", fileURL: fileURL)
-        
-        let frameForTimes = generateTimeForFrames(video: video)
-        
-        // Set up pose detector with .stream
-        let options = AccuratePoseDetectorOptions()
-        options.detectorMode = .stream
-        let poseDetector = PoseDetector.poseDetector(options: options)
-        
-        /*writeToFile(dataString: "Perry the platypus. " , fileURL: fileURL)
-        writeToFile(dataString: "Perry", fileURL: fileURL)
-        writeToFile(dataString: "\nThis is a Test.", fileURL: fileURL)
-        let test = readFile(fileURL: fileURL)
-        print(test)*/
-    
-    
-        let generator = AVAssetImageGenerator(asset: video)
-        generator.generateCGImagesAsynchronously(forTimes: frameForTimes, completionHandler: {requestedTime,image,actualTime,result,error in
-            DispatchQueue.main.async {
-                if let image = image {
-                    let visionImg = VisionImage(image: UIImage(cgImage: image))
-                    
-                    DispatchQueue.global(qos: .utility).async {
-                        var results: [Pose]?
-                        do {
-                            results = try poseDetector.results(in: visionImg)
-                        }
-                        catch let error {
-                            print("Failed to detect pose with error: \(error.localizedDescription)")
-                            return
-                        }
-                        guard let detectedPoses = results, !detectedPoses.isEmpty else {
-                            return
-                        }
-                        
-                        DispatchQueue.main.async {
-                            for pose in detectedPoses {
+            for frame in outputFrames {
+                var results: [Pose]?
+                do {
+                    results = try poseDetector.results(in: frame)
+                }
+                catch let error {
+                    print("Failed to detect pose with error: \(error.localizedDescription)")
+                    return
+                }
+                guard let detectedPoses = results, !detectedPoses.isEmpty else {
+                    return
+                }
+                
+                
+                
+                for pose in detectedPoses {
 //                                let noseLM = (pose.landmark(ofType: .nose)).position
 //                                let leftEyeInnerLM = (pose.landmark(ofType: .leftEyeInner)).position
 //                                let leftEyeLM = (pose.landmark(ofType: .leftEye)).position
@@ -233,66 +204,71 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
 //                                let rightEarLM = (pose.landmark(ofType: .rightEar)).position
 //                                let mouthLeftLM = (pose.landmark(ofType: .mouthLeft)).position
 //                                let mouthRightLM = (pose.landmark(ofType: .mouthRight)).position
-                                let leftShoulderLM = (pose.landmark(ofType: .leftShoulder)).position
-                                let rightShoulderLM = (pose.landmark(ofType: .rightShoulder)).position
-                                let leftElbowLM = (pose.landmark(ofType: .leftElbow)).position
-                                let rightElbowLM = (pose.landmark(ofType: .rightElbow)).position
-                                let leftWristLM = (pose.landmark(ofType: .leftWrist)).position
-                                let rightWristLM = (pose.landmark(ofType: .rightWrist)).position
-                                let leftPinkyFingerLM = (pose.landmark(ofType: .leftPinkyFinger)).position
+                    let leftShoulderLM = (pose.landmark(ofType: .leftShoulder)).position
+                    let rightShoulderLM = (pose.landmark(ofType: .rightShoulder)).position
+                    let leftElbowLM = (pose.landmark(ofType: .leftElbow)).position
+                    let rightElbowLM = (pose.landmark(ofType: .rightElbow)).position
+                    let leftWristLM = (pose.landmark(ofType: .leftWrist)).position
+                    let rightWristLM = (pose.landmark(ofType: .rightWrist)).position
+                    let leftPinkyFingerLM = (pose.landmark(ofType: .leftPinkyFinger)).position
 //                                let rightPinkyFingerLM = (pose.landmark(ofType: .rightPinkyFinger)).position
-                                let leftIndexFingerLM = (pose.landmark(ofType: .leftIndexFinger)).position
-                                let rightIndexFingerLM = (pose.landmark(ofType: .rightIndexFinger)).position
-                                let leftThumbLM = (pose.landmark(ofType: .leftThumb)).position
+                    let leftIndexFingerLM = (pose.landmark(ofType: .leftIndexFinger)).position
+                    let rightIndexFingerLM = (pose.landmark(ofType: .rightIndexFinger)).position
+                    let leftThumbLM = (pose.landmark(ofType: .leftThumb)).position
 //                                let rightThumbLM = (pose.landmark(ofType: .rightThumb)).position
-                                let leftHipLM = (pose.landmark(ofType: .leftHip)).position
-                                let rightHipLM = (pose.landmark(ofType: .rightHip)).position
-                                let leftKneeLM = (pose.landmark(ofType: .leftKnee)).position
-                                let rightKneeLM = (pose.landmark(ofType: .rightKnee)).position
-                                let leftAnkleLM = (pose.landmark(ofType: .leftAnkle)).position
-                                let rightAnkleLM = (pose.landmark(ofType: .rightAnkle)).position
+                    let leftHipLM = (pose.landmark(ofType: .leftHip)).position
+                    let rightHipLM = (pose.landmark(ofType: .rightHip)).position
+                    let leftKneeLM = (pose.landmark(ofType: .leftKnee)).position
+                    let rightKneeLM = (pose.landmark(ofType: .rightKnee)).position
+                    let leftAnkleLM = (pose.landmark(ofType: .leftAnkle)).position
+                    let rightAnkleLM = (pose.landmark(ofType: .rightAnkle)).position
 //                                let leftHeelLM = (pose.landmark(ofType: .leftHeel)).position
 //                                let rightHeelLM = (pose.landmark(ofType: .rightHeel)).position
-                                let leftToeLM = (pose.landmark(ofType: .leftToe)).position
-                                let rightToeLM = (pose.landmark(ofType: .rightToe)).position
-                                
-
-                                let leftWristVertexAngle = self.calculateAngle(vertex: leftWristLM, p2: leftElbowLM, p3: leftIndexFingerLM)
-                                let leftElbowVertexAngle = self.calculateAngle(vertex: leftElbowLM, p2: leftShoulderLM, p3: leftWristLM)
-                                let leftShoulderVertexAngle = self.calculateAngle(vertex: leftShoulderLM, p2: leftElbowLM, p3: leftHipLM)
-                                let leftHipVertexAngle = self.calculateAngle(vertex: leftHipLM, p2: leftShoulderLM, p3: leftKneeLM)
-                                let leftKneeVertexAngle = self.calculateAngle(vertex: leftKneeLM, p2: leftHipLM, p3: leftAnkleLM)
-                                let leftAnkleVertexAngle = self.calculateAngle(vertex: leftAnkleLM, p2: leftKneeLM, p3: leftToeLM)
-                                // Experimental Calculation this semi tells us rotation
-                                let leftWristRotAngle = self.calculateWristRotation(vertex: leftPinkyFingerLM, p2X: leftPinkyFingerLM.x, p2Y: leftThumbLM.x, p3: leftThumbLM)
-                                
-                                let leftHalfData = leftWristVertexAngle + " " + leftElbowVertexAngle + " " + leftShoulderVertexAngle + " " + leftHipVertexAngle + " " + leftKneeVertexAngle + " " + leftAnkleVertexAngle + leftWristRotAngle
-                                
-                                
-                                let rightWristVertexAngle = self.calculateAngle(vertex: rightWristLM, p2: rightElbowLM, p3: rightIndexFingerLM)
-                                let rightElbowVertexAngle = self.calculateAngle(vertex: rightElbowLM, p2: rightShoulderLM, p3: rightWristLM)
-                                let rightShoulderVertexAngle = self.calculateAngle(vertex: rightShoulderLM, p2: rightElbowLM, p3: rightHipLM)
-                                let rightHipVertexAngle = self.calculateAngle(vertex: rightHipLM, p2: rightShoulderLM, p3: rightKneeLM)
-                                let rightKneeVertexAngle = self.calculateAngle(vertex: rightKneeLM, p2: rightHipLM, p3: rightAnkleLM)
-                                let rightAnkleVertexAngle = self.calculateAngle(vertex: rightAnkleLM, p2: rightKneeLM, p3: rightToeLM)
-                                let rightWristRotAngle = self.calculateWristRotation(vertex: leftPinkyFingerLM, p2X: leftPinkyFingerLM.x, p2Y: leftThumbLM.x, p3: leftThumbLM)
-                                
-                                
-                                let rightHalfData = rightWristVertexAngle + " " + rightElbowVertexAngle + " " + rightShoulderVertexAngle + " " + rightHipVertexAngle + " " + rightKneeVertexAngle + rightAnkleVertexAngle + rightWristRotAngle
-                                
-                                let outputData = leftHalfData + " " + rightHalfData
-                                self.writeToFile(dataString: outputData, fileURL: fileURL)
-                                print(outputData)
-                            } // end for pose in detectedPoses
-                        }
-                        
-                    }
+                    let leftToeLM = (pose.landmark(ofType: .leftToe)).position
+                    let rightToeLM = (pose.landmark(ofType: .rightToe)).position
                     
-                } //end if let image //image is the image of the current frame from the time specified in frameForTimes
+
+                    let leftWristVertexAngle = self.calculateAngle(vertex: leftWristLM, p2: leftElbowLM, p3: leftIndexFingerLM)
+                    let leftElbowVertexAngle = self.calculateAngle(vertex: leftElbowLM, p2: leftShoulderLM, p3: leftWristLM)
+                    let leftShoulderVertexAngle = self.calculateAngle(vertex: leftShoulderLM, p2: leftElbowLM, p3: leftHipLM)
+                    let leftHipVertexAngle = self.calculateAngle(vertex: leftHipLM, p2: leftShoulderLM, p3: leftKneeLM)
+                    let leftKneeVertexAngle = self.calculateAngle(vertex: leftKneeLM, p2: leftHipLM, p3: leftAnkleLM)
+                    let leftAnkleVertexAngle = self.calculateAngle(vertex: leftAnkleLM, p2: leftKneeLM, p3: leftToeLM)
+                    // Experimental Calculation this semi tells us rotation
+                    let leftWristRotAngle = self.calculateWristRotation(vertex: leftPinkyFingerLM, p2X: leftPinkyFingerLM.x, p2Y: leftThumbLM.x, p3: leftThumbLM)
+                    
+                    let leftHalfData = leftWristVertexAngle + " " + leftElbowVertexAngle + " " + leftShoulderVertexAngle + " " + leftHipVertexAngle + " " + leftKneeVertexAngle + " " + leftAnkleVertexAngle + " " + leftWristRotAngle
+                    
+                    
+                    let rightWristVertexAngle = self.calculateAngle(vertex: rightWristLM, p2: rightElbowLM, p3: rightIndexFingerLM)
+                    let rightElbowVertexAngle = self.calculateAngle(vertex: rightElbowLM, p2: rightShoulderLM, p3: rightWristLM)
+                    let rightShoulderVertexAngle = self.calculateAngle(vertex: rightShoulderLM, p2: rightElbowLM, p3: rightHipLM)
+                    let rightHipVertexAngle = self.calculateAngle(vertex: rightHipLM, p2: rightShoulderLM, p3: rightKneeLM)
+                    let rightKneeVertexAngle = self.calculateAngle(vertex: rightKneeLM, p2: rightHipLM, p3: rightAnkleLM)
+                    let rightAnkleVertexAngle = self.calculateAngle(vertex: rightAnkleLM, p2: rightKneeLM, p3: rightToeLM)
+                    let rightWristRotAngle = self.calculateWristRotation(vertex: leftPinkyFingerLM, p2X: leftPinkyFingerLM.x, p2Y: leftThumbLM.x, p3: leftThumbLM)
+                    
+                    
+                    let rightHalfData = rightWristVertexAngle + " " + rightElbowVertexAngle + " " + rightShoulderVertexAngle + " " + rightHipVertexAngle + " " + rightKneeVertexAngle + " " + rightAnkleVertexAngle + " " +  rightWristRotAngle
+                    
+                    let outputData = leftHalfData + " " + rightHalfData + "\n"
+                    self.writeToFile(dataString: outputData, fileURL: fileURL)
+                    //print(outputData)
+                } // end for pose in detectedPoses
+                
+                
+                
             }
-            usleep(60000)
-        })
-        generator.cancelAllCGImageGeneration()
+            
+            print("Background...")
+            semaphore.signal()
+        }
+        DispatchQueue.global().async {
+            semaphore.wait()
+            print(self.readFile(fileURL: fileURL))
+            print("FINISHED NOW")
+            semaphore.signal()
+        }
     }
     
     func overwriteFile(dataString : String, fileURL: URL ) {
@@ -336,8 +312,6 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         }
         return ""
     }
-    
-    
     
     
     func calculateAngle(vertex: Vision3DPoint, p2: Vision3DPoint, p3: Vision3DPoint ) -> String {
