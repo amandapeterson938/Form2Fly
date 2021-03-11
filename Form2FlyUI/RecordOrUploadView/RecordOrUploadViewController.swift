@@ -64,11 +64,18 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
                 print(videoURL)
                 print(String(Float(video.duration.seconds)))
                 
+                
+                let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask) [0]
+                
+//                let queue = OperationQueue()
+//                let operation = BlockOperation{self.analyzeVideo(video: video)}
+//                queue.addOperations([operation], waitUntilFinished: true)
+//                print("Operations finished")
+                
+                
                 //analyzeVideo(video: video)
-                print("Perry")
-                let testVar = generateCGI(video: video)
-                print(testVar.count)
-                analyzePoses(imageFrames: testVar)
+                generateVideoFrames(video: video)
+                //implementML(video: video, videoFrames: videoFrames)
                 
                 // Opening new view (Training)
                 if let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TrainingViewController") as? TrainingViewController {
@@ -125,112 +132,8 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         }
     }
     
-    func generateCGI(video: AVURLAsset) -> [VisionImage] {
-        var generatedImages = [VisionImage]()
-        
-        let reader = try! AVAssetReader(asset: video)
-
-        let videoTrack = video.tracks(withMediaType: AVMediaType.video)[0]
-
-        // read video frames as BGRA
-        let trackReaderOutput = AVAssetReaderTrackOutput(track: videoTrack, outputSettings:[String(kCVPixelBufferPixelFormatTypeKey): NSNumber(value: kCVPixelFormatType_32BGRA)])
-
-        reader.add(trackReaderOutput)
-        reader.startReading()
-
-        while let sampleBuffer = trackReaderOutput.copyNextSampleBuffer() {
-            if let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) {
-                let ciImage = CIImage(cvImageBuffer: imageBuffer)
-                let cgImage = convertCIImageToCGImage(inputImage: ciImage) as CGImage?
-                
-                generatedImages.append(VisionImage(image: UIImage(cgImage: cgImage!)))
-            }
-        }
-        return generatedImages
-    }//end generateCGI
-    
-    
-    func analyzePoses(imageFrames: [VisionImage]) {
-        // Set up pose detector with .stream
-        let options = AccuratePoseDetectorOptions()
-        options.detectorMode = .stream
-        let poseDetector = PoseDetector.poseDetector(options: options)
-        
-        DispatchQueue.main.async {
-            DispatchQueue.global(qos: .background).async {
-                for frame in imageFrames {
-                    
-                    var results: [Pose]?
-                    do {
-                        results = try poseDetector.results(in: frame)
-                    }
-                    catch let error {
-                        print("Failed to detect pose with error: \(error.localizedDescription)")
-                        return
-                    }
-                    guard let detectedPoses = results, !detectedPoses.isEmpty else {
-                        return
-                    }
-                    
-                    
-                    for pose in detectedPoses {
-                        let noseLM = (pose.landmark(ofType: .nose)).position
-                        let leftEyeInnerLM = (pose.landmark(ofType: .leftEyeInner)).position
-                        let leftEyeLM = (pose.landmark(ofType: .leftEye)).position
-                        let leftEyeOuterLM = (pose.landmark(ofType: .leftEyeOuter)).position
-                        let rightEyeInnerLM = (pose.landmark(ofType: .rightEyeInner)).position
-                        let rightEyeLM = (pose.landmark(ofType: .rightEye)).position
-                        let rightEyeOuterLM = (pose.landmark(ofType: .rightEyeOuter)).position
-                        let leftEarLM = (pose.landmark(ofType: .leftEar)).position
-                        let rightEarLM = (pose.landmark(ofType: .rightEar)).position
-                        let mouthLeftLM = (pose.landmark(ofType: .mouthLeft)).position
-                        let mouthRightLM = (pose.landmark(ofType: .mouthRight)).position
-                        let leftShoulderLM = (pose.landmark(ofType: .leftShoulder)).position
-                        let rightShoulderLM = (pose.landmark(ofType: .rightShoulder)).position
-                        let leftElbowLM = (pose.landmark(ofType: .leftElbow)).position
-                        let rightElbowLM = (pose.landmark(ofType: .rightElbow)).position
-                        let leftWristLM = (pose.landmark(ofType: .leftWrist)).position
-                        let rightWristLM = (pose.landmark(ofType: .rightWrist)).position
-                        let leftPinkyFingerLM = (pose.landmark(ofType: .leftPinkyFinger)).position
-                        let rightPinkyFingerLM = (pose.landmark(ofType: .rightPinkyFinger)).position
-                        let leftIndexFingerLM = (pose.landmark(ofType: .leftIndexFinger)).position
-                        let rightIndexFingerLM = (pose.landmark(ofType: .rightIndexFinger)).position
-                        let leftThumbLM = (pose.landmark(ofType: .leftThumb)).position
-                        let rightThumbLM = (pose.landmark(ofType: .rightThumb)).position
-                        let leftHipLM = (pose.landmark(ofType: .leftHip)).position
-                        let rightHipLM = (pose.landmark(ofType: .rightHip)).position
-                        let leftKneeLM = (pose.landmark(ofType: .leftKnee)).position
-                        let rightKneeLM = (pose.landmark(ofType: .rightKnee)).position
-                        let leftAnkleLM = (pose.landmark(ofType: .leftAnkle)).position
-                        let rightAnkleLM = (pose.landmark(ofType: .rightAnkle)).position
-                        let leftHeelLM = (pose.landmark(ofType: .leftHeel)).position
-                        let rightHeelLM = (pose.landmark(ofType: .rightHeel)).position
-                        let leftToeLM = (pose.landmark(ofType: .leftToe)).position
-                        let rightToeLM = (pose.landmark(ofType: .rightToe)).position
-                        
-                        
-                        self.calculateAngle(vertex: leftElbowLM, p2: leftShoulderLM, p3: leftWristLM)
-                    }
-                    
-                    
-                }
-            }
-        }
-    }
-    
-    func convertCIImageToCGImage(inputImage: CIImage) -> CGImage? {
-        let context = CIContext(options: nil)
-        if let cgImage = context.createCGImage(inputImage, from: inputImage.extent) {
-            return cgImage
-        }
-        return nil
-    }
-    
-    
-    func analyzeVideo(video: AVURLAsset) {
+    func generateTimeForFrames(video: AVURLAsset) -> [NSValue] {
         let videoSec = Float(video.duration.seconds)
-        
-        let generator = AVAssetImageGenerator(asset: video)
         
         var frameForTimes = [NSValue]()
         
@@ -246,19 +149,65 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         }
         print("COUNT: " + String(frameForTimes.count))
         
+        return frameForTimes
+    }
+    
+    func generateVideoFrames(video: AVURLAsset) {
+        let frameForTimes = generateTimeForFrames(video: video)
+        let numFrames = frameForTimes.count
+        var outputFrames = [VisionImage]()
+        
+        let semaphore = DispatchSemaphore(value: 1)
+        DispatchQueue.global().async {
+            semaphore.wait()
+            
+            let generator = AVAssetImageGenerator(asset: video)
+            var curFrameNum = 0
+            generator.generateCGImagesAsynchronously(forTimes: frameForTimes, completionHandler:{_, image, _,_,error in
+                if let image = image {
+                    outputFrames.append(VisionImage(image: UIImage(cgImage: image)))
+                }
+                
+                curFrameNum += 1
+                if(curFrameNum >= numFrames) {
+                    print("Finished Frames")
+                    semaphore.signal()
+                }
+            })
+        }
+        DispatchQueue.global().async {
+            
+        }
+    }
+    
+    
+    func analyzeVideo(video: AVURLAsset) {
+        
+        let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask) [0]
+        let fileURL = URL(fileURLWithPath: "poseData", relativeTo: directoryURL).appendingPathExtension("txt")
+        overwriteFile(dataString: "", fileURL: fileURL)
+        
+        let frameForTimes = generateTimeForFrames(video: video)
+        
         // Set up pose detector with .stream
         let options = AccuratePoseDetectorOptions()
         options.detectorMode = .stream
         let poseDetector = PoseDetector.poseDetector(options: options)
         
-        var elbowAngles = [Double]()
-        
+        /*writeToFile(dataString: "Perry the platypus. " , fileURL: fileURL)
+        writeToFile(dataString: "Perry", fileURL: fileURL)
+        writeToFile(dataString: "\nThis is a Test.", fileURL: fileURL)
+        let test = readFile(fileURL: fileURL)
+        print(test)*/
+    
+    
+        let generator = AVAssetImageGenerator(asset: video)
         generator.generateCGImagesAsynchronously(forTimes: frameForTimes, completionHandler: {requestedTime,image,actualTime,result,error in
             DispatchQueue.main.async {
                 if let image = image {
                     let visionImg = VisionImage(image: UIImage(cgImage: image))
                     
-                    DispatchQueue.global(qos: .background).async {
+                    DispatchQueue.global(qos: .utility).async {
                         var results: [Pose]?
                         do {
                             results = try poseDetector.results(in: visionImg)
@@ -273,17 +222,17 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
                         
                         DispatchQueue.main.async {
                             for pose in detectedPoses {
-                                let noseLM = (pose.landmark(ofType: .nose)).position
-                                let leftEyeInnerLM = (pose.landmark(ofType: .leftEyeInner)).position
-                                let leftEyeLM = (pose.landmark(ofType: .leftEye)).position
-                                let leftEyeOuterLM = (pose.landmark(ofType: .leftEyeOuter)).position
-                                let rightEyeInnerLM = (pose.landmark(ofType: .rightEyeInner)).position
-                                let rightEyeLM = (pose.landmark(ofType: .rightEye)).position
-                                let rightEyeOuterLM = (pose.landmark(ofType: .rightEyeOuter)).position
-                                let leftEarLM = (pose.landmark(ofType: .leftEar)).position
-                                let rightEarLM = (pose.landmark(ofType: .rightEar)).position
-                                let mouthLeftLM = (pose.landmark(ofType: .mouthLeft)).position
-                                let mouthRightLM = (pose.landmark(ofType: .mouthRight)).position
+//                                let noseLM = (pose.landmark(ofType: .nose)).position
+//                                let leftEyeInnerLM = (pose.landmark(ofType: .leftEyeInner)).position
+//                                let leftEyeLM = (pose.landmark(ofType: .leftEye)).position
+//                                let leftEyeOuterLM = (pose.landmark(ofType: .leftEyeOuter)).position
+//                                let rightEyeInnerLM = (pose.landmark(ofType: .rightEyeInner)).position
+//                                let rightEyeLM = (pose.landmark(ofType: .rightEye)).position
+//                                let rightEyeOuterLM = (pose.landmark(ofType: .rightEyeOuter)).position
+//                                let leftEarLM = (pose.landmark(ofType: .leftEar)).position
+//                                let rightEarLM = (pose.landmark(ofType: .rightEar)).position
+//                                let mouthLeftLM = (pose.landmark(ofType: .mouthLeft)).position
+//                                let mouthRightLM = (pose.landmark(ofType: .mouthRight)).position
                                 let leftShoulderLM = (pose.landmark(ofType: .leftShoulder)).position
                                 let rightShoulderLM = (pose.landmark(ofType: .rightShoulder)).position
                                 let leftElbowLM = (pose.landmark(ofType: .leftElbow)).position
@@ -291,65 +240,107 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
                                 let leftWristLM = (pose.landmark(ofType: .leftWrist)).position
                                 let rightWristLM = (pose.landmark(ofType: .rightWrist)).position
                                 let leftPinkyFingerLM = (pose.landmark(ofType: .leftPinkyFinger)).position
-                                let rightPinkyFingerLM = (pose.landmark(ofType: .rightPinkyFinger)).position
+//                                let rightPinkyFingerLM = (pose.landmark(ofType: .rightPinkyFinger)).position
                                 let leftIndexFingerLM = (pose.landmark(ofType: .leftIndexFinger)).position
                                 let rightIndexFingerLM = (pose.landmark(ofType: .rightIndexFinger)).position
                                 let leftThumbLM = (pose.landmark(ofType: .leftThumb)).position
-                                let rightThumbLM = (pose.landmark(ofType: .rightThumb)).position
+//                                let rightThumbLM = (pose.landmark(ofType: .rightThumb)).position
                                 let leftHipLM = (pose.landmark(ofType: .leftHip)).position
                                 let rightHipLM = (pose.landmark(ofType: .rightHip)).position
                                 let leftKneeLM = (pose.landmark(ofType: .leftKnee)).position
                                 let rightKneeLM = (pose.landmark(ofType: .rightKnee)).position
                                 let leftAnkleLM = (pose.landmark(ofType: .leftAnkle)).position
                                 let rightAnkleLM = (pose.landmark(ofType: .rightAnkle)).position
-                                let leftHeelLM = (pose.landmark(ofType: .leftHeel)).position
-                                let rightHeelLM = (pose.landmark(ofType: .rightHeel)).position
+//                                let leftHeelLM = (pose.landmark(ofType: .leftHeel)).position
+//                                let rightHeelLM = (pose.landmark(ofType: .rightHeel)).position
                                 let leftToeLM = (pose.landmark(ofType: .leftToe)).position
                                 let rightToeLM = (pose.landmark(ofType: .rightToe)).position
                                 
+
+                                let leftWristVertexAngle = self.calculateAngle(vertex: leftWristLM, p2: leftElbowLM, p3: leftIndexFingerLM)
+                                let leftElbowVertexAngle = self.calculateAngle(vertex: leftElbowLM, p2: leftShoulderLM, p3: leftWristLM)
+                                let leftShoulderVertexAngle = self.calculateAngle(vertex: leftShoulderLM, p2: leftElbowLM, p3: leftHipLM)
+                                let leftHipVertexAngle = self.calculateAngle(vertex: leftHipLM, p2: leftShoulderLM, p3: leftKneeLM)
+                                let leftKneeVertexAngle = self.calculateAngle(vertex: leftKneeLM, p2: leftHipLM, p3: leftAnkleLM)
+                                let leftAnkleVertexAngle = self.calculateAngle(vertex: leftAnkleLM, p2: leftKneeLM, p3: leftToeLM)
+                                // Experimental Calculation this semi tells us rotation
+                                let leftWristRotAngle = self.calculateWristRotation(vertex: leftPinkyFingerLM, p2X: leftPinkyFingerLM.x, p2Y: leftThumbLM.x, p3: leftThumbLM)
                                 
-                                let p1x = leftElbowLM.x
-                                let p1y = leftElbowLM.y
-
-                                let p2x = leftShoulderLM.x
-                                let p2y = leftShoulderLM.y
-
-                                let p3x = leftWristLM.x
-                                let p3y = leftWristLM.y
-
-                                let p12 = ((pow((Double(p1x) - Double(p2x)), 2)) + (pow((Double(p1y) - Double(p2y)), 2))).squareRoot()
-                                let p13 = ((pow((Double(p1x) - Double(p3x)), 2)) + (pow((Double(p1y) - Double(p3y)), 2))).squareRoot()
-                                let p23 = ((pow((Double(p2x) - Double(p3x)), 2)) + (pow((Double(p2y) - Double(p3y)), 2))).squareRoot()
-
-                                let div1 = Double(pow(p12,2) + pow(p13, 2) - pow(p23,2))
-
-                                let ang = acos(div1 / Double(2 * p12 * p13)) * (Double(180) / Double(CGFloat.pi))
+                                let leftHalfData = leftWristVertexAngle + " " + leftElbowVertexAngle + " " + leftShoulderVertexAngle + " " + leftHipVertexAngle + " " + leftKneeVertexAngle + " " + leftAnkleVertexAngle + leftWristRotAngle
                                 
-                                elbowAngles.append(ang)
-                                print(elbowAngles.count)
-
-                                //print(String(ang) + "\t\t" + String(requestedTime.seconds))
                                 
-                                //self.calculateAngle(vertex: leftElbowLM, p2: leftShoulderLM, p3: leftWristLM)
+                                let rightWristVertexAngle = self.calculateAngle(vertex: rightWristLM, p2: rightElbowLM, p3: rightIndexFingerLM)
+                                let rightElbowVertexAngle = self.calculateAngle(vertex: rightElbowLM, p2: rightShoulderLM, p3: rightWristLM)
+                                let rightShoulderVertexAngle = self.calculateAngle(vertex: rightShoulderLM, p2: rightElbowLM, p3: rightHipLM)
+                                let rightHipVertexAngle = self.calculateAngle(vertex: rightHipLM, p2: rightShoulderLM, p3: rightKneeLM)
+                                let rightKneeVertexAngle = self.calculateAngle(vertex: rightKneeLM, p2: rightHipLM, p3: rightAnkleLM)
+                                let rightAnkleVertexAngle = self.calculateAngle(vertex: rightAnkleLM, p2: rightKneeLM, p3: rightToeLM)
+                                let rightWristRotAngle = self.calculateWristRotation(vertex: leftPinkyFingerLM, p2X: leftPinkyFingerLM.x, p2Y: leftThumbLM.x, p3: leftThumbLM)
+                                
+                                
+                                let rightHalfData = rightWristVertexAngle + " " + rightElbowVertexAngle + " " + rightShoulderVertexAngle + " " + rightHipVertexAngle + " " + rightKneeVertexAngle + rightAnkleVertexAngle + rightWristRotAngle
+                                
+                                let outputData = leftHalfData + " " + rightHalfData
+                                self.writeToFile(dataString: outputData, fileURL: fileURL)
+                                print(outputData)
                             } // end for pose in detectedPoses
                         }
-                        
-                    }//end
-                    
-                    DispatchQueue.global(qos: .background).async {
                         
                     }
                     
                 } //end if let image //image is the image of the current frame from the time specified in frameForTimes
             }
-            usleep(30000)
+            usleep(60000)
         })
         generator.cancelAllCGImageGeneration()
-        print("Im done.")
+    }
+    
+    func overwriteFile(dataString : String, fileURL: URL ) {
+        guard let data = dataString.data(using: .utf8) else {
+            print("Unable to convert string to data.")
+            return
+        }
+        do {
+            try data.write(to: fileURL)
+            print("File saved: \(fileURL.absoluteURL)")
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func writeToFile(dataString : String, fileURL: URL ) {
+        let newString = readFile(fileURL: fileURL) + dataString
+        
+        guard let data = newString.data(using: .utf8) else {
+            print("Unable to convert string to data.")
+            return
+        }
+        do {
+            try data.write(to: fileURL)
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func readFile(fileURL : URL) -> String {
+        do {
+            let savedData =  try Data(contentsOf: fileURL)
+            if let savedString = String(data: savedData, encoding: .utf8) {
+                return savedString
+            }
+        }
+        catch {
+            print("Unable to read file.")
+        }
+        return ""
     }
     
     
-    func calculateAngle(vertex: Vision3DPoint, p2: Vision3DPoint, p3: Vision3DPoint ) {
+    
+    
+    func calculateAngle(vertex: Vision3DPoint, p2: Vision3DPoint, p3: Vision3DPoint ) -> String {
         let vertexX = vertex.x
         let vertexY = vertex.y
         let p2X = p2.x
@@ -367,7 +358,26 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         let angleRadians = acos(dividend / divisor)
         let angleDegrees = angleRadians * (Double(180) / Double(CGFloat.pi))
         
-        print(angleDegrees)
+        return String(angleDegrees)
+    }
+    
+    func calculateWristRotation(vertex: Vision3DPoint, p2X: CGFloat, p2Y: CGFloat, p3: Vision3DPoint ) -> String {
+        let vertexX = vertex.x
+        let vertexY = vertex.y
+        let p3X = p3.x
+        let p3Y = p3.y
+        
+        let p12 = ((pow((Double(vertexX) - Double(p2X)), 2)) + (pow((Double(vertexY) - Double(p2Y)), 2))).squareRoot()
+        let p13 = ((pow((Double(vertexX) - Double(p3X)), 2)) + (pow((Double(vertexY) - Double(p3Y)), 2))).squareRoot()
+        let p23 = ((pow((Double(p2X) - Double(p3X)), 2)) + (pow((Double(p2Y) - Double(p3Y)), 2))).squareRoot()
+        
+        let dividend = Double(pow(p12,2) + pow(p13, 2) - pow(p23,2))
+        let divisor = Double(2 * p12 * p13)
+        
+        let angleRadians = acos(dividend / divisor)
+        let angleDegrees = angleRadians * (Double(180) / Double(CGFloat.pi))
+        
+        return String(angleDegrees)
     }
  
 }

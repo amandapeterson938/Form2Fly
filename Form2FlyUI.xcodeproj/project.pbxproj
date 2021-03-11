@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -82,7 +82,6 @@
 				CE9A4C8048AAF7D8EB3AB9CA /* Pods-Form2FlyUI.debug.xcconfig */,
 				6D67DDECD2F818414CE87D54 /* Pods-Form2FlyUI.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
