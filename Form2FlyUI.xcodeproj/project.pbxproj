@@ -26,6 +26,7 @@
 		F0C041F825EB27C60070FA53 /* Professional.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C041F725EB27C60070FA53 /* Professional.swift */; };
 		F0C0420025EB38940070FA53 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C041FF25EB38940070FA53 /* SettingsViewController.swift */; };
 		F0C0420425EB3B870070FA53 /* ThrowTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C0420325EB3B870070FA53 /* ThrowTypeViewController.swift */; };
+		F0E7CB0F25FAD8E800D2B8AD /* testLogo3.png in Resources */ = {isa = PBXBuildFile; fileRef = F0E7CB0E25FAD8E800D2B8AD /* testLogo3.png */; };
 		F0F1A87925EC5AAD00AF4F6F /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F1A87825EC5AAD00AF4F6F /* avatar.png */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		F0C041F725EB27C60070FA53 /* Professional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Professional.swift; sourceTree = "<group>"; };
 		F0C041FF25EB38940070FA53 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		F0C0420325EB3B870070FA53 /* ThrowTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrowTypeViewController.swift; sourceTree = "<group>"; };
+		F0E7CB0E25FAD8E800D2B8AD /* testLogo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testLogo3.png; sourceTree = "<group>"; };
 		F0F1A87825EC5AAD00AF4F6F /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,6 +122,7 @@
 		F09912D725EB035700B6811A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F0E7CB0E25FAD8E800D2B8AD /* testLogo3.png */,
 				F0F1A87825EC5AAD00AF4F6F /* avatar.png */,
 				F0AEDCF025E831EB00AAF1AA /* image2.png */,
 				F048CF1325EACA00006F1C70 /* pickProfessional.png */,
@@ -259,6 +262,7 @@
 				F0F1A87925EC5AAD00AF4F6F /* avatar.png in Resources */,
 				F0AEDCE525E82E0100AAF1AA /* Assets.xcassets in Resources */,
 				F048CF1125EAB69D006F1C70 /* puzzleNoBG.png in Resources */,
+				F0E7CB0F25FAD8E800D2B8AD /* testLogo3.png in Resources */,
 				F048CF1425EACA00006F1C70 /* pickProfessional.png in Resources */,
 				F0AEDCF125E831EB00AAF1AA /* image2.png in Resources */,
 				F0AEDCE325E82E0100AAF1AA /* Main.storyboard in Resources */,

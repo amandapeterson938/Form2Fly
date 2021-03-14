@@ -11,9 +11,12 @@ import MLKit
 import MobileCoreServices
 
 class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIVideoEditorControllerDelegate{
-
+    
     @IBOutlet weak var recordVideoBtn: UIButton!
     @IBOutlet weak var uploadVideoBtn: UIButton!
+    
+    var blackSquare = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 0, height: 0))
+    var spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
     
     let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask) [0]
     
@@ -71,7 +74,11 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
                 print(String(Float(video.duration.seconds)))
                 
                 let fileURL = URL(fileURLWithPath: "poseData", relativeTo: directoryURL).appendingPathExtension("txt")
+                
+                
+                // Analyze the video
                 analyzeVideo(video: video, fileURL: fileURL)
+                
                 
             }
         }
@@ -153,12 +160,16 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         options.detectorMode = .stream
         let poseDetector = PoseDetector.poseDetector(options: options)
         
+        startLoadingObjects()
+        
         // set up semaphore to manage thread
         let semaphore = DispatchSemaphore(value: 1)
+    
         
         // generate frames from the frame times generated from generateTimeForFrames function
         // analyze each frame using mlkit pose detector (calls analyzeFrame function) results are saved in file with fileURL
         DispatchQueue.global().async {
+            
             semaphore.wait()
             
             let generator = AVAssetImageGenerator(asset: video)
@@ -168,9 +179,12 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
                     let visionImg = VisionImage(image: UIImage(cgImage: image))
                     
                     self.analyzeFrame(poseDetector: poseDetector, fileURL: fileURL, frame: visionImg)
-                }
-                
+                    
+                    print(curFrameNum)
+                    
+                }                
                 curFrameNum += 1
+                
                 if(curFrameNum >= numFrames) {
                     semaphore.signal()
                 }
@@ -179,6 +193,9 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         // should have all data saved to file so we can print the file and open the training activity
         DispatchQueue.main.async {
             semaphore.wait()
+            
+            self.endLoadingObjects()
+            
             print(self.readFile(fileURL: fileURL))
             
             // Opening new view (Training)
@@ -189,6 +206,13 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             
             semaphore.signal()
         }
+    }
+    
+    func testPrint(number: Float) {
+        DispatchQueue.main.async {
+            print(number)
+        }
+        
     }
 
 // analyze visionimage for poses and save angle results to file with fileURL
@@ -364,5 +388,27 @@ func analyzeFrame(poseDetector: PoseDetector, fileURL: URL, frame: VisionImage) 
         
         return String(angleDegrees)
     }
- 
+    
+    func startLoadingObjects() {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        let width = self.view.bounds.width;
+        let height = self.view.bounds.height;
+        blackSquare = UIView(frame: CGRect(x: 0.0, y: 0.0, width: width, height: height))
+        blackSquare.backgroundColor = UIColor.systemBackground
+        view.addSubview(blackSquare)
+        
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.color = UIColor.init(named: "Form2FlyBlue")
+        spinner.startAnimating()
+        view.addSubview(spinner)
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+    
+    func endLoadingObjects() {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        blackSquare.removeFromSuperview()
+        spinner.stopAnimating()
+    }
 }

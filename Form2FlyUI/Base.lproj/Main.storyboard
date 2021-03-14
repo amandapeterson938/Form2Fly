@@ -55,7 +55,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="Xe2-L3-mtt"/>
                                 </constraints>
-                                <imageReference key="image" image="image2.png" symbolScale="default"/>
+                                <imageReference key="image" image="testLogo3.png" symbolScale="default"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -577,14 +577,15 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="uYf-rq-VTB"/>
-        <segue reference="cCs-ih-kNM"/>
-        <segue reference="Z6w-bW-cTR"/>
+        <segue reference="0R6-Fe-VRn"/>
+        <segue reference="s9G-cg-8hZ"/>
         <segue reference="NOd-Vc-Ib0"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="avatar.png" width="273" height="418.5"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="image2.png" width="1046" height="295"/>
+        <image name="testLogo3.png" width="386.39999389648438" height="130.08000183105469"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
