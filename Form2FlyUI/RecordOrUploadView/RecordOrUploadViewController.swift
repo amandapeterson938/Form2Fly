@@ -117,6 +117,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             print(String(Float(video.duration.seconds)))
             
             let fileURL = URL(fileURLWithPath: "poseData", relativeTo: directoryURL).appendingPathExtension("txt")
+            
             analyzeVideo(video: video, fileURL: fileURL)
             
             isNext = false
@@ -208,13 +209,6 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         }
     }
     
-    func testPrint(number: Float) {
-        DispatchQueue.main.async {
-            print(number)
-        }
-        
-    }
-
 // analyze visionimage for poses and save angle results to file with fileURL
 func analyzeFrame(poseDetector: PoseDetector, fileURL: URL, frame: VisionImage) {
     
@@ -227,9 +221,10 @@ func analyzeFrame(poseDetector: PoseDetector, fileURL: URL, frame: VisionImage) 
             return
         }
         guard let detectedPoses = results, !detectedPoses.isEmpty else {
+            print("No poses detected...")
             return
         }
-        
+    
         // iterate through poses found in the frame
         for pose in detectedPoses {
 //                                let noseLM = (pose.landmark(ofType: .nose)).position
@@ -389,6 +384,7 @@ func analyzeFrame(poseDetector: PoseDetector, fileURL: URL, frame: VisionImage) 
         return String(angleDegrees)
     }
     
+    // Once user has finished picking their video / recording this function will be called to show that it is loading
     func startLoadingObjects() {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
@@ -406,6 +402,7 @@ func analyzeFrame(poseDetector: PoseDetector, fileURL: URL, frame: VisionImage) 
         spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
+    // This will dismiss the loading objects before the training window opens 
     func endLoadingObjects() {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         blackSquare.removeFromSuperview()
