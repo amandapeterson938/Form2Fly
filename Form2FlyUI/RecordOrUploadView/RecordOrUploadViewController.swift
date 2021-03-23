@@ -15,13 +15,31 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     @IBOutlet weak var recordVideoBtn: UIButton!
     @IBOutlet weak var uploadVideoBtn: UIButton!
     
+    // Loading objects
     var blackSquare = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 0, height: 0))
     var spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
     
-    let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask) [0]
+    // pose dictionary with key being the frame number and the value being the angles that need to change that frame
+    // Example: key: 0 val: "|abreviation-angle-time duration..."
+    var poseDictionary: [Int: String] = [:]
+    
+    // array of abrieviations for the angles being analyzed used to fill in keys for dictionaries lastSubPointsDict and pointsDict
+    var abrvArr:[String] = ["lwr", "lel", "lsh", "lhi", "lkn", "lan", "lro", "rwr", "rel", "rsh", "rhi", "rkn", "ran", "rro"]
+    var lastSubPointsDict: [String: String] = [:]
+    var pointsDict: [String: String] = [:]
+    
+    //let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask) [0]
+    
+    var poseChangesFileURL = URL(fileURLWithPath: "poseChanges")
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Initialize values in dictionary
+        for abrv in abrvArr {
+            lastSubPointsDict[abrv] = ""
+            pointsDict[abrv] = ""
+        }
         
         // Round edges of the buttons
         recordVideoBtn.layer.cornerRadius = 12
@@ -73,11 +91,9 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
                 print(videoURL)
                 print(String(Float(video.duration.seconds)))
                 
-                let fileURL = URL(fileURLWithPath: "poseData", relativeTo: directoryURL).appendingPathExtension("txt")
-                
                 
                 // Analyze the video
-                analyzeVideo(video: video, fileURL: fileURL)
+                analyzeVideo(video: video)
                 
                 
             }
@@ -116,9 +132,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             
             print(String(Float(video.duration.seconds)))
             
-            let fileURL = URL(fileURLWithPath: "poseData", relativeTo: directoryURL).appendingPathExtension("txt")
-            
-            analyzeVideo(video: video, fileURL: fileURL)
+            analyzeVideo(video: video)
             
             isNext = false
         }
@@ -139,7 +153,9 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         var cnt = Float(0.0)
         let secInc = Float(1 / numberOfFramesPerSec)
         while((curSec + secInc) < videoSec) {
+            
             frameForTimes.append(curSec as NSValue)
+            
             curSec = Float(secInc * cnt)
             cnt = cnt + 1
         }
@@ -149,12 +165,14 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     }
     
     // Clears file with given fileURL then precedes to analyze the video by calling generateTimeForFrames, generates the frame by using generateCGIImagesAsynchronously then calls analyzeFrame to get the pose data and writes to the file.
-    func analyzeVideo(video: AVURLAsset, fileURL: URL) {
-        
-        overwriteFile(dataString: "", fileURL: fileURL)
+    func analyzeVideo(video: AVURLAsset) {
         
         let frameForTimes = generateTimeForFrames(video: video, numberOfFramesPerSec: 30)
         let numFrames = frameForTimes.count
+        
+        for num in 0 ... numFrames {
+            poseDictionary[num] = ""
+        }
         
         // Set up pose detector with .stream
         let options = AccuratePoseDetectorOptions()
@@ -175,13 +193,12 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             
             let generator = AVAssetImageGenerator(asset: video)
             var curFrameNum = 0
-            generator.generateCGImagesAsynchronously(forTimes: frameForTimes, completionHandler:{_, image, _,_,error in
+            generator.generateCGImagesAsynchronously(forTimes: frameForTimes, completionHandler:{requestedTime, image, _,_,error in
                 if let image = image {
+                    
                     let visionImg = VisionImage(image: UIImage(cgImage: image))
                     
-                    self.analyzeFrame(poseDetector: poseDetector, fileURL: fileURL, frame: visionImg)
-                    
-                    print(curFrameNum)
+                    self.analyzeFrame(poseDetector: poseDetector, frame: visionImg, currentTime: requestedTime.seconds)
                     
                 }                
                 curFrameNum += 1
@@ -197,7 +214,12 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             
             self.endLoadingObjects()
             
-            print(self.readFile(fileURL: fileURL))
+            
+            DispatchQueue.global(qos: .default).sync {
+                print("*******************************")
+                self.analyzeDictionary()
+            }
+            
             
             // Opening new view (Training)
             if let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TrainingViewController") as? TrainingViewController {
@@ -209,8 +231,9 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         }
     }
     
+    
 // analyze visionimage for poses and save angle results to file with fileURL
-func analyzeFrame(poseDetector: PoseDetector, fileURL: URL, frame: VisionImage) {
+    func analyzeFrame(poseDetector: PoseDetector, frame: VisionImage, currentTime: Double) {
     
         var results: [Pose]?
         do {
@@ -224,7 +247,6 @@ func analyzeFrame(poseDetector: PoseDetector, fileURL: URL, frame: VisionImage) 
             print("No poses detected...")
             return
         }
-    
         // iterate through poses found in the frame
         for pose in detectedPoses {
 //                                let noseLM = (pose.landmark(ofType: .nose)).position
@@ -262,6 +284,7 @@ func analyzeFrame(poseDetector: PoseDetector, fileURL: URL, frame: VisionImage) 
             let rightToeLM = (pose.landmark(ofType: .rightToe)).position
             
 
+            // Angle Calculations
             let leftWristVertexAngle = self.calculateAngle(vertex: leftWristLM, p2: leftElbowLM, p3: leftIndexFingerLM)
             let leftElbowVertexAngle = self.calculateAngle(vertex: leftElbowLM, p2: leftShoulderLM, p3: leftWristLM)
             let leftShoulderVertexAngle = self.calculateAngle(vertex: leftShoulderLM, p2: leftElbowLM, p3: leftHipLM)
@@ -273,7 +296,6 @@ func analyzeFrame(poseDetector: PoseDetector, fileURL: URL, frame: VisionImage) 
             
             let leftHalfData = leftWristVertexAngle + " " + leftElbowVertexAngle + " " + leftShoulderVertexAngle + " " + leftHipVertexAngle + " " + leftKneeVertexAngle + " " + leftAnkleVertexAngle + " " + leftWristRotAngle
             
-            
             let rightWristVertexAngle = self.calculateAngle(vertex: rightWristLM, p2: rightElbowLM, p3: rightIndexFingerLM)
             let rightElbowVertexAngle = self.calculateAngle(vertex: rightElbowLM, p2: rightShoulderLM, p3: rightWristLM)
             let rightShoulderVertexAngle = self.calculateAngle(vertex: rightShoulderLM, p2: rightElbowLM, p3: rightHipLM)
@@ -283,58 +305,75 @@ func analyzeFrame(poseDetector: PoseDetector, fileURL: URL, frame: VisionImage) 
             // Experimental Calculation this semi tells us rotation
             let rightWristRotAngle = self.calculateWristRotation(vertex: leftPinkyFingerLM, p2X: leftPinkyFingerLM.x, p2Y: leftThumbLM.y, p3: leftThumbLM)
             
-            
             let rightHalfData = rightWristVertexAngle + " " + rightElbowVertexAngle + " " + rightShoulderVertexAngle + " " + rightHipVertexAngle + " " + rightKneeVertexAngle + " " + rightAnkleVertexAngle + " " +  rightWristRotAngle
             
             let outputData = leftHalfData + " " + rightHalfData + "\n"
-            self.writeToFile(dataString: outputData, fileURL: fileURL)
-            //print(outputData)
+            
+            pointsDict["lwr"]! += leftWristVertexAngle + " "
+            pointsDict["lel"]! += leftElbowVertexAngle + " "
+            pointsDict["lsh"]! += leftShoulderVertexAngle + " "
+            pointsDict["lhi"]! += leftHipVertexAngle + " "
+            pointsDict["lkn"]! += leftKneeVertexAngle + " "
+            pointsDict["lan"]! += leftAnkleVertexAngle + " "
+            pointsDict["lro"]! += leftWristRotAngle + " "
+            
+            pointsDict["rwr"]! += rightWristVertexAngle + " "
+            pointsDict["rel"]! += rightElbowVertexAngle + " "
+            pointsDict["rsh"]! += rightShoulderVertexAngle + " "
+            pointsDict["rhi"]! += rightHipVertexAngle + " "
+            pointsDict["rkn"]! += rightKneeVertexAngle + " "
+            pointsDict["ran"]! += rightAnkleVertexAngle + " "
+            pointsDict["rro"]! += rightWristRotAngle + " "
+            
         }
     }
     
-    // Overwrites file with fileURL with given string
-    func overwriteFile(dataString : String, fileURL: URL ) {
-        guard let data = dataString.data(using: .utf8) else {
-            print("Unable to convert string to data.")
-            return
-        }
-        do {
-            try data.write(to: fileURL)
-            print("File saved: \(fileURL.absoluteURL)")
-        }
-        catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    // Appends string to file with fileURL
-    func writeToFile(dataString : String, fileURL: URL ) {
-        let newString = readFile(fileURL: fileURL) + dataString
-        
-        guard let data = newString.data(using: .utf8) else {
-            print("Unable to convert string to data.")
-            return
-        }
-        do {
-            try data.write(to: fileURL)
-        }
-        catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    // Returns string of data from the given fileURL
-    func readFile(fileURL : URL) -> String {
-        do {
-            let savedData =  try Data(contentsOf: fileURL)
-            if let savedString = String(data: savedData, encoding: .utf8) {
-                return savedString
+    // Analyzes the pointsDict Dictionary to fill in the dictionary that is named poseDictionary with values of the form
+    // |abreviation-angle-duration till next change|abreviation-angle-durration till next change...
+    // Some might not have a time value in that case there is not a change for the remaining of the video
+    func analyzeDictionary() {
+        for (key, val) in pointsDict {
+            let val_array = val.components(separatedBy: " ")
+            
+            var i = 0
+            for angle in val_array {
+                if (angle.isEmpty) {
+                    continue
+                }
+                
+                if (lastSubPointsDict[key] == "") {
+                    lastSubPointsDict[key] = angle + " " + String(i)
+                    
+                    poseDictionary[i]! += "|" + key + "-" + String(angle)
+                }
+                else {
+                    let lastSubPointsDictInfo = lastSubPointsDict[key]!.components(separatedBy: " ")
+                    
+                    if(lastSubPointsDictInfo.count == 2) {
+                        let lastSubAngle = Float(lastSubPointsDictInfo[0]) ?? 0.0
+                        let lastFrame = Int(lastSubPointsDictInfo[1]) ?? 0
+                        
+                        if(fabsf(lastSubAngle - Float(angle)!) >= 3) {
+                            let frameDiff = i - lastFrame
+                            let timeSince = Double(frameDiff) / 30.0
+                            
+                            poseDictionary[lastFrame]! += "-" + String(timeSince)
+                            poseDictionary[i]! += "|" + key + "-" + String(angle)
+                            
+                            lastSubPointsDict[key] = angle + " " + String(i)
+                            
+                            
+                        }
+                    }
+                }
+                
+                i += 1
             }
         }
-        catch {
-            print("Unable to read file.")
-        }
-        return ""
+        
+        //print(lastSubPointsDict)
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        print(poseDictionary.sorted(by: <))
     }
     
     // Calculates angle with the given vertex, point2, and point3 returns string value of angle in degrees
@@ -408,4 +447,5 @@ func analyzeFrame(poseDetector: PoseDetector, fileURL: URL, frame: VisionImage) 
         blackSquare.removeFromSuperview()
         spinner.stopAnimating()
     }
+    
 }
