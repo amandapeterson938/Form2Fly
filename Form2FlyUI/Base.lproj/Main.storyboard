@@ -545,7 +545,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="P3v-pt-uxc">
-                                <rect key="frame" x="25" y="117" width="364" height="745"/>
+                                <rect key="frame" x="70.5" y="117" width="273" height="745"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Training Advice" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="bXT-90-eVz">
                                 <rect key="frame" x="20" y="44" width="374" height="56"/>
@@ -577,8 +577,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="uYf-rq-VTB"/>
-        <segue reference="cCs-ih-kNM"/>
-        <segue reference="Z6w-bW-cTR"/>
+        <segue reference="0R6-Fe-VRn"/>
+        <segue reference="s9G-cg-8hZ"/>
         <segue reference="NOd-Vc-Ib0"/>
     </inferredMetricsTieBreakers>
     <resources>
