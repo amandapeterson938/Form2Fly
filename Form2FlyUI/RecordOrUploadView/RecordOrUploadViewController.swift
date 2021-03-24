@@ -164,10 +164,10 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         return frameForTimes
     }
     
-    // Clears file with given fileURL then precedes to analyze the video by calling generateTimeForFrames, generates the frame by using generateCGIImagesAsynchronously then calls analyzeFrame to get the pose data and writes to the file.
+    // Analyze the video by calling generateTimeForFrames, generates the frame by using generateCGIImagesAsynchronously then calls analyzeFrame to get the pose data and writes to the dictionary
     func analyzeVideo(video: AVURLAsset) {
         
-        let frameForTimes = generateTimeForFrames(video: video, numberOfFramesPerSec: 30)
+        let frameForTimes = generateTimeForFrames(video: video, numberOfFramesPerSec: 50)
         let numFrames = frameForTimes.count
         
         for num in 0 ... numFrames {
@@ -186,7 +186,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     
         
         // generate frames from the frame times generated from generateTimeForFrames function
-        // analyze each frame using mlkit pose detector (calls analyzeFrame function) results are saved in file with fileURL
+        // analyze each frame using mlkit pose detector (calls analyzeFrame function) results are saved in a dictionary
         DispatchQueue.global().async {
             
             semaphore.wait()
@@ -223,8 +223,13 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             
             // Opening new view (Training)
             if let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TrainingViewController") as? TrainingViewController {
+                
+                
                     newViewController.modalPresentationStyle = .currentContext
                     self.navigationController?.pushViewController(newViewController, animated: true)
+                
+                    self.navigationController?.popViewController(animated: false)
+                
             }
             
             semaphore.signal()
@@ -232,7 +237,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     }
     
     
-// analyze visionimage for poses and save angle results to file with fileURL
+// analyze visionimage for poses and save angle result to dictionary
     func analyzeFrame(poseDetector: PoseDetector, frame: VisionImage, currentTime: Double) {
     
         var results: [Pose]?
@@ -355,14 +360,13 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
                         
                         if(fabsf(lastSubAngle - Float(angle)!) >= 3) {
                             let frameDiff = i - lastFrame
-                            let timeSince = Double(frameDiff) / 30.0
+                            let timeSince = Double(frameDiff) / 50.0
                             
                             poseDictionary[lastFrame]! += "-" + String(timeSince)
+                            
                             poseDictionary[i]! += "|" + key + "-" + String(angle)
                             
                             lastSubPointsDict[key] = angle + " " + String(i)
-                            
-                            
                         }
                     }
                 }
