@@ -167,7 +167,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     // Analyze the video by calling generateTimeForFrames, generates the frame by using generateCGIImagesAsynchronously then calls analyzeFrame to get the pose data and writes to the dictionary
     func analyzeVideo(video: AVURLAsset) {
         
-        let frameForTimes = generateTimeForFrames(video: video, numberOfFramesPerSec: 50)
+        let frameForTimes = generateTimeForFrames(video: video, numberOfFramesPerSec: 30)
         let numFrames = frameForTimes.count
         
         for num in 0 ... numFrames {
@@ -360,7 +360,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
                         
                         if(fabsf(lastSubAngle - Float(angle)!) >= 3) {
                             let frameDiff = i - lastFrame
-                            let timeSince = Double(frameDiff) / 50.0
+                            let timeSince = Double(frameDiff) / 30.0
                             
                             poseDictionary[lastFrame]! += "-" + String(timeSince)
                             
