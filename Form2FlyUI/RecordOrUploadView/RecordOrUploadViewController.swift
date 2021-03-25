@@ -28,6 +28,8 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     var lastSubPointsDict: [String: String] = [:]
     var pointsDict: [String: String] = [:]
     
+    var testArray = [String]()
+    
     //let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask) [0]
     
     var poseChangesFileURL = URL(fileURLWithPath: "poseChanges")
@@ -93,7 +95,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
                 
                 
                 // Analyze the video
-                analyzeVideo(video: video)
+                analyzeVideo(video: video, videoURL: videoURL)
                 
                 
             }
@@ -132,7 +134,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             
             print(String(Float(video.duration.seconds)))
             
-            analyzeVideo(video: video)
+            analyzeVideo(video: video, videoURL: videoURL)
             
             isNext = false
         }
@@ -165,7 +167,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     }
     
     // Analyze the video by calling generateTimeForFrames, generates the frame by using generateCGIImagesAsynchronously then calls analyzeFrame to get the pose data and writes to the dictionary
-    func analyzeVideo(video: AVURLAsset) {
+    func analyzeVideo(video: AVURLAsset, videoURL: URL) {
         
         let frameForTimes = generateTimeForFrames(video: video, numberOfFramesPerSec: 30)
         let numFrames = frameForTimes.count
@@ -191,22 +193,31 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             
             semaphore.wait()
             
-            let generator = AVAssetImageGenerator(asset: video)
-            var curFrameNum = 0
-            generator.generateCGImagesAsynchronously(forTimes: frameForTimes, completionHandler:{requestedTime, image, _,_,error in
-                if let image = image {
-                    
-                    let visionImg = VisionImage(image: UIImage(cgImage: image))
-                    
-                    self.analyzeFrame(poseDetector: poseDetector, frame: visionImg, currentTime: requestedTime.seconds)
-                    
-                }                
-                curFrameNum += 1
+            let videoDuration = video.duration.seconds
+            
+            let asset = AVAsset(url: videoURL)
+            let generator = AVAssetImageGenerator(asset: asset)
+            generator.appliesPreferredTrackTransform = true
+            generator.requestedTimeToleranceBefore = CMTime.zero;
+            generator.requestedTimeToleranceAfter = CMTime.zero;
+            
+            var time = 0.0
+            
+            while(time < videoDuration) {
+                print("Processing:", time)
                 
-                if(curFrameNum >= numFrames) {
-                    semaphore.signal()
+                let cmTime = CMTimeMakeWithSeconds(time, preferredTimescale: 600)
+                if let image = try? generator.copyCGImage(at: cmTime, actualTime: nil) {
+                    self.analyzeFrame(poseDetector: poseDetector, frame: VisionImage(image: UIImage(cgImage: image)), currentTime: 0.0)
                 }
-            })
+                
+                print("update time")
+                time =  time + (1/30)
+            }
+            
+            
+            
+            semaphore.signal()
         }
         // should have all data saved to file so we can print the file and open the training activity
         DispatchQueue.main.async {
@@ -312,7 +323,9 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             
             let rightHalfData = rightWristVertexAngle + " " + rightElbowVertexAngle + " " + rightShoulderVertexAngle + " " + rightHipVertexAngle + " " + rightKneeVertexAngle + " " + rightAnkleVertexAngle + " " +  rightWristRotAngle
             
-            let outputData = leftHalfData + " " + rightHalfData + "\n"
+            let outputData = leftHalfData + " " + rightHalfData //+ "\n"
+            
+            testArray.append(outputData)
             
             pointsDict["lwr"]! += leftWristVertexAngle + " "
             pointsDict["lel"]! += leftElbowVertexAngle + " "
@@ -378,6 +391,8 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         //print(lastSubPointsDict)
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~")
         print(poseDictionary.sorted(by: <))
+        print("******************************")
+        print(testArray)
     }
     
     // Calculates angle with the given vertex, point2, and point3 returns string value of angle in degrees
