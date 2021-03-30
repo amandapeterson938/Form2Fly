@@ -12,6 +12,7 @@
 		F031338E25EBE29A002C649F /* RecordOrUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F031338D25EBE29A002C649F /* RecordOrUploadViewController.swift */; };
 		F048CF1125EAB69D006F1C70 /* puzzleNoBG.png in Resources */ = {isa = PBXBuildFile; fileRef = F048CF1025EAB69D006F1C70 /* puzzleNoBG.png */; };
 		F048CF1425EACA00006F1C70 /* pickProfessional.png in Resources */ = {isa = PBXBuildFile; fileRef = F048CF1325EACA00006F1C70 /* pickProfessional.png */; };
+		F07EAC582610C205007A5769 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07EAC572610C205007A5769 /* User.swift */; };
 		F09912D025EB005D00B6811A /* SelectOrMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09912CF25EB005D00B6811A /* SelectOrMatchViewController.swift */; };
 		F09912D525EB026200B6811A /* SignOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09912D425EB026200B6811A /* SignOnViewController.swift */; };
 		F0AEDCDC25E82E0100AAF1AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AEDCDB25E82E0100AAF1AA /* AppDelegate.swift */; };
@@ -38,6 +39,7 @@
 		F031338D25EBE29A002C649F /* RecordOrUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordOrUploadViewController.swift; sourceTree = "<group>"; };
 		F048CF1025EAB69D006F1C70 /* puzzleNoBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = puzzleNoBG.png; sourceTree = "<group>"; };
 		F048CF1325EACA00006F1C70 /* pickProfessional.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pickProfessional.png; sourceTree = "<group>"; };
+		F07EAC572610C205007A5769 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F09912CF25EB005D00B6811A /* SelectOrMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOrMatchViewController.swift; sourceTree = "<group>"; };
 		F09912D425EB026200B6811A /* SignOnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOnViewController.swift; sourceTree = "<group>"; };
 		F0AEDCD825E82E0100AAF1AA /* Form2FlyUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Form2FlyUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,6 +170,7 @@
 				F0AEDCE625E82E0100AAF1AA /* LaunchScreen.storyboard */,
 				F0AEDCE925E82E0100AAF1AA /* Info.plist */,
 				F0AEDCD925E82E0100AAF1AA /* Products */,
+				F07EAC572610C205007A5769 /* User.swift */,
 			);
 			path = Form2FlyUI;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F07EAC582610C205007A5769 /* User.swift in Sources */,
 				F0AEDCE025E82E0100AAF1AA /* ViewController.swift in Sources */,
 				F0C0420425EB3B870070FA53 /* ThrowTypeViewController.swift in Sources */,
 				F09912D525EB026200B6811A /* SignOnViewController.swift in Sources */,

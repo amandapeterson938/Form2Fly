@@ -10,10 +10,12 @@ import AVKit
 import MLKit
 import MobileCoreServices
 
-class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIVideoEditorControllerDelegate{
+class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIVideoEditorControllerDelegate {
     
     @IBOutlet weak var recordVideoBtn: UIButton!
     @IBOutlet weak var uploadVideoBtn: UIButton!
+    
+    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "")
     
     // Loading objects
     var blackSquare = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 0, height: 0))
@@ -46,6 +48,12 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         // Round edges of the buttons
         recordVideoBtn.layer.cornerRadius = 12
         uploadVideoBtn.layer.cornerRadius = 12
+        
+        print("Record or Upload Information: ")
+        print(currentUser.dominantHand)
+        print(currentUser.pickOrMatch)
+        print(currentUser.proName)
+        print(currentUser.throwType)
     }
     
     
@@ -66,6 +74,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     
     // Runs when user presses upload a video button
     @IBAction func uploadVideo(_ sender: Any) {
+        
         // runs imagePickerController this opens photo library so the user can choose their video then calls function to analyze the video for poses then opens training activity
         let videoPicker = UIImagePickerController()
         videoPicker.modalPresentationStyle = .currentContext
@@ -393,6 +402,38 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         print(poseDictionary.sorted(by: <))
         print("******************************")
         print(testArray)
+        print("-------------------------------")
+        print(analyzeArray(poseData: testArray))
+    }
+    
+    var weights = [Double]()
+    var weighted_scores = [Double]()
+    
+    func analyzeArray(poseData: [String]) {
+        if(currentUser.dominantHand == "right") {
+            weights = [0.04, 0.1, 0.07, 0.05, 0.05, 0.02, 0.01, 0.08, 0.2, 0.15, 0.1, 0.1, 0.02, 0.01]
+        }
+        else {
+            weights = [0.08, 0.2, 0.15, 0.1, 0.1, 0.02, 0.01, 0.04, 0.1, 0.07, 0.05, 0.05, 0.02, 0.01]
+        }
+        
+        for frame in poseData {
+            let landmarkArray = frame.components(separatedBy: " ")
+            
+            //print(landmarkArray)
+            var temp = [Double]()
+            var i = 0
+            for landmark in landmarkArray {
+                let adjusted = Double(landmark)! * weights[i]
+                temp.append(adjusted)
+                
+                i += 1
+            }
+            
+            weighted_scores.append( temp.reduce(0, +) )
+        }
+        
+        print(weighted_scores)
     }
     
     // Calculates angle with the given vertex, point2, and point3 returns string value of angle in degrees

@@ -187,7 +187,7 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Match Me to a Professional"/>
                                 <connections>
-                                    <segue destination="jfb-BD-ojB" kind="show" id="kte-C4-VD0"/>
+                                    <segue destination="jfb-BD-ojB" kind="show" identifier="matchToProfessionalSegue" id="kte-C4-VD0"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEL-yZ-Tx6">
@@ -196,7 +196,7 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Pick A Professional"/>
                                 <connections>
-                                    <segue destination="kO1-1k-wxL" kind="show" id="2XV-5f-7jn"/>
+                                    <segue destination="kO1-1k-wxL" kind="show" identifier="pickAProfessionalSegue" id="2XV-5f-7jn"/>
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="9qr-DE-PFV">
@@ -205,6 +205,9 @@
                                     <segment title="Left Hand"/>
                                     <segment title="Right Hand"/>
                                 </segments>
+                                <connections>
+                                    <action selector="dominantHandChanged:" destination="8Kg-oR-8kS" eventType="valueChanged" id="gTu-hh-phg"/>
+                                </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Your Dominant Hand" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qde-TW-SWh">
                                 <rect key="frame" x="118.5" y="332" width="177.5" height="17"/>
@@ -255,6 +258,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="dominantHandChoice" destination="9qr-DE-PFV" id="Vty-fw-ktX"/>
                         <outlet property="matchToProfessionalBtn" destination="nTd-pK-OZU" id="f97-af-VuO"/>
                         <outlet property="selectProfessionalBtn" destination="MEL-yZ-Tx6" id="9nL-LV-YAz"/>
                     </connections>
@@ -326,7 +330,7 @@
                                         <connections>
                                             <outlet property="proNameLbl" destination="Ctg-Au-cRZ" id="BSq-eq-d6v"/>
                                             <outlet property="proThrowTypeLbl" destination="z2M-Z0-A1z" id="MSu-Rs-ohW"/>
-                                            <segue destination="b0f-pI-qVb" kind="show" id="uYf-rq-VTB"/>
+                                            <segue destination="b0f-pI-qVb" kind="show" identifier="professionalPickedToUpload" id="uYf-rq-VTB"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -371,7 +375,7 @@
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Forehand"/>
                                 <connections>
-                                    <segue destination="b0f-pI-qVb" kind="show" id="Vvx-bR-fyB"/>
+                                    <segue destination="b0f-pI-qVb" kind="show" identifier="forehandToUploadSegue" id="Vvx-bR-fyB"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TfG-GH-m1r">
@@ -545,7 +549,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="P3v-pt-uxc">
-                                <rect key="frame" x="70.5" y="117" width="273" height="745"/>
+                                <rect key="frame" x="25" y="117" width="364" height="745"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Training Advice" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="bXT-90-eVz">
                                 <rect key="frame" x="20" y="44" width="374" height="56"/>
@@ -576,8 +580,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="uYf-rq-VTB"/>
-        <segue reference="0R6-Fe-VRn"/>
+        <segue reference="Vvx-bR-fyB"/>
+        <segue reference="tSm-K0-gac"/>
         <segue reference="s9G-cg-8hZ"/>
         <segue reference="NOd-Vc-Ib0"/>
     </inferredMetricsTieBreakers>
