@@ -24,18 +24,23 @@ class ThrowTypeViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if(segue.identifier == "forehandToUploadSegue") {
-            currentUser.throwType = "forehand"
-        }
-        else {
-            currentUser.throwType = "backhand"
-        }
-        
         currentUser.proName = ""
         
-        let destinationVC = segue.destination as! RecordOrUploadViewController
+        if(segue.identifier == "forehandToUploadSegue") {
+            currentUser.throwType = "forehand"
+            
+            let destinationVC = segue.destination as! RecordOrUploadViewController
+            
+            destinationVC.currentUser = currentUser
+        }
+        else if (segue.identifier == "backhandToUploadSegue"){
+            currentUser.throwType = "backhand"
+            
+            let destinationVC = segue.destination as! RecordOrUploadViewController
+            
+            destinationVC.currentUser = currentUser
+        }
         
-        destinationVC.currentUser = currentUser
     }
 
 }

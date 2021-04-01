@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		259C32BD5B9440AA86E7772E /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = A27F61EE58A447C69EE31E8A /* awsconfiguration.json */; };
+		78A91654528C4BFFA3F9D82F /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 06337B3F87F045DE92A98793 /* amplifyconfiguration.json */; };
 		9608D34C69E77EA49AA077E0 /* Pods_Form2FlyUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 846F61094318C7B276554B50 /* Pods_Form2FlyUI.framework */; };
 		F00107B025EC3BEF00D4A383 /* TrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00107AF25EC3BEF00D4A383 /* TrainingViewController.swift */; };
 		F031338E25EBE29A002C649F /* RecordOrUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F031338D25EBE29A002C649F /* RecordOrUploadViewController.swift */; };
@@ -15,6 +17,7 @@
 		F07EAC582610C205007A5769 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07EAC572610C205007A5769 /* User.swift */; };
 		F09912D025EB005D00B6811A /* SelectOrMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09912CF25EB005D00B6811A /* SelectOrMatchViewController.swift */; };
 		F09912D525EB026200B6811A /* SignOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09912D425EB026200B6811A /* SignOnViewController.swift */; };
+		F09EC01B261551CD00E289A4 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09EC01A261551CD00E289A4 /* CreateAccountViewController.swift */; };
 		F0AEDCDC25E82E0100AAF1AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AEDCDB25E82E0100AAF1AA /* AppDelegate.swift */; };
 		F0AEDCDE25E82E0100AAF1AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AEDCDD25E82E0100AAF1AA /* SceneDelegate.swift */; };
 		F0AEDCE025E82E0100AAF1AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AEDCDF25E82E0100AAF1AA /* ViewController.swift */; };
@@ -28,12 +31,18 @@
 		F0C041F825EB27C60070FA53 /* Professional.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C041F725EB27C60070FA53 /* Professional.swift */; };
 		F0C0420025EB38940070FA53 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C041FF25EB38940070FA53 /* SettingsViewController.swift */; };
 		F0C0420425EB3B870070FA53 /* ThrowTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C0420325EB3B870070FA53 /* ThrowTypeViewController.swift */; };
+		F0DAB6842612D9BE00417C4F /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = F0DAB6832612D9BE00417C4F /* amplifyconfiguration.json */; };
+		F0DAB6872612D9C800417C4F /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = F0DAB6862612D9C800417C4F /* awsconfiguration.json */; };
+		F0DAB68A2612DBBF00417C4F /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DAB6892612DBBF00417C4F /* Backend.swift */; };
 		F0F1A87925EC5AAD00AF4F6F /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F1A87825EC5AAD00AF4F6F /* avatar.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06337B3F87F045DE92A98793 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		6D67DDECD2F818414CE87D54 /* Pods-Form2FlyUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Form2FlyUI.release.xcconfig"; path = "Target Support Files/Pods-Form2FlyUI/Pods-Form2FlyUI.release.xcconfig"; sourceTree = "<group>"; };
 		846F61094318C7B276554B50 /* Pods_Form2FlyUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Form2FlyUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D31DA01D984491C89F978F6 /* amplifytools.xcconfig */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.xcconfig; path = amplifytools.xcconfig; sourceTree = "<group>"; };
+		A27F61EE58A447C69EE31E8A /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = awsconfiguration.json; sourceTree = "<group>"; };
 		CE9A4C8048AAF7D8EB3AB9CA /* Pods-Form2FlyUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Form2FlyUI.debug.xcconfig"; path = "Target Support Files/Pods-Form2FlyUI/Pods-Form2FlyUI.debug.xcconfig"; sourceTree = "<group>"; };
 		F00107AF25EC3BEF00D4A383 /* TrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
 		F031338D25EBE29A002C649F /* RecordOrUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordOrUploadViewController.swift; sourceTree = "<group>"; };
@@ -42,6 +51,7 @@
 		F07EAC572610C205007A5769 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F09912CF25EB005D00B6811A /* SelectOrMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOrMatchViewController.swift; sourceTree = "<group>"; };
 		F09912D425EB026200B6811A /* SignOnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOnViewController.swift; sourceTree = "<group>"; };
+		F09EC01A261551CD00E289A4 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		F0AEDCD825E82E0100AAF1AA /* Form2FlyUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Form2FlyUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0AEDCDB25E82E0100AAF1AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F0AEDCDD25E82E0100AAF1AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +67,9 @@
 		F0C041F725EB27C60070FA53 /* Professional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Professional.swift; sourceTree = "<group>"; };
 		F0C041FF25EB38940070FA53 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		F0C0420325EB3B870070FA53 /* ThrowTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrowTypeViewController.swift; sourceTree = "<group>"; };
+		F0DAB6832612D9BE00417C4F /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
+		F0DAB6862612D9C800417C4F /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		F0DAB6892612DBBF00417C4F /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		F0F1A87825EC5AAD00AF4F6F /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,9 +146,22 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		F09EC019261551A300E289A4 /* CreateAccount */ = {
+			isa = PBXGroup;
+			children = (
+				F09EC01A261551CD00E289A4 /* CreateAccountViewController.swift */,
+			);
+			path = CreateAccount;
+			sourceTree = "<group>";
+		};
 		F0AEDCCF25E82E0100AAF1AA = {
 			isa = PBXGroup;
 			children = (
+				F09EC019261551A300E289A4 /* CreateAccount */,
+				F0DAB6892612DBBF00417C4F /* Backend.swift */,
+				F0DAB6832612D9BE00417C4F /* amplifyconfiguration.json */,
+				F0DAB6862612D9C800417C4F /* awsconfiguration.json */,
+				F613B65231974B7A9AB785AD /* AmplifyConfig */,
 				F0AEDCDA25E82E0100AAF1AA /* Form2FlyUI */,
 				C9BA5097D6E88DC78FD8BC52 /* Pods */,
 				56570BF0001CCCB086B337A9 /* Frameworks */,
@@ -199,6 +225,17 @@
 				F0C0420325EB3B870070FA53 /* ThrowTypeViewController.swift */,
 			);
 			path = SelectThrowType;
+			sourceTree = "<group>";
+		};
+		F613B65231974B7A9AB785AD /* AmplifyConfig */ = {
+			isa = PBXGroup;
+			children = (
+				9D31DA01D984491C89F978F6 /* amplifytools.xcconfig */,
+				06337B3F87F045DE92A98793 /* amplifyconfiguration.json */,
+				A27F61EE58A447C69EE31E8A /* awsconfiguration.json */,
+			);
+			name = AmplifyConfig;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +306,10 @@
 				F0AEDCF125E831EB00AAF1AA /* image2.png in Resources */,
 				F0B662FF260147FA005332E7 /* form2fly_logo_glow (2).png in Resources */,
 				F0AEDCE325E82E0100AAF1AA /* Main.storyboard in Resources */,
+				F0DAB6872612D9C800417C4F /* awsconfiguration.json in Resources */,
+				78A91654528C4BFFA3F9D82F /* amplifyconfiguration.json in Resources */,
+				259C32BD5B9440AA86E7772E /* awsconfiguration.json in Resources */,
+				F0DAB6842612D9BE00417C4F /* amplifyconfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +379,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F09EC01B261551CD00E289A4 /* CreateAccountViewController.swift in Sources */,
 				F07EAC582610C205007A5769 /* User.swift in Sources */,
 				F0AEDCE025E82E0100AAF1AA /* ViewController.swift in Sources */,
 				F0C0420425EB3B870070FA53 /* ThrowTypeViewController.swift in Sources */,
@@ -350,6 +392,7 @@
 				F0C041F525EB262F0070FA53 /* ProTableCell.swift in Sources */,
 				F0AEDCDE25E82E0100AAF1AA /* SceneDelegate.swift in Sources */,
 				F0C0420025EB38940070FA53 /* SettingsViewController.swift in Sources */,
+				F0DAB68A2612DBBF00417C4F /* Backend.swift in Sources */,
 				F031338E25EBE29A002C649F /* RecordOrUploadViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
