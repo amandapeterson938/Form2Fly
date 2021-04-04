@@ -13,12 +13,18 @@ class ProfessionalsViewController: UIViewController {
     var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "")
     
     var professionals: [Professional] = []
+    
+    //professionalPlayers.init()
+    //let professionalArray = professionalPlayers.shared.returnProfessionals()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         currentUser.pickOrMatch = "pick"
         
-        professionals = createProArray()
+        professionalPlayers.init()
+        self.professionals = professionalPlayers.shared.returnProfessionals()
+        print("PROFESSIONALS.COUNT", professionals.count)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -27,9 +33,10 @@ class ProfessionalsViewController: UIViewController {
     func createProArray() -> [Professional] {
         var tempProfessionals: [Professional] = []
         
-        let pro1 = Professional(proName: "P. McBeth", proThrowType: "Backhand", proData: [], proWeightedScore: "", fileURLPath: "")
-        let pro2 = Professional(proName: "S. Withers", proThrowType: "Backhand", proData: [], proWeightedScore: "", fileURLPath: "")
-        let pro3 = Professional(proName: "A. Hammers", proThrowType: "Backhand", proData: [], proWeightedScore: "", fileURLPath: "")
+        // only for table view so it does not have full information full information is in professionalPlayers.swift
+        let pro1 = Professional(proName: "P. McBeth", proThrowType: "backhand", proDominantHand: "right", proData: [], proWeightedScore: 9588.502678121475, fileURLPath: "")
+        let pro2 = Professional(proName: "S. Withers", proThrowType: "backhand", proDominantHand: "right", proData: [], proWeightedScore: 8514.528468886949, fileURLPath: "")
+        let pro3 = Professional(proName: "A. Hammers", proThrowType: "backhand", proDominantHand: "right", proData: [], proWeightedScore: 0.0, fileURLPath: "")
         
         tempProfessionals.append(pro1)
         tempProfessionals.append(pro2)
@@ -50,7 +57,6 @@ class ProfessionalsViewController: UIViewController {
             return
         }
     }
-
 }
 
 

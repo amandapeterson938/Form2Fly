@@ -10,17 +10,15 @@ import Foundation
 class Professional {
     var proName: String
     var proThrowType: String
+    var proDominantHand: String
     var proData: [String]
-    var proWeightedScore: String
+    var proWeightedScore: Double
     var videoURL: URL
     
-    
-    //let videoURL = URL(fileURLWithPath: "")
-    //let video = AVURLAsset(url: videoURL, options: nil)
-    
-    init(proName: String, proThrowType: String, proData: [String], proWeightedScore: String, fileURLPath: String) {
+    init(proName: String, proThrowType: String, proDominantHand: String, proData: [String], proWeightedScore: Double, fileURLPath: String) {
         self.proName = proName
         self.proThrowType = proThrowType
+        self.proDominantHand = proDominantHand
         self.proData = proData
         self.proWeightedScore = proWeightedScore
         self.videoURL = URL(fileURLWithPath: fileURLPath)

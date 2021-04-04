@@ -11,6 +11,7 @@
 		78A91654528C4BFFA3F9D82F /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 06337B3F87F045DE92A98793 /* amplifyconfiguration.json */; };
 		9608D34C69E77EA49AA077E0 /* Pods_Form2FlyUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 846F61094318C7B276554B50 /* Pods_Form2FlyUI.framework */; };
 		F00107B025EC3BEF00D4A383 /* TrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00107AF25EC3BEF00D4A383 /* TrainingViewController.swift */; };
+		F00DCC032619FEBC0076B9FD /* professionalPlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00DCC022619FEBC0076B9FD /* professionalPlayers.swift */; };
 		F031338E25EBE29A002C649F /* RecordOrUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F031338D25EBE29A002C649F /* RecordOrUploadViewController.swift */; };
 		F048CF1125EAB69D006F1C70 /* puzzleNoBG.png in Resources */ = {isa = PBXBuildFile; fileRef = F048CF1025EAB69D006F1C70 /* puzzleNoBG.png */; };
 		F048CF1425EACA00006F1C70 /* pickProfessional.png in Resources */ = {isa = PBXBuildFile; fileRef = F048CF1325EACA00006F1C70 /* pickProfessional.png */; };
@@ -45,6 +46,7 @@
 		A27F61EE58A447C69EE31E8A /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = awsconfiguration.json; sourceTree = "<group>"; };
 		CE9A4C8048AAF7D8EB3AB9CA /* Pods-Form2FlyUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Form2FlyUI.debug.xcconfig"; path = "Target Support Files/Pods-Form2FlyUI/Pods-Form2FlyUI.debug.xcconfig"; sourceTree = "<group>"; };
 		F00107AF25EC3BEF00D4A383 /* TrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
+		F00DCC022619FEBC0076B9FD /* professionalPlayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = professionalPlayers.swift; sourceTree = "<group>"; };
 		F031338D25EBE29A002C649F /* RecordOrUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordOrUploadViewController.swift; sourceTree = "<group>"; };
 		F048CF1025EAB69D006F1C70 /* puzzleNoBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = puzzleNoBG.png; sourceTree = "<group>"; };
 		F048CF1325EACA00006F1C70 /* pickProfessional.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pickProfessional.png; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				F0C041F125EB22D10070FA53 /* ProfessionalsViewController.swift */,
 				F0C041F425EB262F0070FA53 /* ProTableCell.swift */,
 				F0C041F725EB27C60070FA53 /* Professional.swift */,
+				F00DCC022619FEBC0076B9FD /* professionalPlayers.swift */,
 			);
 			path = ProfessionalTableView;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				F0AEDCDC25E82E0100AAF1AA /* AppDelegate.swift in Sources */,
 				F0C041F225EB22D10070FA53 /* ProfessionalsViewController.swift in Sources */,
 				F00107B025EC3BEF00D4A383 /* TrainingViewController.swift in Sources */,
+				F00DCC032619FEBC0076B9FD /* professionalPlayers.swift in Sources */,
 				F09912D025EB005D00B6811A /* SelectOrMatchViewController.swift in Sources */,
 				F0C041F525EB262F0070FA53 /* ProTableCell.swift in Sources */,
 				F0AEDCDE25E82E0100AAF1AA /* SceneDelegate.swift in Sources */,

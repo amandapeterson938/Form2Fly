@@ -434,7 +434,122 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         }
         
         print(weighted_scores)
-        print(weighted_scores.reduce(0, +))
+        let weighted_sum = weighted_scores.reduce(0, +)
+        print(weighted_sum)
+        
+        //var professionalsVC: ProfessionalsViewController = ProfessionalsViewController(nibName: nil, bundle: nil)
+        //var professionalArray = professionalsVC.proPlayers
+        
+        professionalPlayers.init()
+        let professionalArray = professionalPlayers.shared.returnProfessionals()
+        
+        var usersProfessional: Professional = Professional(proName: "", proThrowType: "", proDominantHand: "", proData: [], proWeightedScore: 0.0, fileURLPath: "")
+        
+        if(currentUser.pickOrMatch == "pick") {
+            //getProInformation
+            for professional in professionalArray {
+                if(currentUser.proName == professional.proName) {
+                    usersProfessional = professional
+                    break
+                }
+            }
+        }
+        else{
+            var closestProIndex: Int? = nil
+            var closestDifference = 0.0
+            var i = 0
+            for professional in professionalArray {
+                
+                if(professional.proThrowType == currentUser.throwType) {
+                    var difference = fabs(professional.proWeightedScore - weighted_sum)
+                    
+                    if(i == 0 || difference < closestDifference) {
+                        closestProIndex = i
+                        closestDifference = difference
+                    }
+                }
+                
+                i += 1
+            }
+            
+            if(closestProIndex == nil) {
+                print("No professionals with", currentUser.throwType, "throw type")
+                return
+            }
+            else {
+                usersProfessional = professionalArray[closestProIndex!]
+            }
+            
+        }
+        
+        print("Selection: ", currentUser.pickOrMatch)
+        print("Professional: ", usersProfessional.proName)
+        
+        var overallSimilarity = min(usersProfessional.proWeightedScore, weighted_sum) / max(usersProfessional.proWeightedScore, weighted_sum)
+        print("Overall Similarity: ", overallSimilarity)
+        
+        analyzeMilestones(userData: poseData, proData: usersProfessional.proData)
+    }
+    
+    func createWeights(angleData: [String]) -> [Double] {
+        var pro_weighted: [Double] = []
+        
+        if(currentUser.dominantHand == "right") {
+            weights = [0.04, 0.1, 0.07, 0.05, 0.05, 0.02, 0.01, 0.08, 0.2, 0.15, 0.1, 0.1, 0.02, 0.01]
+        }
+        else {
+            weights = [0.08, 0.2, 0.15, 0.1, 0.1, 0.02, 0.01, 0.04, 0.1, 0.07, 0.05, 0.05, 0.02, 0.01]
+        }
+        
+        for frame in angleData {
+            let landmarkArray = frame.components(separatedBy: " ")
+            
+            //print(landmarkArray)
+            var temp = [Double]()
+            var i = 0
+            for landmark in landmarkArray {
+                let adjusted = Double(landmark)! * weights[i]
+                temp.append(adjusted)
+                
+                i += 1
+            }
+            
+            pro_weighted.append( temp.reduce(0, +) )
+        }
+        
+        return pro_weighted
+    }
+    
+    //func analyzeAngles(userData: [String], proData: [String])
+    
+    func analyzeMilestones(userData: [String], proData: [String]) {
+        let userLen = userData.count
+        let proLen = proData.count
+        
+        let numberOfSplits = Int(min(userLen, proLen) / 2)
+        
+        let userWeights = createWeights(angleData: userData)
+        let proWeights = createWeights(angleData: proData)
+        
+        for num in 0...numberOfSplits {
+            let percentOfVideo = Double(num) / Double(numberOfSplits)
+            
+            var currentFramePercentUser = doubleToInteger(data: (Double(userLen) * percentOfVideo))
+            var currentFramePercentPro = doubleToInteger(data: (Double(proLen) * percentOfVideo))
+            
+            if(percentOfVideo == 1.0) {
+                currentFramePercentUser -= 1
+                currentFramePercentPro -= 1
+            }
+            
+            let proW = proWeights[currentFramePercentPro]
+            let userW = userWeights[currentFramePercentUser]
+            
+            let frame_sim = (min(proW, userW) / max(proW, userW)) * 100
+            
+            print("Video Percent:", percentOfVideo, "Frame Sim: ", frame_sim)
+        }
+        
     }
     
     // Calculates angle with the given vertex, point2, and point3 returns string value of angle in degrees
@@ -507,6 +622,13 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         blackSquare.removeFromSuperview()
         spinner.stopAnimating()
+    }
+    
+    func doubleToInteger(data:Double)-> Int {
+        let doubleToString = "\(data)"
+        let stringToInteger = (doubleToString as NSString).integerValue
+        
+        return stringToInteger
     }
     
 }
