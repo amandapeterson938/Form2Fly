@@ -10,10 +10,12 @@ import AVKit
 import MLKit
 import MobileCoreServices
 
-class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIVideoEditorControllerDelegate{
+class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIVideoEditorControllerDelegate {
     
     @IBOutlet weak var recordVideoBtn: UIButton!
     @IBOutlet weak var uploadVideoBtn: UIButton!
+    
+    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "")
     
     // Loading objects
     var blackSquare = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 0, height: 0))
@@ -27,6 +29,8 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     var abrvArr:[String] = ["lwr", "lel", "lsh", "lhi", "lkn", "lan", "lro", "rwr", "rel", "rsh", "rhi", "rkn", "ran", "rro"]
     var lastSubPointsDict: [String: String] = [:]
     var pointsDict: [String: String] = [:]
+    
+    var testArray = [String]()
     
     //let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask) [0]
     
@@ -44,6 +48,12 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         // Round edges of the buttons
         recordVideoBtn.layer.cornerRadius = 12
         uploadVideoBtn.layer.cornerRadius = 12
+        
+        print("Record or Upload Information: ")
+        print(currentUser.dominantHand)
+        print(currentUser.pickOrMatch)
+        print(currentUser.proName)
+        print(currentUser.throwType)
     }
     
     
@@ -64,6 +74,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     
     // Runs when user presses upload a video button
     @IBAction func uploadVideo(_ sender: Any) {
+        
         // runs imagePickerController this opens photo library so the user can choose their video then calls function to analyze the video for poses then opens training activity
         let videoPicker = UIImagePickerController()
         videoPicker.modalPresentationStyle = .currentContext
@@ -93,7 +104,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
                 
                 
                 // Analyze the video
-                analyzeVideo(video: video)
+                analyzeVideo(video: video, videoURL: videoURL)
                 
                 
             }
@@ -132,7 +143,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             
             print(String(Float(video.duration.seconds)))
             
-            analyzeVideo(video: video)
+            analyzeVideo(video: video, videoURL: videoURL)
             
             isNext = false
         }
@@ -165,7 +176,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     }
     
     // Analyze the video by calling generateTimeForFrames, generates the frame by using generateCGIImagesAsynchronously then calls analyzeFrame to get the pose data and writes to the dictionary
-    func analyzeVideo(video: AVURLAsset) {
+    func analyzeVideo(video: AVURLAsset, videoURL: URL) {
         
         let frameForTimes = generateTimeForFrames(video: video, numberOfFramesPerSec: 30)
         let numFrames = frameForTimes.count
@@ -191,22 +202,31 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             
             semaphore.wait()
             
-            let generator = AVAssetImageGenerator(asset: video)
-            var curFrameNum = 0
-            generator.generateCGImagesAsynchronously(forTimes: frameForTimes, completionHandler:{requestedTime, image, _,_,error in
-                if let image = image {
-                    
-                    let visionImg = VisionImage(image: UIImage(cgImage: image))
-                    
-                    self.analyzeFrame(poseDetector: poseDetector, frame: visionImg, currentTime: requestedTime.seconds)
-                    
-                }                
-                curFrameNum += 1
+            let videoDuration = video.duration.seconds
+            
+            let asset = AVAsset(url: videoURL)
+            let generator = AVAssetImageGenerator(asset: asset)
+            generator.appliesPreferredTrackTransform = true
+            generator.requestedTimeToleranceBefore = CMTime.zero;
+            generator.requestedTimeToleranceAfter = CMTime.zero;
+            
+            var time = 0.0
+            
+            while(time < videoDuration) {
+                print("Processing:", time)
                 
-                if(curFrameNum >= numFrames) {
-                    semaphore.signal()
+                let cmTime = CMTimeMakeWithSeconds(time, preferredTimescale: 600)
+                if let image = try? generator.copyCGImage(at: cmTime, actualTime: nil) {
+                    self.analyzeFrame(poseDetector: poseDetector, frame: VisionImage(image: UIImage(cgImage: image)), currentTime: 0.0)
                 }
-            })
+                
+                print("update time")
+                time =  time + (1/30)
+            }
+            
+            
+            
+            semaphore.signal()
         }
         // should have all data saved to file so we can print the file and open the training activity
         DispatchQueue.main.async {
@@ -312,7 +332,9 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             
             let rightHalfData = rightWristVertexAngle + " " + rightElbowVertexAngle + " " + rightShoulderVertexAngle + " " + rightHipVertexAngle + " " + rightKneeVertexAngle + " " + rightAnkleVertexAngle + " " +  rightWristRotAngle
             
-            let outputData = leftHalfData + " " + rightHalfData + "\n"
+            let outputData = leftHalfData + " " + rightHalfData //+ "\n"
+            
+            testArray.append(outputData)
             
             pointsDict["lwr"]! += leftWristVertexAngle + " "
             pointsDict["lel"]! += leftElbowVertexAngle + " "
@@ -378,6 +400,156 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         //print(lastSubPointsDict)
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~")
         print(poseDictionary.sorted(by: <))
+        print("******************************")
+        print(testArray)
+        print("-------------------------------")
+        print(analyzeArray(poseData: testArray))
+    }
+    
+    var weights = [Double]()
+    var weighted_scores = [Double]()
+    
+    func analyzeArray(poseData: [String]) {
+        if(currentUser.dominantHand == "right") {
+            weights = [0.04, 0.1, 0.07, 0.05, 0.05, 0.02, 0.01, 0.08, 0.2, 0.15, 0.1, 0.1, 0.02, 0.01]
+        }
+        else {
+            weights = [0.08, 0.2, 0.15, 0.1, 0.1, 0.02, 0.01, 0.04, 0.1, 0.07, 0.05, 0.05, 0.02, 0.01]
+        }
+        
+        for frame in poseData {
+            let landmarkArray = frame.components(separatedBy: " ")
+            
+            //print(landmarkArray)
+            var temp = [Double]()
+            var i = 0
+            for landmark in landmarkArray {
+                let adjusted = Double(landmark)! * weights[i]
+                temp.append(adjusted)
+                
+                i += 1
+            }
+            
+            weighted_scores.append( temp.reduce(0, +) )
+        }
+        
+        print(weighted_scores)
+        let weighted_sum = weighted_scores.reduce(0, +)
+        print(weighted_sum)
+        
+        //var professionalsVC: ProfessionalsViewController = ProfessionalsViewController(nibName: nil, bundle: nil)
+        //var professionalArray = professionalsVC.proPlayers
+        
+        professionalPlayers.init()
+        let professionalArray = professionalPlayers.shared.returnProfessionals()
+        
+        var usersProfessional: Professional = Professional(proName: "", proThrowType: "", proDominantHand: "", proData: [], proWeightedScore: 0.0, fileURLPath: "")
+        
+        if(currentUser.pickOrMatch == "pick") {
+            //getProInformation
+            for professional in professionalArray {
+                if(currentUser.proName == professional.proName) {
+                    usersProfessional = professional
+                    break
+                }
+            }
+        }
+        else{
+            var closestProIndex: Int? = nil
+            var closestDifference = 0.0
+            var i = 0
+            for professional in professionalArray {
+                
+                if(professional.proThrowType == currentUser.throwType) {
+                    var difference = fabs(professional.proWeightedScore - weighted_sum)
+                    
+                    if(i == 0 || difference < closestDifference) {
+                        closestProIndex = i
+                        closestDifference = difference
+                    }
+                }
+                
+                i += 1
+            }
+            
+            if(closestProIndex == nil) {
+                print("No professionals with", currentUser.throwType, "throw type")
+                return
+            }
+            else {
+                usersProfessional = professionalArray[closestProIndex!]
+            }
+            
+        }
+        
+        print("Selection: ", currentUser.pickOrMatch)
+        print("Professional: ", usersProfessional.proName)
+        
+        var overallSimilarity = min(usersProfessional.proWeightedScore, weighted_sum) / max(usersProfessional.proWeightedScore, weighted_sum)
+        print("Overall Similarity: ", overallSimilarity)
+        
+        analyzeMilestones(userData: poseData, proData: usersProfessional.proData)
+    }
+    
+    func createWeights(angleData: [String]) -> [Double] {
+        var pro_weighted: [Double] = []
+        
+        if(currentUser.dominantHand == "right") {
+            weights = [0.04, 0.1, 0.07, 0.05, 0.05, 0.02, 0.01, 0.08, 0.2, 0.15, 0.1, 0.1, 0.02, 0.01]
+        }
+        else {
+            weights = [0.08, 0.2, 0.15, 0.1, 0.1, 0.02, 0.01, 0.04, 0.1, 0.07, 0.05, 0.05, 0.02, 0.01]
+        }
+        
+        for frame in angleData {
+            let landmarkArray = frame.components(separatedBy: " ")
+            
+            //print(landmarkArray)
+            var temp = [Double]()
+            var i = 0
+            for landmark in landmarkArray {
+                let adjusted = Double(landmark)! * weights[i]
+                temp.append(adjusted)
+                
+                i += 1
+            }
+            
+            pro_weighted.append( temp.reduce(0, +) )
+        }
+        
+        return pro_weighted
+    }
+    
+    //func analyzeAngles(userData: [String], proData: [String])
+    
+    func analyzeMilestones(userData: [String], proData: [String]) {
+        let userLen = userData.count
+        let proLen = proData.count
+        
+        let numberOfSplits = Int(min(userLen, proLen) / 2)
+        
+        let userWeights = createWeights(angleData: userData)
+        let proWeights = createWeights(angleData: proData)
+        
+        for num in 0...numberOfSplits {
+            let percentOfVideo = Double(num) / Double(numberOfSplits)
+            
+            var currentFramePercentUser = doubleToInteger(data: (Double(userLen) * percentOfVideo))
+            var currentFramePercentPro = doubleToInteger(data: (Double(proLen) * percentOfVideo))
+            
+            if(percentOfVideo == 1.0) {
+                currentFramePercentUser -= 1
+                currentFramePercentPro -= 1
+            }
+            
+            let proW = proWeights[currentFramePercentPro]
+            let userW = userWeights[currentFramePercentUser]
+            
+            let frame_sim = (min(proW, userW) / max(proW, userW)) * 100
+            
+            print("Video Percent:", percentOfVideo, "Frame Sim: ", frame_sim)
+        }
+        
     }
     
     // Calculates angle with the given vertex, point2, and point3 returns string value of angle in degrees
@@ -450,6 +622,13 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         blackSquare.removeFromSuperview()
         spinner.stopAnimating()
+    }
+    
+    func doubleToInteger(data:Double)-> Int {
+        let doubleToString = "\(data)"
+        let stringToInteger = (doubleToString as NSString).integerValue
+        
+        return stringToInteger
     }
     
 }
