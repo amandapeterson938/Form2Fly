@@ -126,6 +126,11 @@ class Backend {
                 print("Sign in succeeded")
                 
                 DispatchQueue.main.async {
+                    let userDefault = UserDefaults.standard
+                    userDefault.set(true, forKey: "isSignedIn")
+                    userDefault.synchronize()
+                    print("Backend defaults: ", userDefault.bool(forKey: "isSignedIn"))
+                    
                     viewController.performSegue(withIdentifier: "signToSelectionSegue", sender: self)
                 }
                 

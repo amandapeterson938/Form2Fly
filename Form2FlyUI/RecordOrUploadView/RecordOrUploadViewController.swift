@@ -434,6 +434,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         }
         
         print(weighted_scores)
+        print(weighted_scores.reduce(0, +))
     }
     
     // Calculates angle with the given vertex, point2, and point3 returns string value of angle in degrees

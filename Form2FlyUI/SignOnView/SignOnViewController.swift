@@ -14,10 +14,35 @@ class SignOnViewController: UIViewController {
     @IBOutlet weak var usernameTxt: UITextField!
     @IBOutlet weak var passwordTxt: UITextField!
     
+    let defaults = UserDefaults.standard
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Round the edges of the buttons
         signOnBtn.layer.cornerRadius = 12
+        
+//        let isSignedIn = defaults.bool(forKey: "isSignedIn")
+//        print(isSignedIn)
+//
+//
+//        if(isSignedIn) {
+////            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+////            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "nextView") as! NextViewController
+////            self.present(nextViewController, animated:true, completion:nil)
+//
+//
+//            print("Going to my spot")
+//            // performSegue(withIdentifier: "signToSelectionSegue", sender: self)
+//            //self.present(SelectOrMatchViewController(), animated: true, completion: nil)
+//
+//            //getTopMostViewController()?.present(SelectOrMatchViewController(), animated: true, completion: nil)
+//            DispatchQueue.main.async {
+//                self.performSegue(withIdentifier: "signToSelectionSegue", sender: self)
+//            }
+//
+//            return
+//        }
         
         self.hideKeyboardWhenTappedAround() 
         
@@ -27,6 +52,17 @@ class SignOnViewController: UIViewController {
         passwordTxt.delegate = self
         
         signOnBtn.isEnabled = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let isSignedIn = defaults.bool(forKey: "isSignedIn")
+        
+        if(isSignedIn) {
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "signToSelectionSegue", sender: self)
+            }
+            return
+        }
     }
     
     var signInResult = false

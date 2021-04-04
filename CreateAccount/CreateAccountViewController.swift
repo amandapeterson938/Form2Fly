@@ -30,7 +30,7 @@ class CreateAccountViewController: UIViewController {
         let email = emailTxt.text ?? ""
         
     
-        print("Username:", username, "Password:", password, "Email:", email)
+        //print("Username:", username, "Password:", password, "Email:", email)
         
         if(username == "" || password == "" || email == "") {
             let incompleteAlert = UIAlertController(title: "Incomplete Form", message: "Please fill in all text fields.", preferredStyle: .alert)

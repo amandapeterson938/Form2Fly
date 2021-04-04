@@ -27,9 +27,9 @@ class ProfessionalsViewController: UIViewController {
     func createProArray() -> [Professional] {
         var tempProfessionals: [Professional] = []
         
-        let pro1 = Professional(proName: "P. McBeth", proThrowType: "Backhand")
-        let pro2 = Professional(proName: "S. Withers", proThrowType: "Backhand")
-        let pro3 = Professional(proName: "A. Hammers", proThrowType: "Backhand")
+        let pro1 = Professional(proName: "P. McBeth", proThrowType: "Backhand", proData: [], proWeightedScore: "", fileURLPath: "")
+        let pro2 = Professional(proName: "S. Withers", proThrowType: "Backhand", proData: [], proWeightedScore: "", fileURLPath: "")
+        let pro3 = Professional(proName: "A. Hammers", proThrowType: "Backhand", proData: [], proWeightedScore: "", fileURLPath: "")
         
         tempProfessionals.append(pro1)
         tempProfessionals.append(pro2)

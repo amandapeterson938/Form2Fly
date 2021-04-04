@@ -68,13 +68,6 @@
                                         </constraints>
                                         <imageReference key="image" image="image2.png" symbolScale="default"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xgm-mV-EcR">
-                                        <rect key="frame" x="348" y="8" width="46" height="30"/>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <segue destination="iBc-9i-TZw" kind="show" id="2iY-6d-Wej"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="1OI-fi-G84" firstAttribute="centerX" secondItem="efg-WV-Gy0" secondAttribute="centerX" id="7Pl-1n-d1E"/>
@@ -87,10 +80,8 @@
                                     <constraint firstItem="7xU-ag-h6E" firstAttribute="top" secondItem="TsE-54-aYB" secondAttribute="bottom" constant="23" id="HKp-G2-Yer"/>
                                     <constraint firstItem="b6S-lQ-r2V" firstAttribute="top" secondItem="7xU-ag-h6E" secondAttribute="bottom" constant="20" id="J6G-pR-wWF"/>
                                     <constraint firstItem="1OI-fi-G84" firstAttribute="leading" secondItem="jaV-eh-pRo" secondAttribute="leading" constant="20" id="LoA-7e-fSn"/>
-                                    <constraint firstItem="jaV-eh-pRo" firstAttribute="trailing" secondItem="Xgm-mV-EcR" secondAttribute="trailing" constant="20" id="Pym-nE-9DU"/>
                                     <constraint firstItem="3s1-go-Djf" firstAttribute="top" secondItem="efg-WV-Gy0" secondAttribute="top" id="QA3-BA-K7J"/>
                                     <constraint firstItem="jaV-eh-pRo" firstAttribute="trailing" secondItem="7xU-ag-h6E" secondAttribute="trailing" constant="20" id="RT2-JZ-YqH"/>
-                                    <constraint firstItem="Xgm-mV-EcR" firstAttribute="top" secondItem="jaV-eh-pRo" secondAttribute="top" constant="8" id="SS1-rw-M5L"/>
                                     <constraint firstItem="jaV-eh-pRo" firstAttribute="trailing" secondItem="1OI-fi-G84" secondAttribute="trailing" constant="20" id="SsU-bW-uUm"/>
                                     <constraint firstAttribute="trailing" secondItem="3s1-go-Djf" secondAttribute="trailing" id="TPW-Dd-5Sb"/>
                                     <constraint firstItem="3s1-go-Djf" firstAttribute="bottom" secondItem="jaV-eh-pRo" secondAttribute="bottom" id="V6V-M5-vnB"/>
@@ -491,6 +482,7 @@
                                     <color key="titleColor" systemColor="systemRedColor"/>
                                 </state>
                                 <connections>
+                                    <action selector="signOut:" destination="RJA-UO-0Cs" eventType="touchUpInside" id="aRi-Kk-waY"/>
                                     <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="Ffd-f2-fpw"/>
                                 </connections>
                             </button>
@@ -627,28 +619,12 @@
             </objects>
             <point key="canvasLocation" x="921.73913043478262" y="3213.6160714285711"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="P51-n7-5MA">
-            <objects>
-                <viewController id="iBc-9i-TZw" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="l0P-Aw-0EP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="SD7-Qv-iJH"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="AVi-NQ-cp0"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fuf-fT-pac" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1106" y="76"/>
-        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="uYf-rq-VTB"/>
         <segue reference="MzS-al-ieB"/>
         <segue reference="nhg-Vh-cDE"/>
-        <segue reference="NOd-Vc-Ib0"/>
+        <segue reference="Ffd-f2-fpw"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="avatar.png" width="273" height="418.5"/>
