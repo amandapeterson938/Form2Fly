@@ -27,6 +27,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     
     // array of abrieviations for the angles being analyzed used to fill in keys for dictionaries lastSubPointsDict and pointsDict
     var abrvArr:[String] = ["lwr", "lel", "lsh", "lhi", "lkn", "lan", "lro", "rwr", "rel", "rsh", "rhi", "rkn", "ran", "rro"]
+    var abrvDictionary: [String: String] = ["lwr":"Left Wrist", "lel" : "Left Elbow", "lsh" : "Left Shoulder" , "lhi" : "Left Hip", "lkn" : "Left Knee", "lan": "Left Ankle", "lro": "Left Wrist Rotation", "rwr": "Right Wrist", "rel": "Right Elbow", "rsh": "Right Shoulder", "rhi": "Right Hip", "rkn": "Right Knee", "ran": "Right Ankle", "rro": "Right Wrist Rotation"]
     var lastSubPointsDict: [String: String] = [:]
     var pointsDict: [String: String] = [:]
     
@@ -38,6 +39,8 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        InsightsViewController.init()
         
         // Initialize values in dictionary
         for abrv in abrvArr {
@@ -410,28 +413,8 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     var weighted_scores = [Double]()
     
     func analyzeArray(poseData: [String]) {
-        if(currentUser.dominantHand == "right") {
-            weights = [0.04, 0.1, 0.07, 0.05, 0.05, 0.02, 0.01, 0.08, 0.2, 0.15, 0.1, 0.1, 0.02, 0.01]
-        }
-        else {
-            weights = [0.08, 0.2, 0.15, 0.1, 0.1, 0.02, 0.01, 0.04, 0.1, 0.07, 0.05, 0.05, 0.02, 0.01]
-        }
         
-        for frame in poseData {
-            let landmarkArray = frame.components(separatedBy: " ")
-            
-            //print(landmarkArray)
-            var temp = [Double]()
-            var i = 0
-            for landmark in landmarkArray {
-                let adjusted = Double(landmark)! * weights[i]
-                temp.append(adjusted)
-                
-                i += 1
-            }
-            
-            weighted_scores.append( temp.reduce(0, +) )
-        }
+        weighted_scores = createWeights(angleData: poseData)
         
         print(weighted_scores)
         let weighted_sum = weighted_scores.reduce(0, +)
@@ -484,11 +467,16 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         
         print("Selection: ", currentUser.pickOrMatch)
         print("Professional: ", usersProfessional.proName)
+        InsightsViewController.shared.usersProName = usersProfessional.proName
         
-        var overallSimilarity = min(usersProfessional.proWeightedScore, weighted_sum) / max(usersProfessional.proWeightedScore, weighted_sum)
+        var overallSimilarity = (min(usersProfessional.proWeightedScore, weighted_sum) / max(usersProfessional.proWeightedScore, weighted_sum)) * 100
         print("Overall Similarity: ", overallSimilarity)
+        InsightsViewController.shared.usersOverallSim = String(format: "%.2f", overallSimilarity) + " %"
         
-        analyzeMilestones(userData: poseData, proData: usersProfessional.proData)
+        InsightsViewController.shared.usersProbAreas = "Perry the Platypus!!!"
+        
+        //analyzeMilestones(userData: poseData, proData: usersProfessional.proData)
+        splitVideoAnalyze(userData: poseData, proData: usersProfessional.proData)
     }
     
     func createWeights(angleData: [String]) -> [Double] {
@@ -520,13 +508,108 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         return pro_weighted
     }
     
+    func createWeightArray(angleData: [String]) -> [String] {
+        var pro_weighted: [String] = []
+        
+        if(currentUser.dominantHand == "right") {
+            weights = [0.04, 0.1, 0.07, 0.05, 0.05, 0.02, 0.01, 0.08, 0.2, 0.15, 0.1, 0.1, 0.02, 0.01]
+        }
+        else {
+            weights = [0.08, 0.2, 0.15, 0.1, 0.1, 0.02, 0.01, 0.04, 0.1, 0.07, 0.05, 0.05, 0.02, 0.01]
+        }
+        
+        for frame in angleData {
+            let landmarkArray = frame.components(separatedBy: " ")
+            
+            //print(landmarkArray)
+            var temp = ""
+            var i = 0
+            for landmark in landmarkArray {
+                let adjusted = Double(landmark)! * weights[i]
+                temp = temp + String(adjusted) + " "
+                
+                i += 1
+            }
+            
+            pro_weighted.append(temp)
+        }
+        
+        return pro_weighted
+    }
+    
     //func analyzeAngles(userData: [String], proData: [String])
+    func splitVideoAnalyze(userData: [String], proData: [String]) {
+        
+        let userWeightedArray = createWeightArray(angleData: userData)
+        let proWeightedArray = createWeightArray(angleData: proData)
+        
+        let userAngleDict = overallAngleDict(angleData: userWeightedArray)
+        let proAngleDict = overallAngleDict(angleData: proWeightedArray)
+        
+        var angleSimilarity: [String: Double] = [:]
+        
+        for abrv in abrvArr {
+            angleSimilarity[abrv] = 0.0
+        }
+        
+        //Push similarity scores in dictionary
+        for (key, val) in userAngleDict {
+            angleSimilarity[key] = (min(userAngleDict[key]!, proAngleDict[key]!) / max(userAngleDict[key]!, proAngleDict[key]!)) * 100
+        }
+        
+        var worstAngleString = ""
+        //Go through dictionary and find the worst
+        for (key, val) in angleSimilarity {
+            //ignoring rro and lro because they are experimental values that doesn't give enough information to user
+            if(key == "rro") {
+                print("Oh no!")
+            }
+            else if(key == "lro") {
+                print("Double oh no!")
+            }
+            else {
+                if(val < 76.0) {
+                    worstAngleString += abrvDictionary[key]! + ": " + String(format: "%.2f", val) + " %\n"
+                }
+            }
+        }
+        
+        InsightsViewController.shared.usersProbAreas = worstAngleString
+        
+        print(angleSimilarity)
+    }
+    
+    func overallAngleDict(angleData: [String]) -> [String: Double] {
+        let abrvArr:[String] = ["lwr", "lel", "lsh", "lhi", "lkn", "lan", "lro", "rwr", "rel", "rsh", "rhi", "rkn", "ran", "rro"]
+
+        
+        var angleDictionary : [String: Double] = [:]
+        
+        for abrv in abrvArr {
+            angleDictionary[abrv] = 0.0
+        }
+        
+        
+        for frame in angleData {
+            let frameArray = frame.split(separator: " ")
+            var i = 0
+            for angle in frameArray {
+                if(!angle.isEmpty) {
+                    angleDictionary[abrvArr[i]] = (angleDictionary[abrvArr[i]] ?? 0.0) + (Double(angle) ?? 0.0) ?? 0.0
+                    //angleArray[i] = angleArray[i] + Double(angle)!
+                    i += 1
+                }
+            }
+        }
+        
+        return angleDictionary
+    }
     
     func analyzeMilestones(userData: [String], proData: [String]) {
         let userLen = userData.count
         let proLen = proData.count
         
-        let numberOfSplits = Int(min(userLen, proLen) / 2)
+        let numberOfSplits = Int(min(userLen, proLen) / 5)
         
         let userWeights = createWeights(angleData: userData)
         let proWeights = createWeights(angleData: proData)
