@@ -586,14 +586,14 @@
             <objects>
                 <viewController storyboardIdentifier="TrainingViewController" id="WHe-qw-MRi" customClass="TrainingViewController" customModule="Form2FlyUI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Uwx-FV-him">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="P3v-pt-uxc">
-                                <rect key="frame" x="25" y="117" width="364" height="745"/>
+                                <rect key="frame" x="25" y="73" width="364" height="735"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Training Advice" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="bXT-90-eVz">
-                                <rect key="frame" x="20" y="44" width="374" height="56"/>
+                                <rect key="frame" x="20" y="0.0" width="374" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="mEj-FG-367"/>
                                 </constraints>
@@ -602,7 +602,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XkM-hN-M6s">
-                                <rect key="frame" x="25" y="57" width="54" height="30"/>
+                                <rect key="frame" x="25" y="13" width="54" height="30"/>
                                 <state key="normal" title="Insights"/>
                                 <connections>
                                     <segue destination="2tG-Yw-1Xc" kind="show" id="j4Z-Fr-i6R"/>
@@ -623,6 +623,7 @@
                             <constraint firstItem="bXT-90-eVz" firstAttribute="centerX" secondItem="P3v-pt-uxc" secondAttribute="centerX" id="o4h-Ni-0ko"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="555-0d-L9j"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OiX-Cu-QOz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -675,6 +676,18 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QMC-s3-Ar8">
+                                        <rect key="frame" x="21" y="702" width="374" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" name="Form2FlyBlue"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Watch Video"/>
+                                        <connections>
+                                            <action selector="uploadVideo:" destination="b0f-pI-qVb" eventType="touchUpInside" id="U58-IQ-Xcg"/>
+                                            <action selector="watchTrainingVideo:" destination="xCv-Oj-e3X" eventType="touchUpInside" id="u9J-q4-ikZ"/>
+                                            <segue destination="WHe-qw-MRi" kind="show" id="3uw-r3-2BO"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Wvf-oQ-9lq" firstAttribute="top" secondItem="4Om-nD-wXS" secondAttribute="bottom" constant="18" id="1ep-3S-Dlc"/>
@@ -715,13 +728,15 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PWD-MG-GAU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="xCv-Oj-e3X" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1911.594202898551" y="2926.3392857142858"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="j4Z-Fr-i6R"/>
         <segue reference="uYf-rq-VTB"/>
-        <segue reference="MzS-al-ieB"/>
+        <segue reference="cCs-ih-kNM"/>
         <segue reference="nhg-Vh-cDE"/>
         <segue reference="Ffd-f2-fpw"/>
     </inferredMetricsTieBreakers>

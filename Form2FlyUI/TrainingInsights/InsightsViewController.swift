@@ -34,16 +34,16 @@ class InsightsViewController: UIViewController {
         usersOverallSimilarity.text = InsightsViewController.shared.usersOverallSim
         usersOverallProb.text = InsightsViewController.shared.usersProbAreas
         
-        let storageOperation = Amplify.Storage.downloadData(key: "myKey")
-        let progressSink = storageOperation.progressPublisher.sink { progress in print("Progress: \(progress)") }
-        let resultSink = storageOperation.resultPublisher.sink {
-            if case let .failure(storageError) = $0 {
-                print("Failed: \(storageError.errorDescription). \(storageError.recoverySuggestion)")
-            }
-        }
-        receiveValue: { data in
-            print("Completed: \(data)")
-        }
+//        let storageOperation = Amplify.Storage.downloadData(key: "myKey")
+//        let progressSink = storageOperation.progressPublisher.sink { progress in print("Progress: \(progress)") }
+//        let resultSink = storageOperation.resultPublisher.sink {
+//            if case let .failure(storageError) = $0 {
+//                print("Failed: \(storageError.errorDescription). \(storageError.recoverySuggestion)")
+//            }
+//        }
+//        receiveValue: { data in
+//            print("Completed: \(data)")
+//        }
         
     }
 }

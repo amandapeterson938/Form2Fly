@@ -10,7 +10,7 @@ import UIKit
 class ProfessionalsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
-    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "")
+    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
     
     var professionals: [Professional] = []
     

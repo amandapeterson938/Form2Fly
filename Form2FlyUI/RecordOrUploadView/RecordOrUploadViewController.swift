@@ -15,7 +15,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     @IBOutlet weak var recordVideoBtn: UIButton!
     @IBOutlet weak var uploadVideoBtn: UIButton!
     
-    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "")
+    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
     
     // Loading objects
     var blackSquare = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 0, height: 0))
@@ -36,6 +36,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     //let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask) [0]
     
     var poseChangesFileURL = URL(fileURLWithPath: "poseChanges")
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,16 +101,22 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             // Save video
             if let videoURL = (info[UIImagePickerController.InfoKey.mediaURL] as? URL) {
                 let video = AVURLAsset(url: videoURL, options: nil)
-                    
-                    
+                
                 print(videoURL)
                 print(String(Float(video.duration.seconds)))
                 
-                
+                func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+                    
+                    currentUser.vidURL = videoURL.path
+                        
+                        let destinationVC = segue.destination as! TrainingViewController
+                        
+                        destinationVC.currentUser = currentUser
+                }
+               
                 // Analyze the video
                 analyzeVideo(video: video, videoURL: videoURL)
-                
-                
+          
             }
         }
         else {
@@ -212,6 +219,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             generator.appliesPreferredTrackTransform = true
             generator.requestedTimeToleranceBefore = CMTime.zero;
             generator.requestedTimeToleranceAfter = CMTime.zero;
+            
             
             var time = 0.0
             

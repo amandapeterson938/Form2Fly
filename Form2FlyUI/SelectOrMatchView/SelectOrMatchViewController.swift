@@ -13,7 +13,7 @@ class SelectOrMatchViewController: UIViewController {
     @IBOutlet weak var selectProfessionalBtn: UIButton!
     @IBOutlet weak var dominantHandChoice: UISegmentedControl!
     
-    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "")
+    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()

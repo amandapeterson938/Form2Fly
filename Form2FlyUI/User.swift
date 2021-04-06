@@ -6,17 +6,20 @@
 //
 
 import Foundation
+import AVKit
 
 class User {
     var dominantHand: String
     var pickOrMatch: String
     var throwType: String
     var proName: String
+    var vidURL: String
     
-    init(dominantHand: String, pickOrMatch: String, throwType: String, proName: String) {
+    init(dominantHand: String, pickOrMatch: String, throwType: String, proName: String, vidURL: String) {
         self.dominantHand = dominantHand
         self.pickOrMatch = pickOrMatch
         self.throwType = throwType // if user is being matched this will be their throwtype, else the user has picked a profesional this will be the professional's throw type
         self.proName = proName //will be declared if user choses to be matched.
+        self.vidURL = vidURL
     }
 }
