@@ -605,7 +605,7 @@
                                     <segue destination="2tG-Yw-1Xc" kind="show" id="j4Z-Fr-i6R"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E0w-Nw-QY9">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="E0w-Nw-QY9">
                                 <rect key="frame" x="20" y="64" width="374" height="714"/>
                             </imageView>
                         </subviews>
@@ -627,6 +627,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="555-0d-L9j"/>
                     <connections>
+                        <outlet property="trainingAdviceLabel" destination="bXT-90-eVz" id="ut0-jh-aOq"/>
                         <outlet property="trainingVideo" destination="E0w-Nw-QY9" id="Rn9-VC-1CW"/>
                     </connections>
                 </viewController>
@@ -691,7 +692,7 @@
                                             <action selector="trainingAction:" destination="2tG-Yw-1Xc" eventType="touchUpInside" id="Qu0-Kk-v0O"/>
                                             <action selector="uploadVideo:" destination="b0f-pI-qVb" eventType="touchUpInside" id="U58-IQ-Xcg"/>
                                             <action selector="watchTrainingVideo:" destination="xCv-Oj-e3X" eventType="touchUpInside" id="u9J-q4-ikZ"/>
-                                            <segue destination="WHe-qw-MRi" kind="show" id="3uw-r3-2BO"/>
+                                            <segue destination="WHe-qw-MRi" kind="show" identifier="goToTrainingSegue" id="3uw-r3-2BO"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -728,7 +729,6 @@
                     <navigationItem key="navigationItem" id="iBI-TS-xGo"/>
                     <connections>
                         <outlet property="insightsScrollView" destination="Ii2-Ek-f2r" id="v6v-aw-RIE"/>
-                        <outlet property="traininingAction" destination="QMC-s3-Ar8" id="wGc-Bb-uQ4"/>
                         <outlet property="usersOverallProb" destination="eSp-2Y-Pau" id="q3D-ge-g7y"/>
                         <outlet property="usersOverallSimilarity" destination="TeQ-hk-MRQ" id="4V7-Z4-6UI"/>
                         <outlet property="usersProfessionalName" destination="4Om-nD-wXS" id="xZ8-2L-BWQ"/>
@@ -744,11 +744,12 @@
     <inferredMetricsTieBreakers>
         <segue reference="3uw-r3-2BO"/>
         <segue reference="uYf-rq-VTB"/>
-        <segue reference="cCs-ih-kNM"/>
-        <segue reference="nhg-Vh-cDE"/>
+        <segue reference="MzS-al-ieB"/>
+        <segue reference="0Wi-eU-NDN"/>
         <segue reference="Ffd-f2-fpw"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="avatar.png" width="273" height="418.5"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="image2.png" width="1046" height="295"/>
         <namedColor name="AccentColor">

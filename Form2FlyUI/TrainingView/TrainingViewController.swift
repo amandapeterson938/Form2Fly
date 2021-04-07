@@ -12,8 +12,11 @@ import MobileCoreServices
 
 
 class TrainingViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    
+    //static let shared = TrainingViewController()
 
   
+    @IBOutlet weak var trainingAdviceLabel: UILabel!
     @IBOutlet weak var trainingVideo: UIImageView!
     
     var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
@@ -29,6 +32,8 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let url = URL(string: currentUser.vidURL) else { return }
+        
+        print("trainU", currentUser.vidURL, "done")
        
         video(url: url)
     }
@@ -103,11 +108,13 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     
     // displays the videos from the testVideoArray that holds the edited images
     var timerCount = 0
+    var testCount9 = 0.0
     @objc func timerAction() {
         
         print("Frame: ", timerCount)
         if(self.editedImageArray.count > timerCount) {
             print(editedImageArray[timerCount].hashValue)
+            self.trainingAdviceLabel.text = String(timerCount)
             self.trainingVideo.image = self.editedImageArray[timerCount]
         }
         else {

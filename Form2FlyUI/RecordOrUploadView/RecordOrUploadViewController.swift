@@ -43,7 +43,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        InsightsViewController.init()
+        //InsightsViewController.init()
         
         // Initialize values in dictionary
         for abrv in abrvArr {
