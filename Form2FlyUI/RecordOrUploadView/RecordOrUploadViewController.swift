@@ -33,6 +33,8 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     
     var testArray = [String]()
     
+    var userVideoURL = ""
+    
     //let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask) [0]
     
     var poseChangesFileURL = URL(fileURLWithPath: "poseChanges")
@@ -105,15 +107,8 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
                 print(videoURL)
                 print(String(Float(video.duration.seconds)))
                 
-                func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-                    
-                    currentUser.vidURL = videoURL.path
-                        
-                        let destinationVC = segue.destination as! TrainingViewController
-                        
-                        destinationVC.currentUser = currentUser
-                }
-               
+                self.userVideoURL = videoURL.absoluteString
+                
                 // Analyze the video
                 analyzeVideo(video: video, videoURL: videoURL)
           
@@ -132,6 +127,16 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         }
             
     } // end imagePickerController didFinishPickingMediaWithInfo
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        currentUser.vidURL = userVideoURL
+        currentUser.dominantHand = currentUser.dominantHand
+            let destinationVC = segue.destination as! TrainingViewController
+            
+            destinationVC.currentUser = currentUser
+    }
     
     func videoEditorControllerDidCancel(_ editor: UIVideoEditorController) {
         editor.dismiss(animated: true, completion: nil)
@@ -181,7 +186,6 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             cnt = cnt + 1
         }
         print("Number of Frames: " + String(frameForTimes.count))
-        
         return frameForTimes
     }
     

@@ -13,13 +13,13 @@ import MobileCoreServices
 
 class TrainingViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
+    static let share = TrainingViewController()
+    
     @IBOutlet weak var myImgView: UIImageView!
     
     var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
     
-    var videoUrl = self.vidURL
-    
-    print(videoUrl)
+    var uservideourl = ""
     
     var testArray = [String]()
     
@@ -28,6 +28,7 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
     }
     
