@@ -605,19 +605,30 @@
                                     <segue destination="2tG-Yw-1Xc" kind="show" id="j4Z-Fr-i6R"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E0w-Nw-QY9">
+                                <rect key="frame" x="20" y="64" width="374" height="714"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="upm-8W-JzY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="bXT-90-eVz" firstAttribute="top" secondItem="upm-8W-JzY" secondAttribute="top" id="9Gj-E6-AUD"/>
+                            <constraint firstItem="E0w-Nw-QY9" firstAttribute="centerX" secondItem="Uwx-FV-him" secondAttribute="centerX" id="9Jg-JS-WRq"/>
+                            <constraint firstItem="E0w-Nw-QY9" firstAttribute="top" secondItem="bXT-90-eVz" secondAttribute="bottom" constant="8" id="Egs-dO-s9a"/>
                             <constraint firstItem="bXT-90-eVz" firstAttribute="leading" secondItem="upm-8W-JzY" secondAttribute="leading" constant="20" id="Faa-Dl-6jo"/>
                             <constraint firstItem="upm-8W-JzY" firstAttribute="trailing" secondItem="bXT-90-eVz" secondAttribute="trailing" constant="20" id="Jf0-1M-XEP"/>
                             <constraint firstItem="XkM-hN-M6s" firstAttribute="leading" secondItem="upm-8W-JzY" secondAttribute="leading" constant="25" id="KCp-Ww-4eH"/>
                             <constraint firstItem="XkM-hN-M6s" firstAttribute="top" secondItem="upm-8W-JzY" secondAttribute="top" constant="13" id="dhy-sz-g4M"/>
+                            <constraint firstItem="E0w-Nw-QY9" firstAttribute="centerY" secondItem="Uwx-FV-him" secondAttribute="centerY" id="k5X-PH-0Dc"/>
                             <constraint firstItem="bXT-90-eVz" firstAttribute="centerX" secondItem="Uwx-FV-him" secondAttribute="centerX" id="kTD-oY-WQa"/>
+                            <constraint firstItem="E0w-Nw-QY9" firstAttribute="leading" secondItem="upm-8W-JzY" secondAttribute="leading" constant="20" id="mdd-gO-ccz"/>
+                            <constraint firstItem="upm-8W-JzY" firstAttribute="trailing" secondItem="E0w-Nw-QY9" secondAttribute="trailing" constant="20" id="syk-J2-ncz"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="555-0d-L9j"/>
+                    <connections>
+                        <outlet property="trainingVideo" destination="E0w-Nw-QY9" id="Rn9-VC-1CW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OiX-Cu-QOz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -626,7 +637,7 @@
         <!--Insights View Controller-->
         <scene sceneID="Qar-pl-1zJ">
             <objects>
-                <viewController id="2tG-Yw-1Xc" customClass="InsightsViewController" customModule="Form2FlyUI" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InsightsViewController" id="2tG-Yw-1Xc" customClass="InsightsViewController" customModule="Form2FlyUI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KeS-Hd-xgT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -728,7 +739,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="j4Z-Fr-i6R"/>
+        <segue reference="3uw-r3-2BO"/>
         <segue reference="uYf-rq-VTB"/>
         <segue reference="cCs-ih-kNM"/>
         <segue reference="nhg-Vh-cDE"/>

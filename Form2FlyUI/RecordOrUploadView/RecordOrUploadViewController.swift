@@ -249,7 +249,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             
             
             // Opening new view (Training)
-            if let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TrainingViewController") as? TrainingViewController {
+            if let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InsightsViewController") as? InsightsViewController {
                 
                 self.currentUser.vidURL = self.userVideoURL
                 newViewController.currentUser = self.currentUser

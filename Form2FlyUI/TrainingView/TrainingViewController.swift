@@ -13,6 +13,7 @@ import MobileCoreServices
 
 class TrainingViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
+  
     @IBOutlet weak var trainingVideo: UIImageView!
     
     var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
@@ -136,70 +137,65 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     // analyze visionimage for poses and save angle result to dictionary
     func analyzeFrame(poseDetector: PoseDetector, frame: VisionImage, currentTime: Double, cgimage: CGImage) {
 
-            var results: [Pose]?
-            do {
-                results = try poseDetector.results(in: frame)
-            }
-            catch let error {
-                print("Failed to detect pose with error: \(error.localizedDescription)")
-                return
-            }
-            guard let detectedPoses = results, !detectedPoses.isEmpty else {
-                print("No poses detected...")
-                return
-            }
-            // iterate through poses found in the frame
-            for pose in detectedPoses {
-                let noseLM = (pose.landmark(ofType: .nose))
-                let leftEyeInnerLM = (pose.landmark(ofType: .leftEyeInner))
-                let leftEyeLM = (pose.landmark(ofType: .leftEye))
-                let leftEyeOuterLM = (pose.landmark(ofType: .leftEyeOuter))
-                let rightEyeInnerLM = (pose.landmark(ofType: .rightEyeInner))
-                let rightEyeLM = (pose.landmark(ofType: .rightEye))
-                let rightEyeOuterLM = (pose.landmark(ofType: .rightEyeOuter))
-                let leftEarLM = (pose.landmark(ofType: .leftEar))
-                let rightEarLM = (pose.landmark(ofType: .rightEar))
-                let mouthLeftLM = (pose.landmark(ofType: .mouthLeft))
-                let mouthRightLM = (pose.landmark(ofType: .mouthRight))
-                let leftShoulderLM = (pose.landmark(ofType: .leftShoulder))
-                let rightShoulderLM = (pose.landmark(ofType: .rightShoulder))
-                let leftElbowLM = (pose.landmark(ofType: .leftElbow))
-                let rightElbowLM = (pose.landmark(ofType: .rightElbow))
-                let leftWristLM = (pose.landmark(ofType: .leftWrist))
-                let rightWristLM = (pose.landmark(ofType: .rightWrist))
-                let leftPinkyFingerLM = (pose.landmark(ofType: .leftPinkyFinger))
-                let rightPinkyFingerLM = (pose.landmark(ofType: .rightPinkyFinger))
-                let leftIndexFingerLM = (pose.landmark(ofType: .leftIndexFinger))
-                let rightIndexFingerLM = (pose.landmark(ofType: .rightIndexFinger))
-                let leftThumbLM = (pose.landmark(ofType: .leftThumb))
-                let rightThumbLM = (pose.landmark(ofType: .rightThumb))
-                let leftHipLM = (pose.landmark(ofType: .leftHip))
-                let rightHipLM = (pose.landmark(ofType: .rightHip))
-                let leftKneeLM = (pose.landmark(ofType: .leftKnee))
-                let rightKneeLM = (pose.landmark(ofType: .rightKnee))
-                let leftAnkleLM = (pose.landmark(ofType: .leftAnkle))
-                let rightAnkleLM = (pose.landmark(ofType: .rightAnkle))
-                let leftHeelLM = (pose.landmark(ofType: .leftHeel))
-                let rightHeelLM = (pose.landmark(ofType: .rightHeel))
-                let leftToeLM = (pose.landmark(ofType: .leftToe))
-                let rightToeLM = (pose.landmark(ofType: .rightToe))
+                var results: [Pose]?
+                do {
+                    results = try poseDetector.results(in: frame)
+                }
+                catch let error {
+                    print("Failed to detect pose with error: \(error.localizedDescription)")
+                    return
+                }
+                guard let detectedPoses = results, !detectedPoses.isEmpty else {
+                    print("No poses detected...")
+                    return
+                }
+                // iterate through poses found in the frame
+                for pose in detectedPoses {
+                    let noseLM = (pose.landmark(ofType: .nose))
+                    let leftEyeInnerLM = (pose.landmark(ofType: .leftEyeInner))
+                    let leftEyeLM = (pose.landmark(ofType: .leftEye))
+                    let leftEyeOuterLM = (pose.landmark(ofType: .leftEyeOuter))
+                    let rightEyeInnerLM = (pose.landmark(ofType: .rightEyeInner))
+                    let rightEyeLM = (pose.landmark(ofType: .rightEye))
+                    let rightEyeOuterLM = (pose.landmark(ofType: .rightEyeOuter))
+                    let leftEarLM = (pose.landmark(ofType: .leftEar))
+                    let rightEarLM = (pose.landmark(ofType: .rightEar))
+                    let mouthLeftLM = (pose.landmark(ofType: .mouthLeft))
+                    let mouthRightLM = (pose.landmark(ofType: .mouthRight))
+                    let leftShoulderLM = (pose.landmark(ofType: .leftShoulder))
+                    let rightShoulderLM = (pose.landmark(ofType: .rightShoulder))
+                    let leftElbowLM = (pose.landmark(ofType: .leftElbow))
+                    let rightElbowLM = (pose.landmark(ofType: .rightElbow))
+                    let leftWristLM = (pose.landmark(ofType: .leftWrist))
+                    let rightWristLM = (pose.landmark(ofType: .rightWrist))
+                    let leftPinkyFingerLM = (pose.landmark(ofType: .leftPinkyFinger))
+                    let rightPinkyFingerLM = (pose.landmark(ofType: .rightPinkyFinger))
+                    let leftIndexFingerLM = (pose.landmark(ofType: .leftIndexFinger))
+                    let rightIndexFingerLM = (pose.landmark(ofType: .rightIndexFinger))
+                    let leftThumbLM = (pose.landmark(ofType: .leftThumb))
+                    let rightThumbLM = (pose.landmark(ofType: .rightThumb))
+                    let leftHipLM = (pose.landmark(ofType: .leftHip))
+                    let rightHipLM = (pose.landmark(ofType: .rightHip))
+                    let leftKneeLM = (pose.landmark(ofType: .leftKnee))
+                    let rightKneeLM = (pose.landmark(ofType: .rightKnee))
+                    let leftAnkleLM = (pose.landmark(ofType: .leftAnkle))
+                    let rightAnkleLM = (pose.landmark(ofType: .rightAnkle))
+                    let leftHeelLM = (pose.landmark(ofType: .leftHeel))
+                    let rightHeelLM = (pose.landmark(ofType: .rightHeel))
+                    let leftToeLM = (pose.landmark(ofType: .leftToe))
+                    let rightToeLM = (pose.landmark(ofType: .rightToe))
 
 
-                let imgDr = UIImage(cgImage: cgimage)
+                    let imgDr = UIImage(cgImage: cgimage)
 
-                UIGraphicsBeginImageContext(imgDr.size)
-                imgDr.draw(at: CGPoint.zero)
-                let context = UIGraphicsGetCurrentContext()
+                    UIGraphicsBeginImageContext(imgDr.size)
+                    imgDr.draw(at: CGPoint.zero)
+                    let context = UIGraphicsGetCurrentContext()
 
-//                context?.setStrokeColor(UIColor.green.cgColor)
-//                context?.setAlpha(0.5)
-//                context?.setLineWidth(10.0)
-               
-                
-                    context?.setStrokeColor(UIColor.red.cgColor)
+                    context?.setStrokeColor(UIColor.green.cgColor)
                     context?.setAlpha(0.5)
                     context?.setLineWidth(10.0)
-                    
+
                     self.checkFrameLike(noseLM, context!)
                     self.checkFrameLike(leftEyeInnerLM, context!)
                     self.checkFrameLike(leftEyeLM, context!)
@@ -233,22 +229,17 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
                     self.checkFrameLike(rightHeelLM, context!)
                     self.checkFrameLike(leftToeLM, context!)
                     self.checkFrameLike(rightToeLM, context!)
-            
-                
 
+                    context?.drawPath(using: .stroke)
 
-                context?.drawPath(using: .stroke)
+                    let myImage = UIGraphicsGetImageFromCurrentImageContext()
+                    UIGraphicsEndImageContext()
 
-                let myImage = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
+                    editedImageArray.append(myImage)
 
-                editedImageArray.append(myImage)
-                
-                
-               
-
-            }
-    }
+                    //self.myImgView.image = myImage
+                }
+        }
 //
 //
     // Check if the landmark.inFrameLikelihood is > 0.5 if it is add the circle
