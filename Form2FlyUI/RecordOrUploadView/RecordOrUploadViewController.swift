@@ -15,7 +15,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     @IBOutlet weak var recordVideoBtn: UIButton!
     @IBOutlet weak var uploadVideoBtn: UIButton!
     
-    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
+    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "", problemAbrv: [])
     
     // Loading objects
     var blackSquare = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 0, height: 0))
@@ -34,8 +34,6 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     var testArray = [String]()
     
     var userVideoURL = ""
-    
-    //let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask) [0]
     
     var poseChangesFileURL = URL(fileURLWithPath: "poseChanges")
    
@@ -244,7 +242,11 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             
             DispatchQueue.global(qos: .default).sync {
                 print("*******************************")
-                self.analyzeDictionary()
+                print("********Angle Array************")
+                print(self.testArray)
+                
+                self.analyzeArray(poseData: self.testArray)
+                //self.analyzeDictionary()
             }
             
             
@@ -345,75 +347,9 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             
             testArray.append(outputData)
             
-            pointsDict["lwr"]! += leftWristVertexAngle + " "
-            pointsDict["lel"]! += leftElbowVertexAngle + " "
-            pointsDict["lsh"]! += leftShoulderVertexAngle + " "
-            pointsDict["lhi"]! += leftHipVertexAngle + " "
-            pointsDict["lkn"]! += leftKneeVertexAngle + " "
-            pointsDict["lan"]! += leftAnkleVertexAngle + " "
-            pointsDict["lro"]! += leftWristRotAngle + " "
-            
-            pointsDict["rwr"]! += rightWristVertexAngle + " "
-            pointsDict["rel"]! += rightElbowVertexAngle + " "
-            pointsDict["rsh"]! += rightShoulderVertexAngle + " "
-            pointsDict["rhi"]! += rightHipVertexAngle + " "
-            pointsDict["rkn"]! += rightKneeVertexAngle + " "
-            pointsDict["ran"]! += rightAnkleVertexAngle + " "
-            pointsDict["rro"]! += rightWristRotAngle + " "
-            
         }
     }
     
-    // Analyzes the pointsDict Dictionary to fill in the dictionary that is named poseDictionary with values of the form
-    // |abreviation-angle-duration till next change|abreviation-angle-durration till next change...
-    // Some might not have a time value in that case there is not a change for the remaining of the video
-    func analyzeDictionary() {
-        for (key, val) in pointsDict {
-            let val_array = val.components(separatedBy: " ")
-            
-            var i = 0
-            for angle in val_array {
-                if (angle.isEmpty) {
-                    continue
-                }
-                
-                if (lastSubPointsDict[key] == "") {
-                    lastSubPointsDict[key] = angle + " " + String(i)
-                    
-                    poseDictionary[i]! += "|" + key + "-" + String(angle)
-                }
-                else {
-                    let lastSubPointsDictInfo = lastSubPointsDict[key]!.components(separatedBy: " ")
-                    
-                    if(lastSubPointsDictInfo.count == 2) {
-                        let lastSubAngle = Float(lastSubPointsDictInfo[0]) ?? 0.0
-                        let lastFrame = Int(lastSubPointsDictInfo[1]) ?? 0
-                        
-                        if(fabsf(lastSubAngle - Float(angle)!) >= 3) {
-                            let frameDiff = i - lastFrame
-                            let timeSince = Double(frameDiff) / 30.0
-                            
-                            poseDictionary[lastFrame]! += "-" + String(timeSince)
-                            
-                            poseDictionary[i]! += "|" + key + "-" + String(angle)
-                            
-                            lastSubPointsDict[key] = angle + " " + String(i)
-                        }
-                    }
-                }
-                
-                i += 1
-            }
-        }
-        
-        //print(lastSubPointsDict)
-        print("~~~~~~~~~~~~~~~~~~~~~~~~~~")
-        print(poseDictionary.sorted(by: <))
-        print("******************************")
-        print(testArray)
-        print("-------------------------------")
-        print(analyzeArray(poseData: testArray))
-    }
     
     var weights = [Double]()
     var weighted_scores = [Double]()
@@ -422,18 +358,20 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         
         weighted_scores = createWeights(angleData: poseData)
         
-        print(weighted_scores)
+        //print(weighted_scores)
         let weighted_sum = weighted_scores.reduce(0, +)
+        print("------------------------------------")
+        print("----------Weighted Sum--------------")
         print(weighted_sum)
-        
-        //var professionalsVC: ProfessionalsViewController = ProfessionalsViewController(nibName: nil, bundle: nil)
-        //var professionalArray = professionalsVC.proPlayers
+        print("------------------------------------")
         
         professionalPlayers.init()
         let professionalArray = professionalPlayers.shared.returnProfessionals()
         
         var usersProfessional: Professional = Professional(proName: "", proThrowType: "", proDominantHand: "", proData: [], proWeightedScore: 0.0, fileURLPath: "")
         
+        // If the current user chose to pick their professional fill find the professional and delclare it as userProfessional
+        // Else the user wants to be matched find the closest weighted score to get the overall similarity. Detailed analysis will come later.
         if(currentUser.pickOrMatch == "pick") {
             //getProInformation
             for professional in professionalArray {
@@ -450,7 +388,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             for professional in professionalArray {
                 
                 if(professional.proThrowType == currentUser.throwType) {
-                    var difference = fabs(professional.proWeightedScore - weighted_sum)
+                    let difference = fabs(professional.proWeightedScore - weighted_sum)
                     
                     if(i == 0 || difference < closestDifference) {
                         closestProIndex = i
@@ -475,11 +413,11 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         print("Professional: ", usersProfessional.proName)
         InsightsViewController.shared.usersProName = usersProfessional.proName
         
-        var overallSimilarity = (min(usersProfessional.proWeightedScore, weighted_sum) / max(usersProfessional.proWeightedScore, weighted_sum)) * 100
+        let overallSimilarity = (min(usersProfessional.proWeightedScore, weighted_sum) / max(usersProfessional.proWeightedScore, weighted_sum)) * 100
         print("Overall Similarity: ", overallSimilarity)
         InsightsViewController.shared.usersOverallSim = String(format: "%.2f", overallSimilarity) + " %"
         
-        InsightsViewController.shared.usersProbAreas = "Perry the Platypus!!!"
+        InsightsViewController.shared.usersProbAreas = ""
         
         //analyzeMilestones(userData: poseData, proData: usersProfessional.proData)
         splitVideoAnalyze(userData: poseData, proData: usersProfessional.proData)
@@ -543,7 +481,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         return pro_weighted
     }
     
-    //func analyzeAngles(userData: [String], proData: [String])
+    
     func splitVideoAnalyze(userData: [String], proData: [String]) {
         
         let userWeightedArray = createWeightArray(angleData: userData)
@@ -559,32 +497,37 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         }
         
         //Push similarity scores in dictionary
-        for (key, val) in userAngleDict {
+        for (key, _) in userAngleDict {
             angleSimilarity[key] = (min(userAngleDict[key]!, proAngleDict[key]!) / max(userAngleDict[key]!, proAngleDict[key]!)) * 100
         }
         
         var worstAngleString = ""
+        var usersProbAreasAbrv: [String] = []
         //Go through dictionary and find the worst
         for (key, val) in angleSimilarity {
             //ignoring rro and lro because they are experimental values that doesn't give enough information to user
             if(key == "rro") {
-                print("Oh no!")
+                // do nothing
             }
             else if(key == "lro") {
-                print("Double oh no!")
+                // do nothing
             }
             else {
                 if(val < 76.0) {
                     worstAngleString += abrvDictionary[key]! + ": " + String(format: "%.2f", val) + " %\n"
+                    
+                    usersProbAreasAbrv.append(key)
                 }
             }
         }
         
         InsightsViewController.shared.usersProbAreas = worstAngleString
+        currentUser.problemAbrv = usersProbAreasAbrv
         
         print(angleSimilarity)
     }
     
+    // Returns dictionary with key being the angle abreviation and value being the total for that key
     func overallAngleDict(angleData: [String]) -> [String: Double] {
         let abrvArr:[String] = ["lwr", "lel", "lsh", "lhi", "lkn", "lan", "lro", "rwr", "rel", "rsh", "rhi", "rkn", "ran", "rro"]
 
@@ -601,44 +544,13 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             var i = 0
             for angle in frameArray {
                 if(!angle.isEmpty) {
-                    angleDictionary[abrvArr[i]] = (angleDictionary[abrvArr[i]] ?? 0.0) + (Double(angle) ?? 0.0) ?? 0.0
+                    angleDictionary[abrvArr[i]] = (angleDictionary[abrvArr[i]] ?? 0.0) + (Double(angle) ?? 0.0) 
                     //angleArray[i] = angleArray[i] + Double(angle)!
                     i += 1
                 }
             }
         }
-        
         return angleDictionary
-    }
-    
-    func analyzeMilestones(userData: [String], proData: [String]) {
-        let userLen = userData.count
-        let proLen = proData.count
-        
-        let numberOfSplits = Int(min(userLen, proLen) / 5)
-        
-        let userWeights = createWeights(angleData: userData)
-        let proWeights = createWeights(angleData: proData)
-        
-        for num in 0...numberOfSplits {
-            let percentOfVideo = Double(num) / Double(numberOfSplits)
-            
-            var currentFramePercentUser = doubleToInteger(data: (Double(userLen) * percentOfVideo))
-            var currentFramePercentPro = doubleToInteger(data: (Double(proLen) * percentOfVideo))
-            
-            if(percentOfVideo == 1.0) {
-                currentFramePercentUser -= 1
-                currentFramePercentPro -= 1
-            }
-            
-            let proW = proWeights[currentFramePercentPro]
-            let userW = userWeights[currentFramePercentUser]
-            
-            let frame_sim = (min(proW, userW) / max(proW, userW)) * 100
-            
-            print("Video Percent:", percentOfVideo, "Frame Sim: ", frame_sim)
-        }
-        
     }
     
     // Calculates angle with the given vertex, point2, and point3 returns string value of angle in degrees
@@ -713,6 +625,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         spinner.stopAnimating()
     }
     
+    //Converts double value to an integer
     func doubleToInteger(data:Double)-> Int {
         let doubleToString = "\(data)"
         let stringToInteger = (doubleToString as NSString).integerValue

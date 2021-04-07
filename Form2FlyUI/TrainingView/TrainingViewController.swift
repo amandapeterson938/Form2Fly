@@ -13,13 +13,12 @@ import MobileCoreServices
 
 class TrainingViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
-    //static let shared = TrainingViewController()
-
-  
     @IBOutlet weak var trainingAdviceLabel: UILabel!
     @IBOutlet weak var trainingImageView: UIImageView!
     
-    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
+    let abrvArr:[String] = ["lwr", "lel", "lsh", "lhi", "lkn", "lan", "lro", "rwr", "rel", "rsh", "rhi", "rkn", "ran", "rro"]
+    
+    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "", problemAbrv: [])
     
     var uservideourl = ""
     
@@ -32,12 +31,10 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let url = URL(string: currentUser.vidURL) else { return }
-        
-        print("trainU", currentUser.vidURL, "done")
        
         analyzeVideoURL(videoURL: url)
         
-        self.trainingAdviceLabel.text = "Hello World!"
+        print("Problem Area Abrv. ", currentUser.problemAbrv)
         
     }
     
@@ -105,13 +102,12 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     
     // displays the videos from the testVideoArray that holds the edited images
     var timerCount = 0
-    var testCount9 = 0.0
     @objc func timerAction() {
         
         print("Frame: ", timerCount)
         if(self.editedImageArray.count > timerCount) {
             print(editedImageArray[timerCount].hashValue)
-            self.trainingAdviceLabel.text = String(timerCount)
+    
             self.trainingImageView.image = self.editedImageArray[timerCount]
         }
         else {
@@ -241,8 +237,6 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
                     UIGraphicsEndImageContext()
 
                     editedImageArray.append(myImage)
-
-                    //self.myImgView.image = myImage
                 }
         }
 //
@@ -252,11 +246,7 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         if landMark.inFrameLikelihood > 0.5 {
             let landMarkPos = landMark.position
             lmContext.addEllipse(in: CGRect(x: landMarkPos.x, y: landMarkPos.y, width: 10, height: 10))
-            //print("IN FRAME")
         }//end if
-        else {
-            //print("OUT OF FRAME")
-        }
     }//end checkFrameLike
 //
 //

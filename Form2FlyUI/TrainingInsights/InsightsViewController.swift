@@ -17,9 +17,7 @@ class InsightsViewController: UIViewController {
     
     @IBOutlet weak var insightsScrollView: UIScrollView!
     
-    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
-    
-    var platypus = 0.2
+    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "", problemAbrv: [])
     
     var usersProName = ""
     var usersOverallSim = ""
@@ -56,6 +54,8 @@ class InsightsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.viewTrainingButton.layer.cornerRadius = 12
         
         print("userIns: ", currentUser.vidURL, "done")
         
