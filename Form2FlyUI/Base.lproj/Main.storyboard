@@ -688,6 +688,7 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Watch Video"/>
                                         <connections>
+                                            <action selector="trainingAction:" destination="2tG-Yw-1Xc" eventType="touchUpInside" id="Qu0-Kk-v0O"/>
                                             <action selector="uploadVideo:" destination="b0f-pI-qVb" eventType="touchUpInside" id="U58-IQ-Xcg"/>
                                             <action selector="watchTrainingVideo:" destination="xCv-Oj-e3X" eventType="touchUpInside" id="u9J-q4-ikZ"/>
                                             <segue destination="WHe-qw-MRi" kind="show" id="3uw-r3-2BO"/>
@@ -727,9 +728,11 @@
                     <navigationItem key="navigationItem" id="iBI-TS-xGo"/>
                     <connections>
                         <outlet property="insightsScrollView" destination="Ii2-Ek-f2r" id="v6v-aw-RIE"/>
+                        <outlet property="traininingAction" destination="QMC-s3-Ar8" id="wGc-Bb-uQ4"/>
                         <outlet property="usersOverallProb" destination="eSp-2Y-Pau" id="q3D-ge-g7y"/>
                         <outlet property="usersOverallSimilarity" destination="TeQ-hk-MRQ" id="4V7-Z4-6UI"/>
                         <outlet property="usersProfessionalName" destination="4Om-nD-wXS" id="xZ8-2L-BWQ"/>
+                        <outlet property="viewTrainingButton" destination="QMC-s3-Ar8" id="8O6-po-8rU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PWD-MG-GAU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

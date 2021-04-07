@@ -29,6 +29,7 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let url = URL(string: currentUser.vidURL) else { return }
+       
         video(url: url)
     }
     

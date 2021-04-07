@@ -25,6 +25,13 @@ class InsightsViewController: UIViewController {
     var usersOverallSim = ""
     var usersProbAreas = ""
 
+    @IBOutlet weak var viewTrainingButton: UIButton!
+    
+
+    @IBAction func trainingAction(_ sender: Any) {
+      
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
