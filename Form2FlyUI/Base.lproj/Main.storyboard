@@ -605,7 +605,7 @@
                                     <segue destination="2tG-Yw-1Xc" kind="show" id="j4Z-Fr-i6R"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="E0w-Nw-QY9">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E0w-Nw-QY9">
                                 <rect key="frame" x="20" y="64" width="374" height="714"/>
                             </imageView>
                         </subviews>
@@ -628,7 +628,7 @@
                     <navigationItem key="navigationItem" id="555-0d-L9j"/>
                     <connections>
                         <outlet property="trainingAdviceLabel" destination="bXT-90-eVz" id="ut0-jh-aOq"/>
-                        <outlet property="trainingVideo" destination="E0w-Nw-QY9" id="Rn9-VC-1CW"/>
+                        <outlet property="trainingImageView" destination="E0w-Nw-QY9" id="2nH-8x-F47"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OiX-Cu-QOz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -742,14 +742,13 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3uw-r3-2BO"/>
+        <segue reference="j4Z-Fr-i6R"/>
         <segue reference="uYf-rq-VTB"/>
         <segue reference="MzS-al-ieB"/>
         <segue reference="0Wi-eU-NDN"/>
         <segue reference="Ffd-f2-fpw"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="avatar.png" width="273" height="418.5"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="image2.png" width="1046" height="295"/>
         <namedColor name="AccentColor">

@@ -17,7 +17,7 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
 
   
     @IBOutlet weak var trainingAdviceLabel: UILabel!
-    @IBOutlet weak var trainingVideo: UIImageView!
+    @IBOutlet weak var trainingImageView: UIImageView!
     
     var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
     
@@ -35,54 +35,52 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         
         print("trainU", currentUser.vidURL, "done")
        
-        video(url: url)
+        analyzeVideoURL(videoURL: url)
+        
+        self.trainingAdviceLabel.text = "Hello World!"
+        
     }
     
     var originalFrames = [CGImage]()
     
-    func video(url: URL) {
-        let videoURL = url
-        //let selVid = info[UIImagePickerController.InfoKey.editedImage]
-        self.dismiss(animated: true, completion: nil)
-
+    func analyzeVideoURL(videoURL : URL) {
         let semaphore = DispatchSemaphore(value: 1)
-
+        
         DispatchQueue.main.async {
             semaphore.wait()
             print("Generating Frames")
-
-                    let video = AVURLAsset(url: videoURL, options: nil)
-
-                    let videoDuration = video.duration.seconds
-                    var time = 0.0
-                    while(time < videoDuration) {
-                        
-                        print("Processing: ", time)
-
-                        let img = self.generateFrame(videoURL: videoURL, frameTime: time)
-                        self.originalFrames.append(img!)
-
-                        time = time + (1/30)
+            
+            let video = AVURLAsset(url: videoURL, options: nil)
+            
+            let videoDuration = video.duration.seconds
+            var time = 0.0
+            while(time < videoDuration) {
+                print("Processing: ", time)
                 
+                let img = self.generateFrame(videoURL: videoURL, frameTime: time)
+                self.originalFrames.append(img!)
+                
+                time = time + (1/30)
             }
+            
             semaphore.signal()
         }
         DispatchQueue.main.async {
             semaphore.wait()
-
+            
             print("Pose Detection in Progress")
-
+            
             let options = AccuratePoseDetectorOptions()
             options.detectorMode = .stream
             let poseDetector = PoseDetector.poseDetector(options: options)
-
+            
             var frameCount = 0
-
+            
             DispatchQueue.global(qos: .default).async {
                 for image in self.originalFrames {
                     self.analyzeFrame(poseDetector: poseDetector, frame: VisionImage(image: UIImage(cgImage: image)), currentTime: 0.0, cgimage: image)
                     frameCount += 1
-
+                    
                     if(frameCount >= self.originalFrames.count) {
                         semaphore.signal()
                     }
@@ -91,19 +89,18 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         }
         DispatchQueue.main.async {
             semaphore.wait()
-
+            
             print("Edited Images")
-
+            
             print(self.testArray)
-
+            
             var test = 0.0
             test = 1/30
-
+            
             self.timer = Timer.scheduledTimer(timeInterval: test, target: self, selector: #selector(self.timerAction), userInfo: nil, repeats: true)
-
+            
             semaphore.signal()
         }
-
     }
     
     // displays the videos from the testVideoArray that holds the edited images
@@ -115,7 +112,7 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         if(self.editedImageArray.count > timerCount) {
             print(editedImageArray[timerCount].hashValue)
             self.trainingAdviceLabel.text = String(timerCount)
-            self.trainingVideo.image = self.editedImageArray[timerCount]
+            self.trainingImageView.image = self.editedImageArray[timerCount]
         }
         else {
             timer.invalidate()
