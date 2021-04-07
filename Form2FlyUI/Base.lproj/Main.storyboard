@@ -682,9 +682,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QMC-s3-Ar8">
-                                        <rect key="frame" x="21" y="702" width="374" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QMC-s3-Ar8">
+                                        <rect key="frame" x="20" y="243" width="374" height="30"/>
                                         <color key="backgroundColor" name="Form2FlyBlue"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Watch Video"/>
@@ -698,7 +697,9 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Wvf-oQ-9lq" firstAttribute="top" secondItem="4Om-nD-wXS" secondAttribute="bottom" constant="18" id="1ep-3S-Dlc"/>
+                                    <constraint firstItem="QMC-s3-Ar8" firstAttribute="centerX" secondItem="Ii2-Ek-f2r" secondAttribute="centerX" id="4Fh-pY-0zZ"/>
                                     <constraint firstItem="WmV-Kz-S7G" firstAttribute="centerX" secondItem="Ii2-Ek-f2r" secondAttribute="centerX" id="4qd-RA-Ou3"/>
+                                    <constraint firstItem="QMC-s3-Ar8" firstAttribute="top" secondItem="eSp-2Y-Pau" secondAttribute="bottom" constant="25" id="6xC-jB-Nzk"/>
                                     <constraint firstItem="TeQ-hk-MRQ" firstAttribute="centerX" secondItem="Ii2-Ek-f2r" secondAttribute="centerX" id="Eoj-lR-tJp"/>
                                     <constraint firstItem="Wvf-oQ-9lq" firstAttribute="centerX" secondItem="Ii2-Ek-f2r" secondAttribute="centerX" id="FtT-R9-5hh"/>
                                     <constraint firstAttribute="bottom" secondItem="TeQ-hk-MRQ" secondAttribute="bottom" constant="679" id="Hgr-6O-gS3"/>
@@ -707,11 +708,13 @@
                                     <constraint firstItem="iFc-ey-W5H" firstAttribute="leading" secondItem="Ii2-Ek-f2r" secondAttribute="leading" constant="21" id="ZpN-QE-oLX"/>
                                     <constraint firstItem="TeQ-hk-MRQ" firstAttribute="centerX" secondItem="Ii2-Ek-f2r" secondAttribute="centerX" id="bFA-3t-zD5"/>
                                     <constraint firstAttribute="trailing" secondItem="Wvf-oQ-9lq" secondAttribute="trailing" constant="143.5" id="fOf-cj-w7t"/>
+                                    <constraint firstItem="G09-mn-NpK" firstAttribute="trailing" secondItem="QMC-s3-Ar8" secondAttribute="trailing" constant="20" id="iRf-FL-pjS"/>
                                     <constraint firstItem="eSp-2Y-Pau" firstAttribute="leading" secondItem="Ii2-Ek-f2r" secondAttribute="leading" constant="60" id="nlx-pG-U6r"/>
                                     <constraint firstItem="iFc-ey-W5H" firstAttribute="top" secondItem="TeQ-hk-MRQ" secondAttribute="bottom" constant="8" id="rfQ-h8-MRU"/>
                                     <constraint firstItem="WmV-Kz-S7G" firstAttribute="top" secondItem="Ii2-Ek-f2r" secondAttribute="top" constant="8" id="v6X-Nz-FQi"/>
                                     <constraint firstItem="4Om-nD-wXS" firstAttribute="centerX" secondItem="Ii2-Ek-f2r" secondAttribute="centerX" id="w4h-bM-een"/>
                                     <constraint firstItem="4Om-nD-wXS" firstAttribute="top" secondItem="WmV-Kz-S7G" secondAttribute="bottom" constant="8" id="wJ0-bc-SxE"/>
+                                    <constraint firstItem="QMC-s3-Ar8" firstAttribute="leading" secondItem="G09-mn-NpK" secondAttribute="leading" constant="20" id="xqA-5U-KcY"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="0Qk-MG-I3b"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="G09-mn-NpK"/>
@@ -742,7 +745,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="j4Z-Fr-i6R"/>
+        <segue reference="3uw-r3-2BO"/>
         <segue reference="uYf-rq-VTB"/>
         <segue reference="MzS-al-ieB"/>
         <segue reference="0Wi-eU-NDN"/>
