@@ -13,9 +13,7 @@ import MobileCoreServices
 
 class TrainingViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
-    static let share = TrainingViewController()
-    
-    @IBOutlet weak var myImgView: UIImageView!
+    @IBOutlet weak var trainingVideo: UIImageView!
     
     var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
     
@@ -24,22 +22,91 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     var testArray = [String]()
     
     var editedImageArray = [UIImage?]()
-    var timer = Timer()
     
+    var timer = Timer()
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        guard let url = URL(string: currentUser.vidURL) else { return }
+        video(url: url)
     }
     
     var originalFrames = [CGImage]()
     
+    func video(url: URL) {
+        let videoURL = url
+        //let selVid = info[UIImagePickerController.InfoKey.editedImage]
+        self.dismiss(animated: true, completion: nil)
+
+        let semaphore = DispatchSemaphore(value: 1)
+
+        DispatchQueue.main.async {
+            semaphore.wait()
+            print("Generating Frames")
+
+                    let video = AVURLAsset(url: videoURL, options: nil)
+
+                    let videoDuration = video.duration.seconds
+                    var time = 0.0
+                    while(time < videoDuration) {
+                        
+                        print("Processing: ", time)
+
+                        let img = self.generateFrame(videoURL: videoURL, frameTime: time)
+                        self.originalFrames.append(img!)
+
+                        time = time + (1/30)
+                
+            }
+            semaphore.signal()
+        }
+        DispatchQueue.main.async {
+            semaphore.wait()
+
+            print("Pose Detection in Progress")
+
+            let options = AccuratePoseDetectorOptions()
+            options.detectorMode = .stream
+            let poseDetector = PoseDetector.poseDetector(options: options)
+
+            var frameCount = 0
+
+            DispatchQueue.global(qos: .default).async {
+                for image in self.originalFrames {
+                    self.analyzeFrame(poseDetector: poseDetector, frame: VisionImage(image: UIImage(cgImage: image)), currentTime: 0.0, cgimage: image)
+                    frameCount += 1
+
+                    if(frameCount >= self.originalFrames.count) {
+                        semaphore.signal()
+                    }
+                }
+            }
+        }
+        DispatchQueue.main.async {
+            semaphore.wait()
+
+            print("Edited Images")
+
+            print(self.testArray)
+
+            var test = 0.0
+            test = 1/30
+
+            self.timer = Timer.scheduledTimer(timeInterval: test, target: self, selector: #selector(self.timerAction), userInfo: nil, repeats: true)
+
+            semaphore.signal()
+        }
+
+    }
+    
+    // displays the videos from the testVideoArray that holds the edited images
     var timerCount = 0
     @objc func timerAction() {
         
         print("Frame: ", timerCount)
         if(self.editedImageArray.count > timerCount) {
-            self.myImgView.image = self.editedImageArray[timerCount]
+            print(editedImageArray[timerCount].hashValue)
+            self.trainingVideo.image = self.editedImageArray[timerCount]
         }
         else {
             timer.invalidate()
@@ -65,24 +132,7 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         }
     }
     
-    // allows user to pick the video they want, once the user picks it will be handled by the imagePickerController
-    @IBAction func watchVidButton(_ sender: Any) {
-        let videoPicker = UIImagePickerController()
-        videoPicker.modalPresentationStyle = .currentContext
-        videoPicker.videoQuality = .typeHigh
-        videoPicker.delegate = self
-        videoPicker.sourceType = .photoLibrary
-        videoPicker.mediaTypes = [kUTTypeMovie as String]
-        videoPicker.allowsEditing = true
-        
-        // If we want to avoid compression
-        //if #available(iOS 11.0, *) {
-          //  videoPicker.videoExportPreset = AVAssetExportPresetPassthrough
-        //}
-        
-        self.present(videoPicker, animated: true, completion: nil)
-    } //end watchVidBtn
-    
+
     // analyze visionimage for poses and save angle result to dictionary
     func analyzeFrame(poseDetector: PoseDetector, frame: VisionImage, currentTime: Double, cgimage: CGImage) {
 
@@ -145,8 +195,8 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
 //                context?.setAlpha(0.5)
 //                context?.setLineWidth(10.0)
                
-          
-                    context?.setStrokeColor(UIColor.green.cgColor)
+                
+                    context?.setStrokeColor(UIColor.red.cgColor)
                     context?.setAlpha(0.5)
                     context?.setLineWidth(10.0)
                     
@@ -183,6 +233,7 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
                     self.checkFrameLike(rightHeelLM, context!)
                     self.checkFrameLike(leftToeLM, context!)
                     self.checkFrameLike(rightToeLM, context!)
+            
                 
 
 
@@ -194,38 +245,7 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
                 editedImageArray.append(myImage)
                 
                 
-                // Angle Calculations
-                let leftWristVertexAngle = self.calculateAngle(vertex: leftWristLM.position, p2: leftElbowLM.position, p3: leftIndexFingerLM.position)
-                let leftElbowVertexAngle = self.calculateAngle(vertex: leftElbowLM.position, p2: leftShoulderLM.position, p3: leftWristLM.position)
-                let leftShoulderVertexAngle = self.calculateAngle(vertex: leftShoulderLM.position, p2: leftElbowLM.position, p3: leftHipLM.position)
-                let leftHipVertexAngle = self.calculateAngle(vertex: leftHipLM.position, p2: leftShoulderLM.position, p3: leftKneeLM.position)
-                let leftKneeVertexAngle = self.calculateAngle(vertex: leftKneeLM.position, p2: leftHipLM.position, p3: leftAnkleLM.position)
-                let leftAnkleVertexAngle = self.calculateAngle(vertex: leftAnkleLM.position, p2: leftKneeLM.position, p3: leftToeLM.position)
-                // Experimental Calculation this semi tells us rotation
-                let leftWristRotAngle = self.calculateWristRotation(vertex: leftPinkyFingerLM.position, p2X: leftPinkyFingerLM.position.x, p2Y: leftThumbLM.position.y, p3: leftThumbLM.position)
-                
-                let leftHalfData = leftWristVertexAngle + " " + leftElbowVertexAngle + " " + leftShoulderVertexAngle + " " + leftHipVertexAngle + " " + leftKneeVertexAngle + " " + leftAnkleVertexAngle + " " + leftWristRotAngle
-                
-                let rightWristVertexAngle = self.calculateAngle(vertex: rightWristLM.position, p2: rightElbowLM.position, p3: rightIndexFingerLM.position)
-                let rightElbowVertexAngle = self.calculateAngle(vertex: rightElbowLM.position, p2: rightShoulderLM.position, p3: rightWristLM.position)
-                let rightShoulderVertexAngle = self.calculateAngle(vertex: rightShoulderLM.position, p2: rightElbowLM.position, p3: rightHipLM.position)
-                let rightHipVertexAngle = self.calculateAngle(vertex: rightHipLM.position, p2: rightShoulderLM.position, p3: rightKneeLM.position)
-                let rightKneeVertexAngle = self.calculateAngle(vertex: rightKneeLM.position, p2: rightHipLM.position, p3: rightAnkleLM.position)
-                let rightAnkleVertexAngle = self.calculateAngle(vertex: rightAnkleLM.position, p2: rightKneeLM.position, p3: rightToeLM.position)
-                // Experimental Calculation this semi tells us rotation
-                let rightWristRotAngle = self.calculateWristRotation(vertex: leftPinkyFingerLM.position, p2X: leftPinkyFingerLM.position.x, p2Y: leftThumbLM.position.y, p3: leftThumbLM.position)
-                
-                let rightHalfData = rightWristVertexAngle + " " + rightElbowVertexAngle + " " + rightShoulderVertexAngle + " " + rightHipVertexAngle + " " + rightKneeVertexAngle + " " + rightAnkleVertexAngle + " " +  rightWristRotAngle
-                
-                let outputData = leftHalfData + " " + rightHalfData //+ "\n"
-                
-                testArray.append(outputData)
-
-//                print("data in the test array")
-//                for element in testArray {
-//                  print (element)
-//                }
-                //self.myImgView.image = myImage
+               
 
             }
     }
@@ -244,44 +264,15 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     }//end checkFrameLike
 //
 //
-    func calculateAngle(vertex: Vision3DPoint, p2: Vision3DPoint, p3: Vision3DPoint ) -> String {
-        let vertexX = vertex.x
-        let vertexY = vertex.y
-        let p2X = p2.x
-        let p2Y = p2.y
-        let p3X = p3.x
-        let p3Y = p3.y
-
-        let p12 = ((pow((Double(vertexX) - Double(p2X)), 2)) + (pow((Double(vertexY) - Double(p2Y)), 2))).squareRoot()
-        let p13 = ((pow((Double(vertexX) - Double(p3X)), 2)) + (pow((Double(vertexY) - Double(p3Y)), 2))).squareRoot()
-        let p23 = ((pow((Double(p2X) - Double(p3X)), 2)) + (pow((Double(p2Y) - Double(p3Y)), 2))).squareRoot()
-
-        let dividend = Double(pow(p12,2) + pow(p13, 2) - pow(p23,2))
-        let divisor = Double(2 * p12 * p13)
-
-        let angleRadians = acos(dividend / divisor)
-        let angleDegrees = angleRadians * (Double(180) / Double(CGFloat.pi))
-
-        return String(angleDegrees)
-    }
-//
-    func calculateWristRotation(vertex: Vision3DPoint, p2X: CGFloat, p2Y: CGFloat, p3: Vision3DPoint ) -> String {
-        let vertexX = vertex.x
-        let vertexY = vertex.y
-        let p3X = p3.x
-        let p3Y = p3.y
-
-        let p12 = ((pow((Double(vertexX) - Double(p2X)), 2)) + (pow((Double(vertexY) - Double(p2Y)), 2))).squareRoot()
-        let p13 = ((pow((Double(vertexX) - Double(p3X)), 2)) + (pow((Double(vertexY) - Double(p3Y)), 2))).squareRoot()
-        let p23 = ((pow((Double(p2X) - Double(p3X)), 2)) + (pow((Double(p2Y) - Double(p3Y)), 2))).squareRoot()
-
-        let dividend = Double(pow(p12,2) + pow(p13, 2) - pow(p23,2))
-        let divisor = Double(2 * p12 * p13)
-
-        let angleRadians = acos(dividend / divisor)
-        let angleDegrees = angleRadians * (Double(180) / Double(CGFloat.pi))
-
-        return String(angleDegrees)
-    }
-
+    
 }
+ 
+    
+    
+
+
+
+    
+
+
+

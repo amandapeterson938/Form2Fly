@@ -128,15 +128,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             
     } // end imagePickerController didFinishPickingMediaWithInfo
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        currentUser.vidURL = userVideoURL
-        currentUser.dominantHand = currentUser.dominantHand
-            let destinationVC = segue.destination as! TrainingViewController
-            
-            destinationVC.currentUser = currentUser
-    }
+
     
     func videoEditorControllerDidCancel(_ editor: UIVideoEditorController) {
         editor.dismiss(animated: true, completion: nil)
@@ -259,6 +251,8 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             // Opening new view (Training)
             if let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TrainingViewController") as? TrainingViewController {
                 
+                self.currentUser.vidURL = self.userVideoURL
+                newViewController.currentUser = self.currentUser
                 
                     newViewController.modalPresentationStyle = .currentContext
                     self.navigationController?.pushViewController(newViewController, animated: true)
