@@ -386,11 +386,11 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             var closestDifference = 0.0
             var i = 0
             for professional in professionalArray {
-                
+                print(professional.proName, professional.proThrowType, currentUser.throwType)
                 if(professional.proThrowType == currentUser.throwType) {
                     let difference = fabs(professional.proWeightedScore - weighted_sum)
                     
-                    if(i == 0 || difference < closestDifference) {
+                    if(i == 0 || difference < closestDifference || closestProIndex == nil) {
                         closestProIndex = i
                         closestDifference = difference
                     }

@@ -40,18 +40,13 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         super.viewDidLoad()
         guard let url = URL(string: currentUser.vidURL) else { return }
         
-       // print("trainU", currentUser.vidURL, "done")
+        self.trainingAdviceLabel.text = ""
        
         analyzeVideoURL(videoURL: url)
         
-        //self.trainingAdviceLabel.text = "Hello World!"
         problemJoints.append(contentsOf: TrainingViewController.share.userProblemAreas)
       
         self.startLoadingObjects()
-        
-        
-        if let path = Bundle.main.path(forResource: "personVideo", ofType: "mov") {
-        }
         
     }
     
@@ -73,7 +68,10 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
                 print("Processing: ", time)
                 
                 let img = self.generateFrame(videoURL: videoURL, frameTime: time)
-                self.originalFrames.append(img!)
+                
+                if (img != nil) {
+                    self.originalFrames.append(img!)
+                }
                 
                 time = time + (1/30)
             }
@@ -139,17 +137,17 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     // Generates a frame (CGImage) from a video at a certain time
     func generateFrame(videoURL : URL, frameTime:Float64) -> CGImage? {
         let asset = AVAsset(url: videoURL)
-        
-        let assetImageGenerate = AVAssetImageGenerator(asset: asset)
-        assetImageGenerate.appliesPreferredTrackTransform = true
-        assetImageGenerate.requestedTimeToleranceAfter = CMTime.zero;
-        assetImageGenerate.requestedTimeToleranceBefore = CMTime.zero;
+        let generator = AVAssetImageGenerator(asset: asset)
+        generator.appliesPreferredTrackTransform = true
+        generator.requestedTimeToleranceBefore = CMTime.zero;
+        generator.requestedTimeToleranceAfter = CMTime.zero;
         
         let time = CMTimeMakeWithSeconds(frameTime, preferredTimescale: 600)
         
-        if let img = try? assetImageGenerate.copyCGImage(at:time, actualTime: nil) {
-            return img
-        } else {
+        if let image = try? generator.copyCGImage(at: time, actualTime: nil) {
+            return image
+        }
+        else {
             return nil
         }
     }

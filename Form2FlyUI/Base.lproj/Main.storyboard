@@ -604,19 +604,41 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E0w-Nw-QY9">
                                 <rect key="frame" x="20" y="64" width="374" height="714"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEd-tq-PtL">
+                                <rect key="frame" x="364" y="783" width="30" height="25"/>
+                                <color key="tintColor" name="Form2FlyBlue"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="house" catalog="system" symbolScale="large"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c09-1Y-4Os">
+                                <rect key="frame" x="20" y="782" width="22" height="26"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="tintColor" name="Form2FlyBlue"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="arrow.counterclockwise" catalog="system" symbolScale="large"/>
+                                </state>
+                                <connections>
+                                    <segue destination="SWq-uZ-kxA" kind="presentation" modalPresentationStyle="fullScreen" id="r3W-yW-xLX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="upm-8W-JzY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="c09-1Y-4Os" firstAttribute="leading" secondItem="upm-8W-JzY" secondAttribute="leading" constant="20" id="4YN-E6-Nc2"/>
                             <constraint firstItem="bXT-90-eVz" firstAttribute="top" secondItem="upm-8W-JzY" secondAttribute="top" id="9Gj-E6-AUD"/>
                             <constraint firstItem="E0w-Nw-QY9" firstAttribute="centerX" secondItem="Uwx-FV-him" secondAttribute="centerX" id="9Jg-JS-WRq"/>
                             <constraint firstItem="E0w-Nw-QY9" firstAttribute="top" secondItem="bXT-90-eVz" secondAttribute="bottom" constant="8" id="Egs-dO-s9a"/>
                             <constraint firstItem="bXT-90-eVz" firstAttribute="leading" secondItem="upm-8W-JzY" secondAttribute="leading" constant="20" id="Faa-Dl-6jo"/>
+                            <constraint firstItem="upm-8W-JzY" firstAttribute="trailing" secondItem="AEd-tq-PtL" secondAttribute="trailing" constant="20" id="Ium-ct-Ujp"/>
                             <constraint firstItem="upm-8W-JzY" firstAttribute="trailing" secondItem="bXT-90-eVz" secondAttribute="trailing" constant="20" id="Jf0-1M-XEP"/>
                             <constraint firstItem="E0w-Nw-QY9" firstAttribute="centerY" secondItem="Uwx-FV-him" secondAttribute="centerY" id="k5X-PH-0Dc"/>
                             <constraint firstItem="bXT-90-eVz" firstAttribute="centerX" secondItem="Uwx-FV-him" secondAttribute="centerX" id="kTD-oY-WQa"/>
                             <constraint firstItem="E0w-Nw-QY9" firstAttribute="leading" secondItem="upm-8W-JzY" secondAttribute="leading" constant="20" id="mdd-gO-ccz"/>
+                            <constraint firstItem="c09-1Y-4Os" firstAttribute="bottom" secondItem="upm-8W-JzY" secondAttribute="bottom" id="o8K-0t-flP"/>
                             <constraint firstItem="upm-8W-JzY" firstAttribute="trailing" secondItem="E0w-Nw-QY9" secondAttribute="trailing" constant="20" id="syk-J2-ncz"/>
+                            <constraint firstItem="AEd-tq-PtL" firstAttribute="bottom" secondItem="upm-8W-JzY" secondAttribute="bottom" id="vkz-cm-02O"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="555-0d-L9j"/>
@@ -740,12 +762,14 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="uYf-rq-VTB"/>
-        <segue reference="MzS-al-ieB"/>
-        <segue reference="0Wi-eU-NDN"/>
+        <segue reference="cCs-ih-kNM"/>
+        <segue reference="r3W-yW-xLX"/>
         <segue reference="NOd-Vc-Ib0"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrow.counterclockwise" catalog="system" width="115" height="128"/>
         <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="house" catalog="system" width="128" height="106"/>
         <image name="image2.png" width="1046" height="295"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
