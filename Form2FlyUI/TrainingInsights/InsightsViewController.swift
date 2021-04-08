@@ -10,6 +10,7 @@ import UIKit
 class InsightsViewController: UIViewController {
     static let shared = InsightsViewController()
     
+    
     @IBOutlet weak var usersProfessionalName: UILabel!
     @IBOutlet weak var usersOverallSimilarity: UILabel!
     @IBOutlet weak var usersOverallProb: UILabel!
@@ -24,7 +25,7 @@ class InsightsViewController: UIViewController {
     var usersProName = ""
     var usersOverallSim = ""
     var usersProbAreas = ""
-
+    
     @IBOutlet weak var viewTrainingButton: UIButton!
     
 

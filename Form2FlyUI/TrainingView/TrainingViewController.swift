@@ -13,7 +13,7 @@ import MobileCoreServices
 
 class TrainingViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
-    //static let shared = TrainingViewController()
+    static let share = TrainingViewController()
 
   
     @IBOutlet weak var trainingAdviceLabel: UILabel!
@@ -21,7 +21,9 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     
     var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
     
-    var uservideourl = ""
+    var userProblemAreas = [String]()
+    
+    var problemJoints = [String]()
     
     var testArray = [String]()
     
@@ -38,7 +40,10 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         analyzeVideoURL(videoURL: url)
         
         self.trainingAdviceLabel.text = "Hello World!"
-        
+        problemJoints.append(contentsOf: TrainingViewController.share.userProblemAreas)
+      
+        print(problemJoints)
+        print(problemJoints.count)
     }
     
     var originalFrames = [CGImage]()
@@ -201,6 +206,7 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
                     context?.setAlpha(0.5)
                     context?.setLineWidth(10.0)
 
+                    
                     self.checkFrameLike(noseLM, context!)
                     self.checkFrameLike(leftEyeInnerLM, context!)
                     self.checkFrameLike(leftEyeLM, context!)

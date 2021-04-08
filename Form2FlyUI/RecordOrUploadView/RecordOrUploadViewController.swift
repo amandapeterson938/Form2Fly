@@ -576,11 +576,15 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             else {
                 if(val < 76.0) {
                     worstAngleString += abrvDictionary[key]! + ": " + String(format: "%.2f", val) + " %\n"
+                    TrainingViewController.share.userProblemAreas += [key]
+                    
                 }
             }
         }
         
         InsightsViewController.shared.usersProbAreas = worstAngleString
+        
+        
         
         print(angleSimilarity)
     }
