@@ -13,16 +13,16 @@ class professionalPlayers {
     var professionals: [Professional] = []
     
     public init() {
-        let proPMcBeth = Professional(proName: "P. McBeth", proThrowType: "backhand", proDominantHand: "right", proData: pMcBeth, proWeightedScore: 9588.502678121475, fileURLPath: "")
-        let proJKoling = Professional(proName: "J. Koling", proThrowType: "forehand", proDominantHand: "right", proData: jKoling, proWeightedScore: 5476.203482207438, fileURLPath: "")
-        let proEMcMahon = Professional(proName: "E. McMahon", proThrowType: "forehand", proDominantHand: "right", proData: eMcMahon, proWeightedScore: 4269.00394567128, fileURLPath: "")
-        let proSWithers = Professional(proName: "S. Withers", proThrowType: "backhand", proDominantHand: "right", proData: sWithers, proWeightedScore: 8514.528468886949, fileURLPath: "")
-        let proZMelton = Professional(proName: "Z. Melton", proThrowType: "backhand", proDominantHand: "left", proData: zMelton, proWeightedScore: 10202.647148211377, fileURLPath: "")
-        let proRFrescura = Professional(proName: "R. Frescura", proThrowType: "backhand", proDominantHand: "left", proData: rFrescura, proWeightedScore: 13092.44929987701, fileURLPath: "")
-        let proOScoggins = Professional(proName: "O. Scoggins", proThrowType: "backhand", proDominantHand: "right", proData: oScoggins, proWeightedScore: 16880.795917341216, fileURLPath: "")
-        let proCClemons = Professional(proName: "C. Clemons", proThrowType: "forehand", proDominantHand: "left", proData: cClemons, proWeightedScore: 12064.194525047642, fileURLPath: "")
-        let proEOakley = Professional(proName: "E. Oakley", proThrowType: "forehand", proDominantHand: "right", proData: eOakley, proWeightedScore: 18432.285840686392, fileURLPath: "")
-        let proCDickerson = Professional(proName: "C. Dickerson", proThrowType: "backhand", proDominantHand: "right", proData: cDickerson, proWeightedScore: 9704.347355282414, fileURLPath: "")
+        let proPMcBeth = Professional(proName: "P. McBeth", proThrowType: "Backhand", proDominantHand: "right", proData: pMcBeth, proWeightedScore: 9588.502678121475, fileURLPath: "")
+        let proJKoling = Professional(proName: "J. Koling", proThrowType: "Forehand", proDominantHand: "right", proData: jKoling, proWeightedScore: 5476.203482207438, fileURLPath: "")
+        let proEMcMahon = Professional(proName: "E. McMahon", proThrowType: "Forehand", proDominantHand: "right", proData: eMcMahon, proWeightedScore: 4269.00394567128, fileURLPath: "")
+        let proSWithers = Professional(proName: "S. Withers", proThrowType: "Backhand", proDominantHand: "right", proData: sWithers, proWeightedScore: 8514.528468886949, fileURLPath: "")
+        let proZMelton = Professional(proName: "Z. Melton", proThrowType: "Backhand", proDominantHand: "left", proData: zMelton, proWeightedScore: 10202.647148211377, fileURLPath: "")
+        let proRFrescura = Professional(proName: "R. Frescura", proThrowType: "Backhand", proDominantHand: "left", proData: rFrescura, proWeightedScore: 13092.44929987701, fileURLPath: "")
+        let proOScoggins = Professional(proName: "O. Scoggins", proThrowType: "Backhand", proDominantHand: "right", proData: oScoggins, proWeightedScore: 16880.795917341216, fileURLPath: "")
+        let proCClemons = Professional(proName: "C. Clemons", proThrowType: "Forehand", proDominantHand: "left", proData: cClemons, proWeightedScore: 12064.194525047642, fileURLPath: "")
+        let proEOakley = Professional(proName: "E. Oakley", proThrowType: "Forehand", proDominantHand: "right", proData: eOakley, proWeightedScore: 18432.285840686392, fileURLPath: "")
+        let proCDickerson = Professional(proName: "C. Dickerson", proThrowType: "Backhand", proDominantHand: "right", proData: cDickerson, proWeightedScore: 9704.347355282414, fileURLPath: "")
         
         
         self.professionals.append(proPMcBeth)

@@ -28,18 +28,7 @@ class InsightsViewController: UIViewController {
     
 
     @IBAction func trainingAction(_ sender: Any) {
-        // Opening new view (Training)
-//        if let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TrainingViewController") as? TrainingViewController {
-//
-//            newViewController.currentUser = self.currentUser
-//
-//                newViewController.modalPresentationStyle = .currentContext
-//                self.navigationController?.pushViewController(newViewController, animated: true)
-//
-//                self.navigationController?.popViewController(animated: false)
-//
-//        }
-        //TrainingViewController.shared.currentUser = self.currentUser
+        //code
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -58,26 +47,12 @@ class InsightsViewController: UIViewController {
         
         self.viewTrainingButton.layer.cornerRadius = 12
         
-        print("userIns: ", currentUser.vidURL, "done")
-        
         usersOverallProb.numberOfLines = 0
-
-        // Do any additional setup after loading the view.
         
         usersProfessionalName.text = InsightsViewController.shared.usersProName
         usersOverallSimilarity.text = InsightsViewController.shared.usersOverallSim
         usersOverallProb.text = InsightsViewController.shared.usersProbAreas
         
-//        let storageOperation = Amplify.Storage.downloadData(key: "myKey")
-//        let progressSink = storageOperation.progressPublisher.sink { progress in print("Progress: \(progress)") }
-//        let resultSink = storageOperation.resultPublisher.sink {
-//            if case let .failure(storageError) = $0 {
-//                print("Failed: \(storageError.errorDescription). \(storageError.recoverySuggestion)")
-//            }
-//        }
-//        receiveValue: { data in
-//            print("Completed: \(data)")
-//        }
         
     }
 }

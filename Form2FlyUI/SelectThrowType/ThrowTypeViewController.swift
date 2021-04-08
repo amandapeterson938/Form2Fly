@@ -34,7 +34,7 @@ class ThrowTypeViewController: UIViewController {
             destinationVC.currentUser = currentUser
         }
         else if (segue.identifier == "backhandToUploadSegue"){
-            currentUser.throwType = "backhand"
+            currentUser.throwType = "Backhand"
             
             let destinationVC = segue.destination as! RecordOrUploadViewController
             

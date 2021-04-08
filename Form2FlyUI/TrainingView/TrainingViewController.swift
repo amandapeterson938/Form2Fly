@@ -49,8 +49,6 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
       
         self.startLoadingObjects()
         
-       
-        analyzeVideoURL(videoURL: url)
         
         if let path = Bundle.main.path(forResource: "personVideo", ofType: "mov") {
         }
