@@ -42,11 +42,11 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         //self.trainingAdviceLabel.text = "Hello World!"
         problemJoints.append(contentsOf: TrainingViewController.share.userProblemAreas)
       
-        print(problemJoints[0])
-        print(problemJoints[1])
-        print(problemJoints[2])
-        print(problemJoints)
-        print(problemJoints.count)
+//        print(problemJoints[0])
+//        print(problemJoints[1])
+//        print(problemJoints[2])
+//        print(problemJoints)
+//        print(problemJoints.count)
     }
     
     var originalFrames = [CGImage]()
@@ -203,12 +203,13 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
 
                     UIGraphicsBeginImageContext(imgDr.size)
                     imgDr.draw(at: CGPoint.zero)
+//                    let context = UIGraphicsGetCurrentContext()
+//
+//
+//                    context?.setAlpha(0.5)
+//                    context?.setLineWidth(10.0)
+
                     let context = UIGraphicsGetCurrentContext()
-
-                   
-                    context?.setAlpha(0.5)
-                    context?.setLineWidth(10.0)
-
                     
                     self.checkFrameLike(noseLM, context!, abrev: "")
                     self.checkFrameLike(leftEyeInnerLM, context!, abrev: "")
@@ -259,48 +260,37 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     // Check if the landmark.inFrameLikelihood is > 0.5 if it is add the circle
     func checkFrameLike(_ landMark: PoseLandmark, _ lmContext: CGContext, abrev: String) {
         if landMark.inFrameLikelihood > 0.5 {
+            
             let landMarkPos = landMark.position
             
-            let jointAbrev = abrev
             
-            let joint0 = problemJoints[0]
-            let joint1 = problemJoints[1]
-            let joint2 = problemJoints[2]
-            let joint3 = problemJoints[3]
-            let joint4 = problemJoints[4]
-            let joint5 = problemJoints[5]
-           
-            
- 
-            if jointAbrev == joint0 {
-                lmContext.setStrokeColor(UIColor.blue.cgColor)
-            } else if jointAbrev == joint1 {
-                lmContext.setStrokeColor(UIColor.blue.cgColor)
-            } else if jointAbrev == joint2 {
-                lmContext.setStrokeColor(UIColor.blue.cgColor)
-            } else if jointAbrev == joint3 {
-                lmContext.setStrokeColor(UIColor.blue.cgColor)
-            } else if jointAbrev == joint4 {
-                lmContext.setStrokeColor(UIColor.blue.cgColor)
-            } else if jointAbrev == joint5 {
-                lmContext.setStrokeColor(UIColor.blue.cgColor)
-            } else {
-                lmContext.setStrokeColor(UIColor.green.cgColor)
+            if(problemJoints.contains(abrev)) {
+                let bounds = CGRect(x: landMarkPos.x, y: landMarkPos.y, width: 10, height: 10)
+                lmContext.saveGState()
+                lmContext.setFillColor(UIColor.red.cgColor)
+                lmContext.addEllipse(in: bounds)
+                lmContext.drawPath(using: .fill)
+                lmContext.restoreGState()
             }
-           
-            
-            lmContext.addEllipse(in: CGRect(x: landMarkPos.x, y: landMarkPos.y, width: 10, height: 10))
-            //print("IN FRAME")
+            else {
+                let bounds = CGRect(x: landMarkPos.x, y: landMarkPos.y, width: 10, height: 10)
+                lmContext.saveGState()
+                lmContext.setFillColor(UIColor.green.cgColor)
+                lmContext.addEllipse(in: bounds)
+                lmContext.drawPath(using: .fill)
+                lmContext.restoreGState()
+            }
         }//end if
         else {
             //print("OUT OF FRAME")
         }
+        
     }//end checkFrameLike
 //
 //
     
 }
- 
+
     
     
 
