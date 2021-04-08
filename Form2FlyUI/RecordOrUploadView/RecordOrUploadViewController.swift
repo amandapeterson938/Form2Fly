@@ -119,6 +119,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             videoEdit.delegate = self
             if let videoURL = (info[UIImagePickerController.InfoKey.mediaURL] as? URL) {
                 videoEdit.videoPath = videoURL.path
+                self.userVideoURL = videoURL.absoluteString
             }
             
             self.present(videoEdit, animated: true, completion: nil)

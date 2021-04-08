@@ -40,6 +40,8 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         super.viewDidLoad()
         guard let url = URL(string: currentUser.vidURL) else { return }
         
+        print("CURRENT URL: ", currentUser.vidURL)
+        
         self.trainingAdviceLabel.text = ""
        
         analyzeVideoURL(videoURL: url)
