@@ -610,6 +610,9 @@
                                 <state key="normal">
                                     <imageReference key="image" image="house" catalog="system" symbolScale="large"/>
                                 </state>
+                                <connections>
+                                    <segue destination="SWq-uZ-kxA" kind="presentation" modalPresentationStyle="fullScreen" id="Gn2-cO-d7v"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c09-1Y-4Os">
                                 <rect key="frame" x="20" y="782" width="22" height="26"/>
@@ -618,9 +621,6 @@
                                 <state key="normal">
                                     <imageReference key="image" image="arrow.counterclockwise" catalog="system" symbolScale="large"/>
                                 </state>
-                                <connections>
-                                    <segue destination="SWq-uZ-kxA" kind="presentation" modalPresentationStyle="fullScreen" id="r3W-yW-xLX"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="upm-8W-JzY"/>
@@ -763,7 +763,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="uYf-rq-VTB"/>
         <segue reference="cCs-ih-kNM"/>
-        <segue reference="r3W-yW-xLX"/>
+        <segue reference="Gn2-cO-d7v"/>
         <segue reference="NOd-Vc-Ib0"/>
     </inferredMetricsTieBreakers>
     <resources>
