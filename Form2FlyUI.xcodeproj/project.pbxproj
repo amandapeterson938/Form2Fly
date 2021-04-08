@@ -43,7 +43,6 @@
 		06337B3F87F045DE92A98793 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		6D67DDECD2F818414CE87D54 /* Pods-Form2FlyUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Form2FlyUI.release.xcconfig"; path = "Target Support Files/Pods-Form2FlyUI/Pods-Form2FlyUI.release.xcconfig"; sourceTree = "<group>"; };
 		846F61094318C7B276554B50 /* Pods_Form2FlyUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Form2FlyUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D31DA01D984491C89F978F6 /* amplifytools.xcconfig */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.xcconfig; path = amplifytools.xcconfig; sourceTree = "<group>"; };
 		A27F61EE58A447C69EE31E8A /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = awsconfiguration.json; sourceTree = "<group>"; };
 		CE9A4C8048AAF7D8EB3AB9CA /* Pods-Form2FlyUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Form2FlyUI.debug.xcconfig"; path = "Target Support Files/Pods-Form2FlyUI/Pods-Form2FlyUI.debug.xcconfig"; sourceTree = "<group>"; };
 		F00107AF25EC3BEF00D4A383 /* TrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
@@ -169,7 +168,6 @@
 		F0AEDCCF25E82E0100AAF1AA = {
 			isa = PBXGroup;
 			children = (
-				F09EC019261551A300E289A4 /* CreateAccount */,
 				F0DAB6892612DBBF00417C4F /* Backend.swift */,
 				F0DAB6832612D9BE00417C4F /* amplifyconfiguration.json */,
 				F0DAB6862612D9C800417C4F /* awsconfiguration.json */,
@@ -192,6 +190,7 @@
 		F0AEDCDA25E82E0100AAF1AA /* Form2FlyUI */ = {
 			isa = PBXGroup;
 			children = (
+				F09EC019261551A300E289A4 /* CreateAccount */,
 				F003C529261B7EA5001415E0 /* TrainingInsights */,
 				F00107AE25EC3BDC00D4A383 /* TrainingView */,
 				F031338C25EBE271002C649F /* RecordOrUploadView */,
@@ -244,7 +243,6 @@
 		F613B65231974B7A9AB785AD /* AmplifyConfig */ = {
 			isa = PBXGroup;
 			children = (
-				9D31DA01D984491C89F978F6 /* amplifytools.xcconfig */,
 				06337B3F87F045DE92A98793 /* amplifyconfiguration.json */,
 				A27F61EE58A447C69EE31E8A /* awsconfiguration.json */,
 			);

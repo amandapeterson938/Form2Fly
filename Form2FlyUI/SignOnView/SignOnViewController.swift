@@ -13,6 +13,7 @@ class SignOnViewController: UIViewController {
 
     @IBOutlet weak var usernameTxt: UITextField!
     @IBOutlet weak var passwordTxt: UITextField!
+    @IBOutlet weak var logoImageView: UIImageView!
     
     let defaults = UserDefaults.standard
     
@@ -21,6 +22,12 @@ class SignOnViewController: UIViewController {
         super.viewDidLoad()
         // Round the edges of the buttons
         signOnBtn.layer.cornerRadius = 12
+        
+        if self.traitCollection.userInterfaceStyle == .dark {
+            self.logoImageView.image = UIImage(named: "form2fly_logo_glow (2).png")
+        } else {
+            self.logoImageView.image = UIImage(named: "image2.png")
+        }
         
 //        let isSignedIn = defaults.bool(forKey: "isSignedIn")
 //        print(isSignedIn)
