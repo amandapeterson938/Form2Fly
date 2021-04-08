@@ -20,8 +20,6 @@ class InsightsViewController: UIViewController {
     
     var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
     
-    var platypus = 0.2
-    
     var usersProName = ""
     var usersOverallSim = ""
     var usersProbAreas = ""
@@ -58,6 +56,8 @@ class InsightsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.viewTrainingButton.layer.cornerRadius = 12
+        
         print("userIns: ", currentUser.vidURL, "done")
         
         usersOverallProb.numberOfLines = 0
@@ -67,9 +67,6 @@ class InsightsViewController: UIViewController {
         usersProfessionalName.text = InsightsViewController.shared.usersProName
         usersOverallSimilarity.text = InsightsViewController.shared.usersOverallSim
         usersOverallProb.text = InsightsViewController.shared.usersProbAreas
-        
-        
-        
         
 //        let storageOperation = Amplify.Storage.downloadData(key: "myKey")
 //        let progressSink = storageOperation.progressPublisher.sink { progress in print("Progress: \(progress)") }

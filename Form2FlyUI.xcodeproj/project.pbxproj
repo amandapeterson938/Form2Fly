@@ -168,7 +168,6 @@
 		F0AEDCCF25E82E0100AAF1AA = {
 			isa = PBXGroup;
 			children = (
-				F09EC019261551A300E289A4 /* CreateAccount */,
 				F0DAB6892612DBBF00417C4F /* Backend.swift */,
 				F0DAB6832612D9BE00417C4F /* amplifyconfiguration.json */,
 				F0DAB6862612D9C800417C4F /* awsconfiguration.json */,
@@ -191,6 +190,7 @@
 		F0AEDCDA25E82E0100AAF1AA /* Form2FlyUI */ = {
 			isa = PBXGroup;
 			children = (
+				F09EC019261551A300E289A4 /* CreateAccount */,
 				F003C529261B7EA5001415E0 /* TrainingInsights */,
 				F00107AE25EC3BDC00D4A383 /* TrainingView */,
 				F031338C25EBE271002C649F /* RecordOrUploadView */,

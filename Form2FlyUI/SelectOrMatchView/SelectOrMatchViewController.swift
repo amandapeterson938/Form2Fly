@@ -12,6 +12,9 @@ class SelectOrMatchViewController: UIViewController {
     @IBOutlet weak var matchToProfessionalBtn: UIButton!
     @IBOutlet weak var selectProfessionalBtn: UIButton!
     @IBOutlet weak var dominantHandChoice: UISegmentedControl!
+    @IBOutlet weak var logoImageView: UIImageView!
+    
+    
     
     var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
     
@@ -20,6 +23,12 @@ class SelectOrMatchViewController: UIViewController {
         // Round the edges of the buttons
         matchToProfessionalBtn.layer.cornerRadius = 12
         selectProfessionalBtn.layer.cornerRadius = 12
+        
+        if self.traitCollection.userInterfaceStyle == .dark {
+            self.logoImageView.image = UIImage(named: "form2fly_logo_glow (2).png")
+        } else {
+            self.logoImageView.image = UIImage(named: "image2.png")
+        }
         
         // set default as right hand
         currentUser.dominantHand = "right"

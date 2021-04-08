@@ -15,9 +15,10 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     
     static let share = TrainingViewController()
 
-  
     @IBOutlet weak var trainingAdviceLabel: UILabel!
     @IBOutlet weak var trainingImageView: UIImageView!
+    
+    let abrvArr:[String] = ["lwr", "lel", "lsh", "lhi", "lkn", "lan", "lro", "rwr", "rel", "rsh", "rhi", "rkn", "ran", "rro"]
     
     var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
     
@@ -30,6 +31,10 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     var editedImageArray = [UIImage?]()
     
     var timer = Timer()
+    
+    // Loading objects
+    var blackSquare = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 0, height: 0))
+    var spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,11 +47,14 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         //self.trainingAdviceLabel.text = "Hello World!"
         problemJoints.append(contentsOf: TrainingViewController.share.userProblemAreas)
       
-//        print(problemJoints[0])
-//        print(problemJoints[1])
-//        print(problemJoints[2])
-//        print(problemJoints)
-//        print(problemJoints.count)
+        self.startLoadingObjects()
+        
+       
+        analyzeVideoURL(videoURL: url)
+        
+        if let path = Bundle.main.path(forResource: "personVideo", ofType: "mov") {
+        }
+        
     }
     
     var originalFrames = [CGImage]()
@@ -57,6 +65,7 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         DispatchQueue.main.async {
             semaphore.wait()
             print("Generating Frames")
+            
             
             let video = AVURLAsset(url: videoURL, options: nil)
             
@@ -98,6 +107,8 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         DispatchQueue.main.async {
             semaphore.wait()
             
+            self.endLoadingObjects()
+            
             print("Edited Images")
             
             print(self.testArray)
@@ -113,13 +124,12 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     
     // displays the videos from the testVideoArray that holds the edited images
     var timerCount = 0
-    var testCount9 = 0.0
     @objc func timerAction() {
         
         print("Frame: ", timerCount)
         if(self.editedImageArray.count > timerCount) {
             print(editedImageArray[timerCount].hashValue)
-            self.trainingAdviceLabel.text = String(timerCount)
+    
             self.trainingImageView.image = self.editedImageArray[timerCount]
         }
         else {
@@ -251,8 +261,6 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
                     UIGraphicsEndImageContext()
 
                     editedImageArray.append(myImage)
-
-                    //self.myImgView.image = myImage
                 }
         }
 //
@@ -262,8 +270,7 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         if landMark.inFrameLikelihood > 0.5 {
             
             let landMarkPos = landMark.position
-            
-            
+               
             if(problemJoints.contains(abrev)) {
                 let bounds = CGRect(x: landMarkPos.x, y: landMarkPos.y, width: 10, height: 10)
                 lmContext.saveGState()
@@ -286,6 +293,31 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         }
         
     }//end checkFrameLike
+    
+    
+    func startLoadingObjects() {
+        //self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        let width = self.view.bounds.width;
+        let height = self.view.bounds.height;
+        blackSquare = UIView(frame: CGRect(x: 0.0, y: 0.0, width: width, height: height))
+        blackSquare.backgroundColor = UIColor.systemBackground
+        view.addSubview(blackSquare)
+        
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.color = UIColor.init(named: "Form2FlyBlue")
+        spinner.startAnimating()
+        view.addSubview(spinner)
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+    
+    // This will dismiss the loading objects before the training window opens
+    func endLoadingObjects() {
+        //self.navigationController?.setNavigationBarHidden(false, animated: true)
+        blackSquare.removeFromSuperview()
+        spinner.stopAnimating()
+    }
 //
 //
     

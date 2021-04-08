@@ -13,6 +13,8 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var passwordTxt: UITextField!
     @IBOutlet weak var emailTxt: UITextField!
     
+    @IBOutlet weak var logoImageView: UIImageView!
+    
     @IBOutlet weak var createAccountBtn: UIButton!
     
     
@@ -22,6 +24,12 @@ class CreateAccountViewController: UIViewController {
         self.hideKeyboardWhenTappedAround() 
         
         createAccountBtn.layer.cornerRadius = 12
+        
+        if self.traitCollection.userInterfaceStyle == .dark {
+            self.logoImageView.image = UIImage(named: "form2fly_logo_glow (2).png")
+        } else {
+            self.logoImageView.image = UIImage(named: "image2.png")
+        }
     }
     
     @IBAction func createAccountSubmit(_ sender: Any) {

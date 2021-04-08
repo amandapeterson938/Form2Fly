@@ -14,9 +14,6 @@ class ProfessionalsViewController: UIViewController {
     
     var professionals: [Professional] = []
     
-    //professionalPlayers.init()
-    //let professionalArray = professionalPlayers.shared.returnProfessionals()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,22 +26,6 @@ class ProfessionalsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
-    
-    func createProArray() -> [Professional] {
-        var tempProfessionals: [Professional] = []
-        
-        // only for table view so it does not have full information full information is in professionalPlayers.swift
-        let pro1 = Professional(proName: "P. McBeth", proThrowType: "backhand", proDominantHand: "right", proData: [], proWeightedScore: 9588.502678121475, fileURLPath: "")
-        let pro2 = Professional(proName: "S. Withers", proThrowType: "backhand", proDominantHand: "right", proData: [], proWeightedScore: 8514.528468886949, fileURLPath: "")
-        let pro3 = Professional(proName: "A. Hammers", proThrowType: "backhand", proDominantHand: "right", proData: [], proWeightedScore: 0.0, fileURLPath: "")
-        
-        tempProfessionals.append(pro1)
-        tempProfessionals.append(pro2)
-        tempProfessionals.append(pro3)
-        
-        return tempProfessionals
-    }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
