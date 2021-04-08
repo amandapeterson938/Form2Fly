@@ -621,6 +621,9 @@
                                 <state key="normal">
                                     <imageReference key="image" image="arrow.counterclockwise" catalog="system" symbolScale="large"/>
                                 </state>
+                                <connections>
+                                    <action selector="replayVideo:" destination="WHe-qw-MRi" eventType="touchUpInside" id="aE2-9H-NAt"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="upm-8W-JzY"/>
