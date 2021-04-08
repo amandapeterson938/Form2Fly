@@ -38,9 +38,7 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let url = URL(string: currentUser.vidURL) else { return }
-        
-        print("CURRENT URL: ", currentUser.vidURL)
+        guard var url = URL(string: currentUser.vidURL) else { return }
         
         self.trainingAdviceLabel.text = ""
        
@@ -50,6 +48,13 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
       
         self.startLoadingObjects()
         
+    }
+    @IBAction func replayVideo(_ sender: Any) {
+        timerCount = 0
+        var test = 0.0
+        test = 1/30
+        
+        self.timer = Timer.scheduledTimer(timeInterval: test, target: self, selector: #selector(self.timerAction), userInfo: nil, repeats: true)
     }
     
     var originalFrames = [CGImage]()
