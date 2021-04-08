@@ -13,6 +13,8 @@ import MobileCoreServices
 
 class TrainingViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
+    static let share = TrainingViewController()
+
     @IBOutlet weak var trainingAdviceLabel: UILabel!
     @IBOutlet weak var trainingImageView: UIImageView!
     
@@ -20,7 +22,9 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     
     var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
     
-    var uservideourl = ""
+    var userProblemAreas = [String]()
+    
+    var problemJoints = [String]()
     
     var testArray = [String]()
     
@@ -36,6 +40,13 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         super.viewDidLoad()
         guard let url = URL(string: currentUser.vidURL) else { return }
         
+       // print("trainU", currentUser.vidURL, "done")
+       
+        analyzeVideoURL(videoURL: url)
+        
+        //self.trainingAdviceLabel.text = "Hello World!"
+        problemJoints.append(contentsOf: TrainingViewController.share.userProblemAreas)
+      
         self.startLoadingObjects()
         
        
@@ -202,45 +213,47 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
 
                     UIGraphicsBeginImageContext(imgDr.size)
                     imgDr.draw(at: CGPoint.zero)
+//                    let context = UIGraphicsGetCurrentContext()
+//
+//
+//                    context?.setAlpha(0.5)
+//                    context?.setLineWidth(10.0)
+
                     let context = UIGraphicsGetCurrentContext()
-
-                    context?.setStrokeColor(UIColor.green.cgColor)
-                    context?.setAlpha(0.5)
-                    context?.setLineWidth(10.0)
-
-                    self.checkFrameLike(noseLM, context!)
-                    self.checkFrameLike(leftEyeInnerLM, context!)
-                    self.checkFrameLike(leftEyeLM, context!)
-                    self.checkFrameLike(leftEyeOuterLM, context!)
-                    self.checkFrameLike(rightEyeInnerLM, context!)
-                    self.checkFrameLike(rightEyeLM, context!)
-                    self.checkFrameLike(rightEyeOuterLM, context!)
-                    self.checkFrameLike(leftEarLM, context!)
-                    self.checkFrameLike(rightEarLM, context!)
-                    self.checkFrameLike(mouthLeftLM, context!)
-                    self.checkFrameLike(mouthRightLM, context!)
-                    self.checkFrameLike(leftShoulderLM, context!)
-                    self.checkFrameLike(rightShoulderLM, context!)
-                    self.checkFrameLike(leftElbowLM, context!)
-                    self.checkFrameLike(rightElbowLM, context!)
-                    self.checkFrameLike(leftWristLM, context!)
-                    self.checkFrameLike(rightWristLM, context!)
-                    self.checkFrameLike(leftPinkyFingerLM, context!)
-                    self.checkFrameLike(rightPinkyFingerLM, context!)
-                    self.checkFrameLike(leftIndexFingerLM, context!)
-                    self.checkFrameLike(rightIndexFingerLM, context!)
-                    self.checkFrameLike(leftThumbLM, context!)
-                    self.checkFrameLike(rightThumbLM, context!)
-                    self.checkFrameLike(leftHipLM, context!)
-                    self.checkFrameLike(rightHipLM, context!)
-                    self.checkFrameLike(leftKneeLM, context!)
-                    self.checkFrameLike(rightKneeLM, context!)
-                    self.checkFrameLike(leftAnkleLM, context!)
-                    self.checkFrameLike(rightAnkleLM, context!)
-                    self.checkFrameLike(leftHeelLM, context!)
-                    self.checkFrameLike(rightHeelLM, context!)
-                    self.checkFrameLike(leftToeLM, context!)
-                    self.checkFrameLike(rightToeLM, context!)
+                    
+                    self.checkFrameLike(noseLM, context!, abrev: "")
+                    self.checkFrameLike(leftEyeInnerLM, context!, abrev: "")
+                    self.checkFrameLike(leftEyeLM, context!, abrev: "")
+                    self.checkFrameLike(leftEyeOuterLM, context!, abrev: "")
+                    self.checkFrameLike(rightEyeInnerLM, context!, abrev: "")
+                    self.checkFrameLike(rightEyeLM, context!, abrev: "")
+                    self.checkFrameLike(rightEyeOuterLM, context!, abrev: "")
+                    self.checkFrameLike(leftEarLM, context!, abrev: "")
+                    self.checkFrameLike(rightEarLM, context!, abrev: "")
+                    self.checkFrameLike(mouthLeftLM, context!, abrev: "")
+                    self.checkFrameLike(mouthRightLM, context!, abrev: "")
+                    self.checkFrameLike(leftShoulderLM, context!, abrev: "lsh")
+                    self.checkFrameLike(rightShoulderLM, context!, abrev: "rsh")
+                    self.checkFrameLike(leftElbowLM, context!, abrev: "lel")
+                    self.checkFrameLike(rightElbowLM, context!, abrev: "rel")
+                    self.checkFrameLike(leftWristLM, context!, abrev: "lro")
+                    self.checkFrameLike(rightWristLM, context!, abrev: "rwr")
+                    self.checkFrameLike(leftPinkyFingerLM, context!, abrev: "")
+                    self.checkFrameLike(rightPinkyFingerLM, context!, abrev: "")
+                    self.checkFrameLike(leftIndexFingerLM, context!, abrev: "")
+                    self.checkFrameLike(rightIndexFingerLM, context!, abrev: "")
+                    self.checkFrameLike(leftThumbLM, context!, abrev: "")
+                    self.checkFrameLike(rightThumbLM, context!, abrev: "")
+                    self.checkFrameLike(leftHipLM, context!, abrev: "lhi")
+                    self.checkFrameLike(rightHipLM, context!, abrev: "rhi")
+                    self.checkFrameLike(leftKneeLM, context!, abrev: "lkn")
+                    self.checkFrameLike(rightKneeLM, context!, abrev: "rkn")
+                    self.checkFrameLike(leftAnkleLM, context!, abrev: "lan")
+                    self.checkFrameLike(rightAnkleLM, context!, abrev: "ran")
+                    self.checkFrameLike(leftHeelLM, context!, abrev: "")
+                    self.checkFrameLike(rightHeelLM, context!, abrev: "")
+                    self.checkFrameLike(leftToeLM, context!, abrev: "")
+                    self.checkFrameLike(rightToeLM, context!, abrev: "")
 
                     context?.drawPath(using: .stroke)
 
@@ -253,11 +266,32 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
 //
 //
     // Check if the landmark.inFrameLikelihood is > 0.5 if it is add the circle
-    func checkFrameLike(_ landMark: PoseLandmark, _ lmContext: CGContext) {
+    func checkFrameLike(_ landMark: PoseLandmark, _ lmContext: CGContext, abrev: String) {
         if landMark.inFrameLikelihood > 0.5 {
+            
             let landMarkPos = landMark.position
-            lmContext.addEllipse(in: CGRect(x: landMarkPos.x, y: landMarkPos.y, width: 10, height: 10))
+               
+            if(problemJoints.contains(abrev)) {
+                let bounds = CGRect(x: landMarkPos.x, y: landMarkPos.y, width: 10, height: 10)
+                lmContext.saveGState()
+                lmContext.setFillColor(UIColor.red.cgColor)
+                lmContext.addEllipse(in: bounds)
+                lmContext.drawPath(using: .fill)
+                lmContext.restoreGState()
+            }
+            else {
+                let bounds = CGRect(x: landMarkPos.x, y: landMarkPos.y, width: 10, height: 10)
+                lmContext.saveGState()
+                lmContext.setFillColor(UIColor.green.cgColor)
+                lmContext.addEllipse(in: bounds)
+                lmContext.drawPath(using: .fill)
+                lmContext.restoreGState()
+            }
         }//end if
+        else {
+            //print("OUT OF FRAME")
+        }
+        
     }//end checkFrameLike
     
     
@@ -288,7 +322,7 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
 //
     
 }
- 
+
     
     
 
