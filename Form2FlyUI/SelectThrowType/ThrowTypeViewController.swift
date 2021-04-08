@@ -12,7 +12,7 @@ class ThrowTypeViewController: UIViewController {
     @IBOutlet weak var backhandBtn: UIButton!
     @IBOutlet weak var forehandBtn: UIButton!
     
-    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "", problemAbrv: [])
+    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -17,7 +17,7 @@ class InsightsViewController: UIViewController {
     
     @IBOutlet weak var insightsScrollView: UIScrollView!
     
-    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "", problemAbrv: [])
+    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
     
     var usersProName = ""
     var usersOverallSim = ""

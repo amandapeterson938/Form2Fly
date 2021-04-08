@@ -18,7 +18,7 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     
     let abrvArr:[String] = ["lwr", "lel", "lsh", "lhi", "lkn", "lan", "lro", "rwr", "rel", "rsh", "rhi", "rkn", "ran", "rro"]
     
-    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "", problemAbrv: [])
+    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
     
     var uservideourl = ""
     
@@ -43,8 +43,6 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         
         if let path = Bundle.main.path(forResource: "personVideo", ofType: "mov") {
         }
-        
-        print("Problem Area Abrv. ", currentUser.problemAbrv)
         
     }
     

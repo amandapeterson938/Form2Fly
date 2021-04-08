@@ -15,7 +15,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     @IBOutlet weak var recordVideoBtn: UIButton!
     @IBOutlet weak var uploadVideoBtn: UIButton!
     
-    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "", problemAbrv: [])
+    var currentUser = User(dominantHand: "", pickOrMatch: "", throwType: "", proName: "", vidURL: "")
     
     // Loading objects
     var blackSquare = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 0, height: 0))
@@ -522,7 +522,6 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         }
         
         InsightsViewController.shared.usersProbAreas = worstAngleString
-        currentUser.problemAbrv = usersProbAreasAbrv
         
         print(angleSimilarity)
     }
