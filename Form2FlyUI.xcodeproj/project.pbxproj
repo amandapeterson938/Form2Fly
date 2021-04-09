@@ -14,6 +14,8 @@
 		F003C52B261B7ECE001415E0 /* InsightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F003C52A261B7ECE001415E0 /* InsightsViewController.swift */; };
 		F00DCC032619FEBC0076B9FD /* professionalPlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00DCC022619FEBC0076B9FD /* professionalPlayers.swift */; };
 		F031338E25EBE29A002C649F /* RecordOrUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F031338D25EBE29A002C649F /* RecordOrUploadViewController.swift */; };
+		F047F685261FD860008F52D7 /* personVideo.mov in Resources */ = {isa = PBXBuildFile; fileRef = F047F684261FD860008F52D7 /* personVideo.mov */; };
+		F047F698261FE58E008F52D7 /* R. Frescura.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F047F697261FE58E008F52D7 /* R. Frescura.mp4 */; };
 		F048CF1125EAB69D006F1C70 /* puzzleNoBG.png in Resources */ = {isa = PBXBuildFile; fileRef = F048CF1025EAB69D006F1C70 /* puzzleNoBG.png */; };
 		F048CF1425EACA00006F1C70 /* pickProfessional.png in Resources */ = {isa = PBXBuildFile; fileRef = F048CF1325EACA00006F1C70 /* pickProfessional.png */; };
 		F07EAC582610C205007A5769 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07EAC572610C205007A5769 /* User.swift */; };
@@ -49,6 +51,8 @@
 		F003C52A261B7ECE001415E0 /* InsightsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsViewController.swift; sourceTree = "<group>"; };
 		F00DCC022619FEBC0076B9FD /* professionalPlayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = professionalPlayers.swift; sourceTree = "<group>"; };
 		F031338D25EBE29A002C649F /* RecordOrUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordOrUploadViewController.swift; sourceTree = "<group>"; };
+		F047F684261FD860008F52D7 /* personVideo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = personVideo.mov; path = ../../../Downloads/Form2FlyMLKitTestVideo/personVideo.mov; sourceTree = "<group>"; };
+		F047F697261FE58E008F52D7 /* R. Frescura.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "R. Frescura.mp4"; sourceTree = "<group>"; };
 		F048CF1025EAB69D006F1C70 /* puzzleNoBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = puzzleNoBG.png; sourceTree = "<group>"; };
 		F048CF1325EACA00006F1C70 /* pickProfessional.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pickProfessional.png; sourceTree = "<group>"; };
 		F07EAC572610C205007A5769 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -129,6 +133,14 @@
 			path = RecordOrUploadView;
 			sourceTree = "<group>";
 		};
+		F047F69A261FE5B0008F52D7 /* proVideoFolder */ = {
+			isa = PBXGroup;
+			children = (
+				F047F697261FE58E008F52D7 /* R. Frescura.mp4 */,
+			);
+			path = proVideoFolder;
+			sourceTree = "<group>";
+		};
 		F09912CD25EB002300B6811A /* SelectOrMatchView */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +180,7 @@
 		F0AEDCCF25E82E0100AAF1AA = {
 			isa = PBXGroup;
 			children = (
+				F047F684261FD860008F52D7 /* personVideo.mov */,
 				F0DAB6892612DBBF00417C4F /* Backend.swift */,
 				F0DAB6832612D9BE00417C4F /* amplifyconfiguration.json */,
 				F0DAB6862612D9C800417C4F /* awsconfiguration.json */,
@@ -190,6 +203,7 @@
 		F0AEDCDA25E82E0100AAF1AA /* Form2FlyUI */ = {
 			isa = PBXGroup;
 			children = (
+				F047F69A261FE5B0008F52D7 /* proVideoFolder */,
 				F09EC019261551A300E289A4 /* CreateAccount */,
 				F003C529261B7EA5001415E0 /* TrainingInsights */,
 				F00107AE25EC3BDC00D4A383 /* TrainingView */,
@@ -315,9 +329,11 @@
 				F0AEDCE525E82E0100AAF1AA /* Assets.xcassets in Resources */,
 				F048CF1125EAB69D006F1C70 /* puzzleNoBG.png in Resources */,
 				F048CF1425EACA00006F1C70 /* pickProfessional.png in Resources */,
+				F047F685261FD860008F52D7 /* personVideo.mov in Resources */,
 				F0AEDCF125E831EB00AAF1AA /* image2.png in Resources */,
 				F0B662FF260147FA005332E7 /* form2fly_logo_glow (2).png in Resources */,
 				F0AEDCE325E82E0100AAF1AA /* Main.storyboard in Resources */,
+				F047F698261FE58E008F52D7 /* R. Frescura.mp4 in Resources */,
 				F0DAB6872612D9C800417C4F /* awsconfiguration.json in Resources */,
 				78A91654528C4BFFA3F9D82F /* amplifyconfiguration.json in Resources */,
 				259C32BD5B9440AA86E7772E /* awsconfiguration.json in Resources */,

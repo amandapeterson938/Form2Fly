@@ -15,8 +15,13 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     
     static let share = TrainingViewController()
 
-    @IBOutlet weak var trainingAdviceLabel: UILabel!
+    //@IBOutlet weak var trainingAdviceLabel: UILabel!
     @IBOutlet weak var trainingImageView: UIImageView!
+    
+    
+    @IBAction func videoSelectionSegment(_ sender: Any) {
+        print("help")
+    }
     
     let abrvArr:[String] = ["lwr", "lel", "lsh", "lhi", "lkn", "lan", "lro", "rwr", "rel", "rsh", "rhi", "rkn", "ran", "rro"]
     
@@ -40,9 +45,27 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         super.viewDidLoad()
         guard var url = URL(string: currentUser.vidURL) else { return }
         
-        self.trainingAdviceLabel.text = ""
+//        if let path = Bundle.main.path(forResource: "P.McBeth backhand.mp4", ofType: "mp4") {
+//            let pathURL = URL(string: path)
+//            analyzeVideoURL(videoURL: pathURL!)
+//        }
+//        else {
+//            analyzeVideoURL(videoURL: url)
+//        }
+        let audioFileName = "R. Frescura"
+        
+        if let audioFileURL = Bundle.main.url(forResource: audioFileName, withExtension: "mp4") {
+            print("I found it!!")
+            analyzeVideoURL(videoURL: audioFileURL)
+        }
+        else {
+            print("I did not find it...")
+        }
+        
+        let testPlease = Bundle.main.url(forResource: "R. Frescura" , withExtension: "mp4")
+        print("Please work: ", testPlease)
        
-        analyzeVideoURL(videoURL: url)
+        //analyzeVideoURL(videoURL: url)
         
         problemJoints.append(contentsOf: TrainingViewController.share.userProblemAreas)
       
