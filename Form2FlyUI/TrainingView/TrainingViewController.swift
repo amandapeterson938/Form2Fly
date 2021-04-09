@@ -19,8 +19,29 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     @IBOutlet weak var trainingImageView: UIImageView!
     
     
+    @IBOutlet weak var vidSelElm: UISegmentedControl!
     @IBAction func videoSelectionSegment(_ sender: Any) {
+        editedImageArray = []
+        originalFrames = []
+        timerCount = 0
         print("help")
+        if vidSelElm.titleForSegment(at: vidSelElm.selectedSegmentIndex) == "User" {
+            guard var url = URL(string: currentUser.vidURL) else { return }
+            analyzeVideoURL(videoURL: url)
+        }
+        else {
+            var audioFileName = InsightsViewController.shared.usersProName
+            print(InsightsViewController.shared.usersProName +  "|" + audioFileName + "|")
+            //audioFileName = "R. Frescura"
+            if let audioFileURL = Bundle.main.url(forResource: audioFileName, withExtension: "mp4") {
+                print("I found it!!")
+                analyzeVideoURL(videoURL: audioFileURL)
+            }
+            else {
+                print("No luck.")
+            }
+        }
+        
     }
     
     let abrvArr:[String] = ["lwr", "lel", "lsh", "lhi", "lkn", "lan", "lro", "rwr", "rel", "rsh", "rhi", "rkn", "ran", "rro"]
@@ -40,10 +61,12 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     // Loading objects
     var blackSquare = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 0, height: 0))
     var spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
+     
    
     override func viewDidLoad() {
         super.viewDidLoad()
         guard var url = URL(string: currentUser.vidURL) else { return }
+        analyzeVideoURL(videoURL: url)
         
 //        if let path = Bundle.main.path(forResource: "P.McBeth backhand.mp4", ofType: "mp4") {
 //            let pathURL = URL(string: path)
@@ -52,15 +75,16 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
 //        else {
 //            analyzeVideoURL(videoURL: url)
 //        }
-        let audioFileName = "R. Frescura"
+        //let audioFileName = "R. Frescura"
+        let audioFileName = InsightsViewController.shared.usersProName
         
-        if let audioFileURL = Bundle.main.url(forResource: audioFileName, withExtension: "mp4") {
-            print("I found it!!")
-            analyzeVideoURL(videoURL: audioFileURL)
-        }
-        else {
-            print("I did not find it...")
-        }
+//        if let audioFileURL = Bundle.main.url(forResource: audioFileName, withExtension: "mp4") {
+//            print("I found it!!")
+//            analyzeVideoURL(videoURL: audioFileURL)
+//        }
+//        else {
+//            print("I did not find it...")
+//        }
         
         let testPlease = Bundle.main.url(forResource: "R. Frescura" , withExtension: "mp4")
         print("Please work: ", testPlease)
@@ -69,7 +93,7 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         
         problemJoints.append(contentsOf: TrainingViewController.share.userProblemAreas)
       
-        self.startLoadingObjects()
+        //self.startLoadingObjects()
         
     }
     @IBAction func replayVideo(_ sender: Any) {
@@ -83,6 +107,8 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     var originalFrames = [CGImage]()
     
     func analyzeVideoURL(videoURL : URL) {
+        self.startLoadingObjects()
+        
         let semaphore = DispatchSemaphore(value: 1)
         
         DispatchQueue.main.async {

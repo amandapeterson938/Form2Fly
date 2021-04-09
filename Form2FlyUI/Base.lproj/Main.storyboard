@@ -647,6 +647,7 @@
                     <navigationItem key="navigationItem" id="555-0d-L9j"/>
                     <connections>
                         <outlet property="trainingImageView" destination="E0w-Nw-QY9" id="2nH-8x-F47"/>
+                        <outlet property="vidSelElm" destination="I6a-Qb-XFA" id="lK1-p1-ExP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OiX-Cu-QOz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
