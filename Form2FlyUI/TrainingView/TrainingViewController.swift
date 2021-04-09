@@ -37,6 +37,10 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
                 print("I found it!!")
                 analyzeVideoURL(videoURL: audioFileURL)
             }
+            else if let audioFileURL = Bundle.main.url(forResource: audioFileName, withExtension: "MOV") {
+                print("I found MOV it!!")
+                analyzeVideoURL(videoURL: audioFileURL)
+            }
             else {
                 print("No luck.")
             }
@@ -68,32 +72,13 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         guard var url = URL(string: currentUser.vidURL) else { return }
         analyzeVideoURL(videoURL: url)
         
-//        if let path = Bundle.main.path(forResource: "P.McBeth backhand.mp4", ofType: "mp4") {
-//            let pathURL = URL(string: path)
-//            analyzeVideoURL(videoURL: pathURL!)
-//        }
-//        else {
-//            analyzeVideoURL(videoURL: url)
-//        }
-        //let audioFileName = "R. Frescura"
         let audioFileName = InsightsViewController.shared.usersProName
-        
-//        if let audioFileURL = Bundle.main.url(forResource: audioFileName, withExtension: "mp4") {
-//            print("I found it!!")
-//            analyzeVideoURL(videoURL: audioFileURL)
-//        }
-//        else {
-//            print("I did not find it...")
-//        }
         
         let testPlease = Bundle.main.url(forResource: "R. Frescura" , withExtension: "mp4")
         print("Please work: ", testPlease)
        
-        //analyzeVideoURL(videoURL: url)
         
         problemJoints.append(contentsOf: TrainingViewController.share.userProblemAreas)
-      
-        //self.startLoadingObjects()
         
     }
     @IBAction func replayVideo(_ sender: Any) {

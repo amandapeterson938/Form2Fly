@@ -19,6 +19,8 @@
 		F048CF1125EAB69D006F1C70 /* puzzleNoBG.png in Resources */ = {isa = PBXBuildFile; fileRef = F048CF1025EAB69D006F1C70 /* puzzleNoBG.png */; };
 		F048CF1425EACA00006F1C70 /* pickProfessional.png in Resources */ = {isa = PBXBuildFile; fileRef = F048CF1325EACA00006F1C70 /* pickProfessional.png */; };
 		F07EAC582610C205007A5769 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07EAC572610C205007A5769 /* User.swift */; };
+		F08FDE32261FF9BD00DA1185 /* S. Withers.MOV in Resources */ = {isa = PBXBuildFile; fileRef = F08FDE31261FF9BD00DA1185 /* S. Withers.MOV */; };
+		F08FDE35261FF9CA00DA1185 /* Z. Melton.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F08FDE34261FF9CA00DA1185 /* Z. Melton.mp4 */; };
 		F09912D025EB005D00B6811A /* SelectOrMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09912CF25EB005D00B6811A /* SelectOrMatchViewController.swift */; };
 		F09912D525EB026200B6811A /* SignOnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09912D425EB026200B6811A /* SignOnViewController.swift */; };
 		F09EC01B261551CD00E289A4 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09EC01A261551CD00E289A4 /* CreateAccountViewController.swift */; };
@@ -56,6 +58,8 @@
 		F048CF1025EAB69D006F1C70 /* puzzleNoBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = puzzleNoBG.png; sourceTree = "<group>"; };
 		F048CF1325EACA00006F1C70 /* pickProfessional.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pickProfessional.png; sourceTree = "<group>"; };
 		F07EAC572610C205007A5769 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F08FDE31261FF9BD00DA1185 /* S. Withers.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "S. Withers.MOV"; sourceTree = "<group>"; };
+		F08FDE34261FF9CA00DA1185 /* Z. Melton.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Z. Melton.mp4"; sourceTree = "<group>"; };
 		F09912CF25EB005D00B6811A /* SelectOrMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOrMatchViewController.swift; sourceTree = "<group>"; };
 		F09912D425EB026200B6811A /* SignOnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOnViewController.swift; sourceTree = "<group>"; };
 		F09EC01A261551CD00E289A4 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +140,8 @@
 		F047F69A261FE5B0008F52D7 /* proVideoFolder */ = {
 			isa = PBXGroup;
 			children = (
+				F08FDE34261FF9CA00DA1185 /* Z. Melton.mp4 */,
+				F08FDE31261FF9BD00DA1185 /* S. Withers.MOV */,
 				F047F697261FE58E008F52D7 /* R. Frescura.mp4 */,
 			);
 			path = proVideoFolder;
@@ -327,9 +333,11 @@
 				F0AEDCE825E82E0100AAF1AA /* LaunchScreen.storyboard in Resources */,
 				F0F1A87925EC5AAD00AF4F6F /* avatar.png in Resources */,
 				F0AEDCE525E82E0100AAF1AA /* Assets.xcassets in Resources */,
+				F08FDE35261FF9CA00DA1185 /* Z. Melton.mp4 in Resources */,
 				F048CF1125EAB69D006F1C70 /* puzzleNoBG.png in Resources */,
 				F048CF1425EACA00006F1C70 /* pickProfessional.png in Resources */,
 				F047F685261FD860008F52D7 /* personVideo.mov in Resources */,
+				F08FDE32261FF9BD00DA1185 /* S. Withers.MOV in Resources */,
 				F0AEDCF125E831EB00AAF1AA /* image2.png in Resources */,
 				F0B662FF260147FA005332E7 /* form2fly_logo_glow (2).png in Resources */,
 				F0AEDCE325E82E0100AAF1AA /* Main.storyboard in Resources */,
