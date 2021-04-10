@@ -4,6 +4,7 @@
 //
 //  Created by Amanda Peterson on 2/28/21.
 //
+// Displays Training View which highlights the users video with red nodes on the users problem areas. Offers the user an option of seeing the professional's video as well.
 
 import UIKit
 import AVKit
@@ -15,7 +16,6 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     
     static let share = TrainingViewController()
 
-    //@IBOutlet weak var trainingAdviceLabel: UILabel!
     @IBOutlet weak var trainingImageView: UIImageView!
     
     
@@ -24,25 +24,20 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         editedImageArray = []
         originalFrames = []
         timerCount = 0
-        print("help")
+        
         if vidSelElm.titleForSegment(at: vidSelElm.selectedSegmentIndex) == "User" {
             guard var url = URL(string: currentUser.vidURL) else { return }
             analyzeVideoURL(videoURL: url)
         }
         else {
-            var audioFileName = InsightsViewController.shared.usersProName
-            print(InsightsViewController.shared.usersProName +  "|" + audioFileName + "|")
-            //audioFileName = "R. Frescura"
-            if let audioFileURL = Bundle.main.url(forResource: audioFileName, withExtension: "mp4") {
-                print("I found it!!")
+            var professionalsFileName = InsightsViewController.shared.usersProName
+            print(InsightsViewController.shared.usersProName +  "|" + professionalsFileName + "|")
+            
+            if let audioFileURL = Bundle.main.url(forResource: professionalsFileName, withExtension: "mp4") {
                 analyzeVideoURL(videoURL: audioFileURL)
             }
-            else if let audioFileURL = Bundle.main.url(forResource: audioFileName, withExtension: "MOV") {
-                print("I found MOV it!!")
+            else if let audioFileURL = Bundle.main.url(forResource: professionalsFileName, withExtension: "MOV") {
                 analyzeVideoURL(videoURL: audioFileURL)
-            }
-            else {
-                print("No luck.")
             }
         }
         
@@ -56,14 +51,12 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     
     var problemJoints = [String]()
     
-    var testArray = [String]()
-    
     var editedImageArray = [UIImage?]()
-    
+
     var timer = Timer()
     
     // Loading objects
-    var blackSquare = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 0, height: 0))
+    var loadingScreen = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 0, height: 0))
     var spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
      
    
@@ -72,15 +65,9 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         guard var url = URL(string: currentUser.vidURL) else { return }
         analyzeVideoURL(videoURL: url)
         
-        let audioFileName = InsightsViewController.shared.usersProName
-        
-        let testPlease = Bundle.main.url(forResource: "R. Frescura" , withExtension: "mp4")
-        print("Please work: ", testPlease)
-       
-        
         problemJoints.append(contentsOf: TrainingViewController.share.userProblemAreas)
-        
     }
+    
     @IBAction func replayVideo(_ sender: Any) {
         timerCount = 0
         var test = 0.0
@@ -146,10 +133,6 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
             
             self.endLoadingObjects()
             
-            print("Edited Images")
-            
-            print(self.testArray)
-            
             var test = 0.0
             test = 1/30
             
@@ -159,13 +142,13 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         }
     }
     
-    // displays the videos from the testVideoArray that holds the edited images
+    // displays the videos from the editedImageArray that holds the edited images
     var timerCount = 0
     @objc func timerAction() {
         
-        print("Frame: ", timerCount)
+        //print("Frame: ", timerCount)
         if(self.editedImageArray.count > timerCount) {
-            print(editedImageArray[timerCount].hashValue)
+            //print(editedImageArray[timerCount].hashValue)
     
             self.trainingImageView.image = self.editedImageArray[timerCount]
         }
@@ -250,11 +233,6 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
 
                     UIGraphicsBeginImageContext(imgDr.size)
                     imgDr.draw(at: CGPoint.zero)
-//                    let context = UIGraphicsGetCurrentContext()
-//
-//
-//                    context?.setAlpha(0.5)
-//                    context?.setLineWidth(10.0)
 
                     let context = UIGraphicsGetCurrentContext()
                     
@@ -300,15 +278,13 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
                     editedImageArray.append(myImage)
                 }
         }
-//
-//
+    
+    
     // Check if the landmark.inFrameLikelihood is > 0.5 if it is add the circle
     func checkFrameLike(_ landMark: PoseLandmark, _ lmContext: CGContext, abrev: String) {
         if landMark.inFrameLikelihood > 0.5 {
             
             let landMarkPos = landMark.position
-            
-            print(problemJoints, abrev)
                
             if(problemJoints.contains(abrev)) {
                 let bounds = CGRect(x: landMarkPos.x, y: landMarkPos.y, width: 10, height: 10)
@@ -327,21 +303,16 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
                 lmContext.restoreGState()
             }
         }//end if
-        else {
-            //print("OUT OF FRAME")
-        }
         
     }//end checkFrameLike
     
-    
+    // Start loading objects including the loading screen which is the system background and the animated spinner
     func startLoadingObjects() {
-        //self.navigationController?.setNavigationBarHidden(true, animated: true)
-        
         let width = self.view.bounds.width;
         let height = self.view.bounds.height;
-        blackSquare = UIView(frame: CGRect(x: 0.0, y: 0.0, width: width, height: height))
-        blackSquare.backgroundColor = UIColor.systemBackground
-        view.addSubview(blackSquare)
+        loadingScreen = UIView(frame: CGRect(x: 0.0, y: 0.0, width: width, height: height))
+        loadingScreen.backgroundColor = UIColor.systemBackground
+        view.addSubview(loadingScreen)
         
         spinner.translatesAutoresizingMaskIntoConstraints = false
         spinner.color = UIColor.init(named: "Form2FlyBlue")
@@ -354,11 +325,9 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
     // This will dismiss the loading objects before the training window opens
     func endLoadingObjects() {
         //self.navigationController?.setNavigationBarHidden(false, animated: true)
-        blackSquare.removeFromSuperview()
+        loadingScreen.removeFromSuperview()
         spinner.stopAnimating()
     }
-//
-//
     
 }
 

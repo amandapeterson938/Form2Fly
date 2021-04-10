@@ -4,6 +4,7 @@
 //
 //  Created by Amanda Peterson on 4/5/21.
 //
+// Displays user's throw analysis displays the professional's name, overall similarity score, and the users problem areas.
 
 import UIKit
 
@@ -52,7 +53,5 @@ class InsightsViewController: UIViewController {
         usersProfessionalName.text = InsightsViewController.shared.usersProName
         usersOverallSimilarity.text = InsightsViewController.shared.usersOverallSim
         usersOverallProb.text = InsightsViewController.shared.usersProbAreas
-        
-        
     }
 }

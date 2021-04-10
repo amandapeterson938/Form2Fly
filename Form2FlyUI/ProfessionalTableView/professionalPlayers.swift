@@ -4,6 +4,7 @@
 //
 //  Created by Amanda Peterson on 4/4/21.
 //
+// Class that contains the supported professionals
 
 import Foundation
 

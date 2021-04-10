@@ -4,6 +4,7 @@
 //
 //  Created by Amanda Peterson on 2/27/21.
 //
+// Gives the user the ability to sign in
 
 import UIKit
 
@@ -28,28 +29,6 @@ class SignOnViewController: UIViewController {
         } else {
             self.logoImageView.image = UIImage(named: "image2.png")
         }
-        
-//        let isSignedIn = defaults.bool(forKey: "isSignedIn")
-//        print(isSignedIn)
-//
-//
-//        if(isSignedIn) {
-////            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-////            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "nextView") as! NextViewController
-////            self.present(nextViewController, animated:true, completion:nil)
-//
-//
-//            print("Going to my spot")
-//            // performSegue(withIdentifier: "signToSelectionSegue", sender: self)
-//            //self.present(SelectOrMatchViewController(), animated: true, completion: nil)
-//
-//            //getTopMostViewController()?.present(SelectOrMatchViewController(), animated: true, completion: nil)
-//            DispatchQueue.main.async {
-//                self.performSegue(withIdentifier: "signToSelectionSegue", sender: self)
-//            }
-//
-//            return
-//        }
         
         self.hideKeyboardWhenTappedAround() 
         

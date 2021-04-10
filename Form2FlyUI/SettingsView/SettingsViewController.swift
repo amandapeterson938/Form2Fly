@@ -4,6 +4,7 @@
 //
 //  Created by Amanda Peterson on 2/27/21.
 //
+// Settings View Controller, if the user clicks sign out it will set the user defaults key "isSignedIn" to false. 
 
 import UIKit
 
