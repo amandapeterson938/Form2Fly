@@ -4,6 +4,7 @@
 //
 //  Created by Amanda Peterson on 2/27/21.
 //
+// Professionals View Controller uses ProTableCell.swift to add professionals to the screen
 
 import UIKit
 

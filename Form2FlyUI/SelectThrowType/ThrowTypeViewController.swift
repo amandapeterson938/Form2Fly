@@ -4,6 +4,7 @@
 //
 //  Created by Amanda Peterson on 2/27/21.
 //
+// Select Throw Type View Controller, gives user the option to choose to analyze their backhand or forehand throws. This choice will be saved to currentUser.throwType
 
 import UIKit
 

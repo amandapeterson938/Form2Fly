@@ -4,6 +4,12 @@
 //
 //  Created by Amanda Peterson on 3/29/21.
 //
+// AWS Documentation for user registration
+// https://docs.amplify.aws/lib/auth/signin/q/platform/ios#register-a-user
+
+// Functions included in Backend.swift
+// signUp(username, password, email, viewController), confirmSignUp(username, confirmationCode, viewController), signIn(username, password, viewController), signOutLocally()
+// Handles sign in and create account functionality (signUp)
 
 import UIKit
 import Amplify
@@ -18,16 +24,14 @@ class Backend {
       // initialize amplify
       do {
         try Amplify.add(plugin: AWSCognitoAuthPlugin())
-        //try Amplify.add(plugin: AWSAPIPlugin(modelRegistration: AmplifyModels()))
-        try Amplify.add(plugin: AWSS3StoragePlugin())
         try Amplify.configure()
-        print("Initialized Amplify With Storage");
+        print("Initialized Amplify");
       } catch {
         print("Could not initialize Amplify: \(error)")
       }
     }
     
-    // AWS Documentation for user registration 
+    // AWS Documentation for user registration
     //https://docs.amplify.aws/lib/auth/signin/q/platform/ios#register-a-user
     
     var isComplete = false

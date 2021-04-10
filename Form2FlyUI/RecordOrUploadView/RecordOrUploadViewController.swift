@@ -4,6 +4,8 @@
 //
 //  Created by Amanda Peterson on 2/28/21.
 //
+// Record or Updload View Controller, this handles the functionality of calling the users camera roll or calling the users camera then the video will be analyzed
+// For best results the video should be cropped to the duration of the throw. 
 
 import UIKit
 import AVKit
@@ -31,7 +33,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
     var lastSubPointsDict: [String: String] = [:]
     var pointsDict: [String: String] = [:]
     
-    var testArray = [String]()
+    var angleArray = [String]()
     
     var userVideoURL = ""
     
@@ -53,11 +55,6 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         recordVideoBtn.layer.cornerRadius = 12
         uploadVideoBtn.layer.cornerRadius = 12
         
-        print("Record or Upload Information: ")
-        print(currentUser.dominantHand)
-        print(currentUser.pickOrMatch)
-        print(currentUser.proName)
-        print(currentUser.throwType)
     }
     
     
@@ -246,10 +243,10 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             DispatchQueue.global(qos: .default).sync {
                 print("*******************************")
                 print("********Angle Array************")
-                print(self.testArray)
+                print(self.angleArray)
                 
-                self.analyzeArray(poseData: self.testArray)
-                //self.analyzeDictionary()
+                self.analyzeArray(poseData: self.angleArray)
+                
             }
             
             
@@ -348,7 +345,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             
             let outputData = leftHalfData + " " + rightHalfData //+ "\n"
             
-            testArray.append(outputData)
+            angleArray.append(outputData)
             
         }
     }
@@ -361,7 +358,6 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         
         weighted_scores = createWeights(angleData: poseData)
         
-        //print(weighted_scores)
         let weighted_sum = weighted_scores.reduce(0, +)
         print("------------------------------------")
         print("----------Weighted Sum--------------")
@@ -383,6 +379,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
                     break
                 }
             }
+            splitVideoAnalyze(userData: poseData, proData: usersProfessional.proData)
         }
         else{
             var closestProIndex: Int? = nil
@@ -439,7 +436,6 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         for frame in angleData {
             let landmarkArray = frame.components(separatedBy: " ")
             
-            //print(landmarkArray)
             var temp = [Double]()
             var i = 0
             for landmark in landmarkArray {
@@ -468,7 +464,6 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         for frame in angleData {
             let landmarkArray = frame.components(separatedBy: " ")
             
-            //print(landmarkArray)
             var temp = ""
             var i = 0
             for landmark in landmarkArray {
@@ -551,7 +546,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
             for angle in frameArray {
                 if(!angle.isEmpty) {
                     angleDictionary[abrvArr[i]] = (angleDictionary[abrvArr[i]] ?? 0.0) + (Double(angle) ?? 0.0) 
-                    //angleArray[i] = angleArray[i] + Double(angle)!
+                    
                     i += 1
                 }
             }

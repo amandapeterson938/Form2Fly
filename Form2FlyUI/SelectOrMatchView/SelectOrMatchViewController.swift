@@ -4,6 +4,7 @@
 //
 //  Created by Amanda Peterson on 2/27/21.
 //
+// Gives user an option to select the professional they want or be matched to one. This will be logged in currentUser.pickOrMatch
 
 import UIKit
 

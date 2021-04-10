@@ -595,9 +595,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E0w-Nw-QY9">
                                 <rect key="frame" x="20" y="85" width="374" height="672"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEd-tq-PtL">
-                                <rect key="frame" x="364" y="783" width="30" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEd-tq-PtL">
+                                <rect key="frame" x="364" y="775" width="30" height="25"/>
                                 <color key="tintColor" name="Form2FlyBlue"/>
                                 <state key="normal">
                                     <imageReference key="image" image="house" catalog="system" symbolScale="large"/>
@@ -606,20 +605,19 @@
                                     <segue destination="SWq-uZ-kxA" kind="presentation" modalPresentationStyle="fullScreen" id="Gn2-cO-d7v"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c09-1Y-4Os">
-                                <rect key="frame" x="20" y="782" width="22" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c09-1Y-4Os">
+                                <rect key="frame" x="20" y="778" width="27" height="22"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="tintColor" name="Form2FlyBlue"/>
                                 <state key="normal">
-                                    <imageReference key="image" image="arrow.counterclockwise" catalog="system" symbolScale="large"/>
+                                    <imageReference key="image" image="repeat" catalog="system" symbolScale="large"/>
                                 </state>
                                 <connections>
                                     <action selector="replayVideo:" destination="WHe-qw-MRi" eventType="touchUpInside" id="aE2-9H-NAt"/>
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="I6a-Qb-XFA">
-                                <rect key="frame" x="111.5" y="40" width="191" height="32"/>
+                                <rect key="frame" x="20" y="40" width="374" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="B3y-kH-JnF"/>
                                 </constraints>
@@ -636,11 +634,17 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="E0w-Nw-QY9" firstAttribute="leading" secondItem="upm-8W-JzY" secondAttribute="leading" constant="20" id="COp-PP-6Pg"/>
+                            <constraint firstItem="c09-1Y-4Os" firstAttribute="bottom" secondItem="upm-8W-JzY" secondAttribute="bottom" constant="-8" id="DA8-8H-D04"/>
                             <constraint firstItem="E0w-Nw-QY9" firstAttribute="centerX" secondItem="Uwx-FV-him" secondAttribute="centerX" id="DIR-Pl-Ld8"/>
                             <constraint firstItem="E0w-Nw-QY9" firstAttribute="centerY" secondItem="Uwx-FV-him" secondAttribute="centerY" id="HX3-gt-X3E"/>
                             <constraint firstItem="E0w-Nw-QY9" firstAttribute="top" secondItem="I6a-Qb-XFA" secondAttribute="bottom" constant="14" id="Moy-UU-bF1"/>
+                            <constraint firstItem="c09-1Y-4Os" firstAttribute="leading" secondItem="upm-8W-JzY" secondAttribute="leading" constant="20" id="PUb-h5-OXe"/>
+                            <constraint firstItem="upm-8W-JzY" firstAttribute="trailing" secondItem="I6a-Qb-XFA" secondAttribute="trailing" constant="20" id="TXP-eV-JN8"/>
+                            <constraint firstItem="I6a-Qb-XFA" firstAttribute="leading" secondItem="upm-8W-JzY" secondAttribute="leading" constant="20" id="ViX-3T-B0L"/>
                             <constraint firstItem="upm-8W-JzY" firstAttribute="trailing" secondItem="E0w-Nw-QY9" secondAttribute="trailing" constant="20" id="W78-1g-03h"/>
+                            <constraint firstItem="AEd-tq-PtL" firstAttribute="bottom" secondItem="upm-8W-JzY" secondAttribute="bottom" constant="-8" id="XYc-nf-as3"/>
                             <constraint firstItem="I6a-Qb-XFA" firstAttribute="top" secondItem="upm-8W-JzY" secondAttribute="top" constant="40" id="bDW-Iy-1Oe"/>
+                            <constraint firstItem="upm-8W-JzY" firstAttribute="trailing" secondItem="AEd-tq-PtL" secondAttribute="trailing" constant="20" id="huJ-zS-Meg"/>
                             <constraint firstItem="I6a-Qb-XFA" firstAttribute="centerX" secondItem="Uwx-FV-him" secondAttribute="centerX" id="ic0-Rv-4bu"/>
                         </constraints>
                     </view>
@@ -770,10 +774,10 @@
         <segue reference="NOd-Vc-Ib0"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="arrow.counterclockwise" catalog="system" width="115" height="128"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="image2.png" width="1046" height="295"/>
+        <image name="repeat" catalog="system" width="128" height="99"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
