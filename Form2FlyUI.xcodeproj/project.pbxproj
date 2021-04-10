@@ -21,7 +21,6 @@
 		F027979F26222BEA00819D8C /* O. Scoggins.MOV in Resources */ = {isa = PBXBuildFile; fileRef = F027979E26222BEA00819D8C /* O. Scoggins.MOV */; };
 		F02797A226222C6600819D8C /* E. McMahon.MOV in Resources */ = {isa = PBXBuildFile; fileRef = F02797A126222C6600819D8C /* E. McMahon.MOV */; };
 		F031338E25EBE29A002C649F /* RecordOrUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F031338D25EBE29A002C649F /* RecordOrUploadViewController.swift */; };
-		F047F685261FD860008F52D7 /* personVideo.mov in Resources */ = {isa = PBXBuildFile; fileRef = F047F684261FD860008F52D7 /* personVideo.mov */; };
 		F047F698261FE58E008F52D7 /* R. Frescura.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F047F697261FE58E008F52D7 /* R. Frescura.mp4 */; };
 		F048CF1125EAB69D006F1C70 /* puzzleNoBG.png in Resources */ = {isa = PBXBuildFile; fileRef = F048CF1025EAB69D006F1C70 /* puzzleNoBG.png */; };
 		F048CF1425EACA00006F1C70 /* pickProfessional.png in Resources */ = {isa = PBXBuildFile; fileRef = F048CF1325EACA00006F1C70 /* pickProfessional.png */; };
@@ -67,7 +66,6 @@
 		F027979E26222BEA00819D8C /* O. Scoggins.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "O. Scoggins.MOV"; sourceTree = "<group>"; };
 		F02797A126222C6600819D8C /* E. McMahon.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "E. McMahon.MOV"; sourceTree = "<group>"; };
 		F031338D25EBE29A002C649F /* RecordOrUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordOrUploadViewController.swift; sourceTree = "<group>"; };
-		F047F684261FD860008F52D7 /* personVideo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = personVideo.mov; path = ../../../Downloads/Form2FlyMLKitTestVideo/personVideo.mov; sourceTree = "<group>"; };
 		F047F697261FE58E008F52D7 /* R. Frescura.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "R. Frescura.mp4"; sourceTree = "<group>"; };
 		F048CF1025EAB69D006F1C70 /* puzzleNoBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = puzzleNoBG.png; sourceTree = "<group>"; };
 		F048CF1325EACA00006F1C70 /* pickProfessional.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pickProfessional.png; sourceTree = "<group>"; };
@@ -207,7 +205,6 @@
 		F0AEDCCF25E82E0100AAF1AA = {
 			isa = PBXGroup;
 			children = (
-				F047F684261FD860008F52D7 /* personVideo.mov */,
 				F0DAB6892612DBBF00417C4F /* Backend.swift */,
 				F0DAB6832612D9BE00417C4F /* amplifyconfiguration.json */,
 				F0DAB6862612D9C800417C4F /* awsconfiguration.json */,
@@ -360,7 +357,6 @@
 				F02797962622284800819D8C /* C. Dickerson.MOV in Resources */,
 				F048CF1125EAB69D006F1C70 /* puzzleNoBG.png in Resources */,
 				F048CF1425EACA00006F1C70 /* pickProfessional.png in Resources */,
-				F047F685261FD860008F52D7 /* personVideo.mov in Resources */,
 				F08FDE32261FF9BD00DA1185 /* S. Withers.MOV in Resources */,
 				F0AEDCF125E831EB00AAF1AA /* image2.png in Resources */,
 				F0B662FF260147FA005332E7 /* form2fly_logo_glow (2).png in Resources */,
