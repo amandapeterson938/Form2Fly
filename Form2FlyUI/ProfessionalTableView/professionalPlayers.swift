@@ -13,7 +13,7 @@ class professionalPlayers {
     var professionals: [Professional] = []
     
     public init() {
-        let proPMcBeth = Professional(proName: "P.McBeth", proThrowType: "Backhand", proDominantHand: "right", proData: pMcBeth, proWeightedScore: 9588.502678121475, fileURLPath: "")
+        let proPMcBeth = Professional(proName: "P. McBeth", proThrowType: "Backhand", proDominantHand: "right", proData: pMcBeth, proWeightedScore: 9588.502678121475, fileURLPath: "")
         let proJKoling = Professional(proName: "J. Koling", proThrowType: "Forehand", proDominantHand: "right", proData: jKoling, proWeightedScore: 5476.203482207438, fileURLPath: "")
         let proEMcMahon = Professional(proName: "E. McMahon", proThrowType: "Forehand", proDominantHand: "right", proData: eMcMahon, proWeightedScore: 4269.00394567128, fileURLPath: "")
         let proSWithers = Professional(proName: "S. Withers", proThrowType: "Backhand", proDominantHand: "right", proData: sWithers, proWeightedScore: 8514.528468886949, fileURLPath: "")

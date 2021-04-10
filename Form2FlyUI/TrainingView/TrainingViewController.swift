@@ -307,6 +307,8 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
         if landMark.inFrameLikelihood > 0.5 {
             
             let landMarkPos = landMark.position
+            
+            print(problemJoints, abrev)
                
             if(problemJoints.contains(abrev)) {
                 let bounds = CGRect(x: landMarkPos.x, y: landMarkPos.y, width: 10, height: 10)
