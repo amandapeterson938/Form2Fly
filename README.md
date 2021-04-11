@@ -49,7 +49,21 @@ amplify init
 ```
 
 Following this you will be given the opportunity to name your project or accept the default value given. 
-Similarly you will do the same for the name of the environment. Next you will choose your default editor which will be "Xcode (Mac OS only)". Continuing on you will select the type of app which is "ios". Now select "AWS access keys". Open up the csv file that you downloaded earlier in this tutorial and input your accessKeyId, secretAccessKey, and region. 
+Similarly you will do the same for the name of the environment. Next you will choose your default editor which will be "Xcode (Mac OS only)". Continuing on you will select the type of app which is "ios". 
+Now you can either select "AWS access keys". In this case open the csv file that you downloaded earlier in this tutorial and input your accessKeyId, secretAccessKey, and region. 
+
+Or you can select "AWS profile" and select the profile name that you set up in the "amplify configure" step.
+
+Next we will add authentication to our project by running
+```bash
+amplify add auth
+```
+The terminal will ask you a series of questions. You will want to use the default configuration for the authentication and security configuration, give users the ability to sign in with a username, and you will select "No, I am done." when it asks if you want to configure advanced settings. 
+
+Next you will push the changes to your account by running
+```bash
+amplify push
+```
 
 Now you will need to run 
 ```bash
@@ -74,5 +88,4 @@ Then finally you can open the project by executing
 open Form2FlyUI.xcworkspace
 ```
 
-After xCode opens you will need to update "Signing and Capabilities" so it is under your Team. Then you will be able to run it on a physical device. 
-
+After Xcode opens you will need to update "Signing and Capabilities" so it is under your Team. Then you will be able to run it on a physical device. 
