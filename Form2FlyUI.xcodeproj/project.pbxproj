@@ -13,13 +13,11 @@
 		F00107B025EC3BEF00D4A383 /* TrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00107AF25EC3BEF00D4A383 /* TrainingViewController.swift */; };
 		F003C52B261B7ECE001415E0 /* InsightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F003C52A261B7ECE001415E0 /* InsightsViewController.swift */; };
 		F00DCC032619FEBC0076B9FD /* professionalPlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00DCC022619FEBC0076B9FD /* professionalPlayers.swift */; };
-		F02797752622258B00819D8C /* J. Koling.MOV in Resources */ = {isa = PBXBuildFile; fileRef = F02797742622258B00819D8C /* J. Koling.MOV */; };
 		F02797932622260A00819D8C /* P. McBeth.MOV in Resources */ = {isa = PBXBuildFile; fileRef = F02797922622260A00819D8C /* P. McBeth.MOV */; };
 		F02797962622284800819D8C /* C. Dickerson.MOV in Resources */ = {isa = PBXBuildFile; fileRef = F02797952622284800819D8C /* C. Dickerson.MOV */; };
 		F0279799262229DD00819D8C /* C. Clemons.MOV in Resources */ = {isa = PBXBuildFile; fileRef = F0279798262229DD00819D8C /* C. Clemons.MOV */; };
 		F027979C26222B2E00819D8C /* E. Oakley.MOV in Resources */ = {isa = PBXBuildFile; fileRef = F027979B26222B2E00819D8C /* E. Oakley.MOV */; };
 		F027979F26222BEA00819D8C /* O. Scoggins.MOV in Resources */ = {isa = PBXBuildFile; fileRef = F027979E26222BEA00819D8C /* O. Scoggins.MOV */; };
-		F02797A226222C6600819D8C /* E. McMahon.MOV in Resources */ = {isa = PBXBuildFile; fileRef = F02797A126222C6600819D8C /* E. McMahon.MOV */; };
 		F031338E25EBE29A002C649F /* RecordOrUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F031338D25EBE29A002C649F /* RecordOrUploadViewController.swift */; };
 		F047F698261FE58E008F52D7 /* R. Frescura.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F047F697261FE58E008F52D7 /* R. Frescura.mp4 */; };
 		F048CF1125EAB69D006F1C70 /* puzzleNoBG.png in Resources */ = {isa = PBXBuildFile; fileRef = F048CF1025EAB69D006F1C70 /* puzzleNoBG.png */; };
@@ -47,6 +45,8 @@
 		F0DAB6872612D9C800417C4F /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = F0DAB6862612D9C800417C4F /* awsconfiguration.json */; };
 		F0DAB68A2612DBBF00417C4F /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DAB6892612DBBF00417C4F /* Backend.swift */; };
 		F0F1A87925EC5AAD00AF4F6F /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F1A87825EC5AAD00AF4F6F /* avatar.png */; };
+		F0FA064F26278534003E55EB /* E. McMahon.MOV in Resources */ = {isa = PBXBuildFile; fileRef = F0FA064E26278534003E55EB /* E. McMahon.MOV */; };
+		F0FA065226278541003E55EB /* J. Koling.MOV in Resources */ = {isa = PBXBuildFile; fileRef = F0FA065126278541003E55EB /* J. Koling.MOV */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,13 +58,11 @@
 		F00107AF25EC3BEF00D4A383 /* TrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
 		F003C52A261B7ECE001415E0 /* InsightsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsViewController.swift; sourceTree = "<group>"; };
 		F00DCC022619FEBC0076B9FD /* professionalPlayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = professionalPlayers.swift; sourceTree = "<group>"; };
-		F02797742622258B00819D8C /* J. Koling.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "J. Koling.MOV"; sourceTree = "<group>"; };
 		F02797922622260A00819D8C /* P. McBeth.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "P. McBeth.MOV"; sourceTree = "<group>"; };
 		F02797952622284800819D8C /* C. Dickerson.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "C. Dickerson.MOV"; sourceTree = "<group>"; };
 		F0279798262229DD00819D8C /* C. Clemons.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "C. Clemons.MOV"; sourceTree = "<group>"; };
 		F027979B26222B2E00819D8C /* E. Oakley.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "E. Oakley.MOV"; sourceTree = "<group>"; };
 		F027979E26222BEA00819D8C /* O. Scoggins.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "O. Scoggins.MOV"; sourceTree = "<group>"; };
-		F02797A126222C6600819D8C /* E. McMahon.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "E. McMahon.MOV"; sourceTree = "<group>"; };
 		F031338D25EBE29A002C649F /* RecordOrUploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordOrUploadViewController.swift; sourceTree = "<group>"; };
 		F047F697261FE58E008F52D7 /* R. Frescura.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "R. Frescura.mp4"; sourceTree = "<group>"; };
 		F048CF1025EAB69D006F1C70 /* puzzleNoBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = puzzleNoBG.png; sourceTree = "<group>"; };
@@ -94,6 +92,8 @@
 		F0DAB6862612D9C800417C4F /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		F0DAB6892612DBBF00417C4F /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		F0F1A87825EC5AAD00AF4F6F /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
+		F0FA064E26278534003E55EB /* E. McMahon.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "E. McMahon.MOV"; sourceTree = "<group>"; };
+		F0FA065126278541003E55EB /* J. Koling.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "J. Koling.MOV"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,8 +153,8 @@
 			isa = PBXGroup;
 			children = (
 				F02797922622260A00819D8C /* P. McBeth.MOV */,
-				F02797742622258B00819D8C /* J. Koling.MOV */,
-				F02797A126222C6600819D8C /* E. McMahon.MOV */,
+				F0FA065126278541003E55EB /* J. Koling.MOV */,
+				F0FA064E26278534003E55EB /* E. McMahon.MOV */,
 				F08FDE31261FF9BD00DA1185 /* S. Withers.MOV */,
 				F08FDE34261FF9CA00DA1185 /* Z. Melton.mp4 */,
 				F047F697261FE58E008F52D7 /* R. Frescura.mp4 */,
@@ -349,7 +349,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0AEDCE825E82E0100AAF1AA /* LaunchScreen.storyboard in Resources */,
-				F02797A226222C6600819D8C /* E. McMahon.MOV in Resources */,
 				F027979F26222BEA00819D8C /* O. Scoggins.MOV in Resources */,
 				F0F1A87925EC5AAD00AF4F6F /* avatar.png in Resources */,
 				F0AEDCE525E82E0100AAF1AA /* Assets.xcassets in Resources */,
@@ -359,15 +358,16 @@
 				F048CF1425EACA00006F1C70 /* pickProfessional.png in Resources */,
 				F08FDE32261FF9BD00DA1185 /* S. Withers.MOV in Resources */,
 				F0AEDCF125E831EB00AAF1AA /* image2.png in Resources */,
+				F0FA064F26278534003E55EB /* E. McMahon.MOV in Resources */,
 				F0B662FF260147FA005332E7 /* form2fly_logo_glow (2).png in Resources */,
 				F0AEDCE325E82E0100AAF1AA /* Main.storyboard in Resources */,
 				F0279799262229DD00819D8C /* C. Clemons.MOV in Resources */,
 				F047F698261FE58E008F52D7 /* R. Frescura.mp4 in Resources */,
-				F02797752622258B00819D8C /* J. Koling.MOV in Resources */,
 				F0DAB6872612D9C800417C4F /* awsconfiguration.json in Resources */,
 				78A91654528C4BFFA3F9D82F /* amplifyconfiguration.json in Resources */,
 				259C32BD5B9440AA86E7772E /* awsconfiguration.json in Resources */,
 				F02797932622260A00819D8C /* P. McBeth.MOV in Resources */,
+				F0FA065226278541003E55EB /* J. Koling.MOV in Resources */,
 				F0DAB6842612D9BE00417C4F /* amplifyconfiguration.json in Resources */,
 				F027979C26222B2E00819D8C /* E. Oakley.MOV in Resources */,
 			);
