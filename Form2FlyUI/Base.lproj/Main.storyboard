@@ -602,6 +602,7 @@
                                     <imageReference key="image" image="house" catalog="system" symbolScale="large"/>
                                 </state>
                                 <connections>
+                                    <action selector="goToHome:" destination="WHe-qw-MRi" eventType="touchUpInside" id="wsT-6r-7RN"/>
                                     <segue destination="SWq-uZ-kxA" kind="presentation" modalPresentationStyle="fullScreen" id="Gn2-cO-d7v"/>
                                 </connections>
                             </button>

@@ -18,6 +18,9 @@ class TrainingViewController: UIViewController, UIImagePickerControllerDelegate 
 
     @IBOutlet weak var trainingImageView: UIImageView!
     
+    @IBAction func goToHome(_ sender: Any) {
+        editedImageArray = []
+    }
     
     @IBOutlet weak var vidSelElm: UISegmentedControl!
     @IBAction func videoSelectionSegment(_ sender: Any) {
