@@ -73,7 +73,7 @@
 		F09912CF25EB005D00B6811A /* SelectOrMatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOrMatchViewController.swift; sourceTree = "<group>"; };
 		F09912D425EB026200B6811A /* SignOnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOnViewController.swift; sourceTree = "<group>"; };
 		F09EC01A261551CD00E289A4 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
-		F0AEDCD825E82E0100AAF1AA /* Form2FlyUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Form2FlyUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0AEDCD825E82E0100AAF1AA /* Form2Fly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Form2Fly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0AEDCDB25E82E0100AAF1AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F0AEDCDD25E82E0100AAF1AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F0AEDCDF25E82E0100AAF1AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -218,7 +218,7 @@
 		F0AEDCD925E82E0100AAF1AA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F0AEDCD825E82E0100AAF1AA /* Form2FlyUI.app */,
+				F0AEDCD825E82E0100AAF1AA /* Form2Fly.app */,
 			);
 			name = Products;
 			path = ..;
@@ -291,9 +291,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F0AEDCD725E82E0100AAF1AA /* Form2FlyUI */ = {
+		F0AEDCD725E82E0100AAF1AA /* Form2Fly */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F0AEDCEC25E82E0100AAF1AA /* Build configuration list for PBXNativeTarget "Form2FlyUI" */;
+			buildConfigurationList = F0AEDCEC25E82E0100AAF1AA /* Build configuration list for PBXNativeTarget "Form2Fly" */;
 			buildPhases = (
 				9AAF0286038B75F43C5B40E6 /* [CP] Check Pods Manifest.lock */,
 				F0AEDCD425E82E0100AAF1AA /* Sources */,
@@ -306,9 +306,9 @@
 			);
 			dependencies = (
 			);
-			name = Form2FlyUI;
+			name = Form2Fly;
 			productName = Form2FlyUI;
-			productReference = F0AEDCD825E82E0100AAF1AA /* Form2FlyUI.app */;
+			productReference = F0AEDCD825E82E0100AAF1AA /* Form2Fly.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -338,7 +338,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F0AEDCD725E82E0100AAF1AA /* Form2FlyUI */,
+				F0AEDCD725E82E0100AAF1AA /* Form2Fly */,
 			);
 		};
 /* End PBXProject section */
@@ -610,7 +610,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = net.mytechportfolio.Form2FlyUI;
+				PRODUCT_BUNDLE_IDENTIFIER = net.mytechportfolio.Form2FlyVersion2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -630,7 +630,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = net.mytechportfolio.Form2FlyUI;
+				PRODUCT_BUNDLE_IDENTIFIER = net.mytechportfolio.Form2FlyVersion2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -649,7 +649,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F0AEDCEC25E82E0100AAF1AA /* Build configuration list for PBXNativeTarget "Form2FlyUI" */ = {
+		F0AEDCEC25E82E0100AAF1AA /* Build configuration list for PBXNativeTarget "Form2Fly" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F0AEDCED25E82E0100AAF1AA /* Debug */,
