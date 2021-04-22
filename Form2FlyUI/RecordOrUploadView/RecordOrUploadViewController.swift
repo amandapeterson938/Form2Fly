@@ -514,7 +514,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
                 if(val < 76.0) {
                     worstAngleString += abrvDictionary[key]! + ": " + String(format: "%.2f", val) + " %\n"
                   
-                    TrainingViewController.share.userProblemAreas += [key]
+                    //TrainingViewController.share.userProblemAreas += [key]
                     
                     usersProbAreasAbrv.append(key)
                 }
@@ -522,6 +522,7 @@ class RecordOrUploadViewController: UIViewController, UIImagePickerControllerDel
         }
         
         InsightsViewController.shared.usersProbAreas = worstAngleString
+        TrainingViewController.share.userProblemAreas = usersProbAreasAbrv
         
         
         
